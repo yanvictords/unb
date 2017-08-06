@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Segundo Trabalho De Programação Sitemática: Código-Fonte de grafos.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Segundo Trabalho De Programação Sitemática
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;Arquivos</span></a></li>
+      <li><a href="globals.html"><span>Arquivos&#160;Membros</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Todos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Arquivos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de Tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Definições e Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Páginas</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">grafos.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="grafos_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef STDIO_H_INCLUDED</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #define STDIO_H_INCLUDED</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#ifndef STDLIB_H_INCLUDED</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="grafos_8h.html#ace4b77adead3c3b8441d5e8fe061bdbe">   16</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #define STDLIB_H_INCLUDED</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#ifndef STRING_H_INCLUDED</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="grafos_8h.html#af67fe47da7b9c2b664d41c852044850c">   20</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #define STRING_H_INCLUDED</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#ifndef MODULO2_H_INCLUDED</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="grafos_8h.html#a4e79e7219655717cf59caed2db5e68ab">   24</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #define MODULO2_H_INCLUDED</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span><span class="preprocessor">    #include &quot;<a class="code" href="modulo2_8h.html">modulo2.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="grafos_8h.html#a4505c08c065b48840a30eedd9845cce2">   28</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span>* <a class="code" href="grafos_8h.html#a4505c08c065b48840a30eedd9845cce2">string</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structlista.html">   30</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlista.html">lista</a>{</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structlista.html#ac9a99dbba9e3239c7bd5e5cc4b7772d4">   31</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="structlista.html#ac9a99dbba9e3239c7bd5e5cc4b7772d4">info</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structlista.html#a4f5685c442fedb5bdc08059f7336631b">   32</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlista.html">lista</a> *<a class="code" href="structlista.html#a4f5685c442fedb5bdc08059f7336631b">down</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structlista.html#a49bf395c47f5ca69b3f774059a9a8015">   33</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlista.html">lista</a> *<a class="code" href="structlista.html#a49bf395c47f5ca69b3f774059a9a8015">up</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structlista.html#a7638e4b2f2958d0dec8a54880bb6f7db">   34</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structlista.html#a7638e4b2f2958d0dec8a54880bb6f7db">ano</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="grafos_8h.html#ac52633be7dc1f1546469563f665d417e">   36</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structlista.html">lista</a>* <a class="code" href="grafos_8h.html#ac52633be7dc1f1546469563f665d417e">PLista</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structgrafo.html">   38</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structgrafo.html">grafo</a>{</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structgrafo.html#a21e107f219014e81a9677825320c4a8e">   39</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlista.html">lista</a>* <a class="code" href="structgrafo.html#a21e107f219014e81a9677825320c4a8e">inicio</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structgrafo.html#aab277b80b92f3b575a931cab8ae194a8">   40</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structgrafo.html#aab277b80b92f3b575a931cab8ae194a8">qnt</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="grafos_8h.html#ad2ceaa7fd9c9bab870e4fd852607631a">   42</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structgrafo.html">grafo</a> <a class="code" href="structgrafo.html">Grafo</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/* 01 */</span>    <span class="keywordtype">int</span>     <a class="code" href="grafos_8h.html#a520e10c45eeaac663faa463c0f766f16">GRF_Grafo_Vazio</a>(<a class="code" href="structgrafo.html">Grafo</a>*);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/* 02 */</span>    <span class="keywordtype">int</span>     <a class="code" href="grafos_8h.html#a6aee6e449325bd79d0f7f5fdf264cba7">GRF_Verificar_Autor</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/* 03 */</span>    <span class="keywordtype">int</span>     <a class="code" href="grafos_8h.html#a60cffde955f199e67dfae9367a8fd037">GRF_Verificar_Publicacao</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/* 04 */</span>    <span class="keywordtype">int</span>     <a class="code" href="grafos_8h.html#a554f46e5c608d19f6999259eafd1fb8b">GRF_Quantidade_Publicacoes</a>(<a class="code" href="structgrafo.html">Grafo</a>*);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/* 05 */</span>    <span class="keywordtype">void</span>    <a class="code" href="grafos_8h.html#a8d44231ee2639ad76be824cf162adf23">GRF_Busca_por_Ano</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/* 06 */</span>    <span class="keywordtype">void</span>    <a class="code" href="grafos_8h.html#a5569ad459d7d9f3b06609ff6bf6db91a">GRF_Liberar_Grafo</a>(<a class="code" href="structgrafo.html">Grafo</a>*);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/* 07 */</span>    <span class="keywordtype">void</span>    <a class="code" href="grafos_8h.html#a4ea0457f86f5a8ae77966336a63d999d">GRF_Imprimir_Grafo</a>(<a class="code" href="structgrafo.html">Grafo</a>*);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/* 08 */</span>    <span class="keywordtype">void</span>    <a class="code" href="grafos_8h.html#aa49f067bcf15575a19b82a146110da0d">GRF_Busca_por_Publicacao</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/* 09 */</span>    <span class="keywordtype">void</span>    <a class="code" href="grafos_8h.html#a1fb8b6c48460e242950801a28ab95680">GRF_Gerar_Arquivo</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/* 10 */</span>    <span class="keywordtype">void</span>    <a class="code" href="grafos_8h.html#a13ac1f849d09ac9c57ebfe743185f02d">GRF_Busca_por_Autor</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/* 11 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#ac01051afccb1209ebc20da589603160e">GRF_Criar_Grafo</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/* 12 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#af232876e7a8bdc17dee10d1db6e2266d">GRF_Insere_Nova_Publicacao</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/* 13 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#a5424e2a344bd1acd9fff43252fb3d195">GRF_Remove_Publicacao</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/* 14 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#ae595f819429c3d86736d7e2adf6f2c10">GRF_Insere_Autor</a>(<a class="code" href="structgrafo.html">Grafo</a>*, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/* 15 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#aa55f8410f1110939f233600159e1a0b5">GRF_ListaPeriodicos_Grafo</a>(<a class="code" href="structlistaPeriodicosFinal.html">listaDePeriodicosFinal</a>*);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/* 16 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#af0ef867bc29a0fc3719c51edea64b027">GRF_ListaEventos_Grafo</a>(<a class="code" href="structlistaEventosFinal.html">listaDeEventosFinal</a>*);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/* 17 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#a9fd743d7cfb17d99006ecef43a96728a">GRF_ListaProjetos_Grafo</a>(<a class="code" href="structlistadeprojetos.html">listadeprojetosfinal</a>*);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/* 18 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#a364e44df02c3921e28cf00cbff7154b7">GRF_Grafo_Relacionamentos_Projetos</a>(<a class="code" href="structlistadeprojetos.html">listadeprojetosfinal</a>*);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/* 19 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#a2f1cf77774600369bb60a499560f1d03">GRF_Grafo_Relacionamentos_Eventos</a>(<a class="code" href="structlistaEventosFinal.html">listaDeEventosFinal</a>*);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/* 20 */</span>    <a class="code" href="structgrafo.html">Grafo</a>*  <a class="code" href="grafos_8h.html#abb0ea9ea92ca4c2d1a4e0090c81aa82b">GRF_Grafo_Relacionamentos_Periodicos</a>(<a class="code" href="structlistaPeriodicosFinal.html">listaDePeriodicosFinal</a>*);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/* 21 */</span>    <span class="keywordtype">void</span> <a class="code" href="grafos_8h.html#aaa3b2c8d0a408bcae5c979293241001c">GRF_Pause</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="ttc" id="grafos_8h_html_af0ef867bc29a0fc3719c51edea64b027"><div class="ttname"><a href="grafos_8h.html#af0ef867bc29a0fc3719c51edea64b027">GRF_ListaEventos_Grafo</a></div><div class="ttdeci">Grafo * GRF_ListaEventos_Grafo(listaDeEventosFinal *)</div><div class="ttdoc">Gera um grafo com as informacoes de uma struct listaDeEventos. </div><div class="ttdef"><b>Definition:</b> grafos.c:569</div></div>
+<div class="ttc" id="structlistaPeriodicosFinal_html"><div class="ttname"><a href="structlistaPeriodicosFinal.html">listaPeriodicosFinal</a></div><div class="ttdef"><b>Definition:</b> modulo2.h:63</div></div>
+<div class="ttc" id="grafos_8h_html_a9fd743d7cfb17d99006ecef43a96728a"><div class="ttname"><a href="grafos_8h.html#a9fd743d7cfb17d99006ecef43a96728a">GRF_ListaProjetos_Grafo</a></div><div class="ttdeci">Grafo * GRF_ListaProjetos_Grafo(listadeprojetosfinal *)</div><div class="ttdoc">Gera um grafo com as informacoes de uma struct listaDeProjetos. </div><div class="ttdef"><b>Definition:</b> grafos.c:604</div></div>
+<div class="ttc" id="modulo2_8h_html"><div class="ttname"><a href="modulo2_8h.html">modulo2.h</a></div><div class="ttdoc">Modulo de declaracao das funcoes e estruturas do modulo2.c. </div></div>
+<div class="ttc" id="structgrafo_html_a21e107f219014e81a9677825320c4a8e"><div class="ttname"><a href="structgrafo.html#a21e107f219014e81a9677825320c4a8e">grafo::inicio</a></div><div class="ttdeci">struct lista * inicio</div><div class="ttdef"><b>Definition:</b> grafos.h:39</div></div>
+<div class="ttc" id="grafos_8h_html_a4ea0457f86f5a8ae77966336a63d999d"><div class="ttname"><a href="grafos_8h.html#a4ea0457f86f5a8ae77966336a63d999d">GRF_Imprimir_Grafo</a></div><div class="ttdeci">void GRF_Imprimir_Grafo(Grafo *)</div><div class="ttdoc">Imprime em tela as informacoes de um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:223</div></div>
+<div class="ttc" id="grafos_8h_html_a8d44231ee2639ad76be824cf162adf23"><div class="ttname"><a href="grafos_8h.html#a8d44231ee2639ad76be824cf162adf23">GRF_Busca_por_Ano</a></div><div class="ttdeci">void GRF_Busca_por_Ano(Grafo *, int)</div><div class="ttdoc">Busca por ano uma publicacao em um grafo, imprimindo seus autores. </div><div class="ttdef"><b>Definition:</b> grafos.c:272</div></div>
+<div class="ttc" id="grafos_8h_html_aaa3b2c8d0a408bcae5c979293241001c"><div class="ttname"><a href="grafos_8h.html#aaa3b2c8d0a408bcae5c979293241001c">GRF_Pause</a></div><div class="ttdeci">void GRF_Pause(void)</div><div class="ttdoc">&quot;Para&quot; a execucao do programa, pedindo ao usuario que digite uma tecla. </div><div class="ttdef"><b>Definition:</b> grafos.c:739</div></div>
+<div class="ttc" id="structlistaEventosFinal_html"><div class="ttname"><a href="structlistaEventosFinal.html">listaEventosFinal</a></div><div class="ttdef"><b>Definition:</b> modulo2.h:44</div></div>
+<div class="ttc" id="structlista_html"><div class="ttname"><a href="structlista.html">lista</a></div><div class="ttdef"><b>Definition:</b> grafos.h:30</div></div>
+<div class="ttc" id="grafos_8h_html_a2f1cf77774600369bb60a499560f1d03"><div class="ttname"><a href="grafos_8h.html#a2f1cf77774600369bb60a499560f1d03">GRF_Grafo_Relacionamentos_Eventos</a></div><div class="ttdeci">Grafo * GRF_Grafo_Relacionamentos_Eventos(listaDeEventosFinal *)</div><div class="ttdoc">Cria um grafo de relacionamento de uma lista de eventos. </div><div class="ttdef"><b>Definition:</b> grafos.c:674</div></div>
+<div class="ttc" id="grafos_8h_html_a4505c08c065b48840a30eedd9845cce2"><div class="ttname"><a href="grafos_8h.html#a4505c08c065b48840a30eedd9845cce2">string</a></div><div class="ttdeci">char * string</div><div class="ttdef"><b>Definition:</b> grafos.h:28</div></div>
+<div class="ttc" id="structgrafo_html"><div class="ttname"><a href="structgrafo.html">grafo</a></div><div class="ttdef"><b>Definition:</b> grafos.h:38</div></div>
+<div class="ttc" id="grafos_8h_html_a6aee6e449325bd79d0f7f5fdf264cba7"><div class="ttname"><a href="grafos_8h.html#a6aee6e449325bd79d0f7f5fdf264cba7">GRF_Verificar_Autor</a></div><div class="ttdeci">int GRF_Verificar_Autor(Grafo *, string)</div><div class="ttdoc">Verifica se um autor existe no Grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:375</div></div>
+<div class="ttc" id="structlistadeprojetos_html"><div class="ttname"><a href="structlistadeprojetos.html">listadeprojetos</a></div><div class="ttdef"><b>Definition:</b> modulo2.h:29</div></div>
+<div class="ttc" id="structlista_html_a49bf395c47f5ca69b3f774059a9a8015"><div class="ttname"><a href="structlista.html#a49bf395c47f5ca69b3f774059a9a8015">lista::up</a></div><div class="ttdeci">struct lista * up</div><div class="ttdef"><b>Definition:</b> grafos.h:33</div></div>
+<div class="ttc" id="grafos_8h_html_a364e44df02c3921e28cf00cbff7154b7"><div class="ttname"><a href="grafos_8h.html#a364e44df02c3921e28cf00cbff7154b7">GRF_Grafo_Relacionamentos_Projetos</a></div><div class="ttdeci">Grafo * GRF_Grafo_Relacionamentos_Projetos(listadeprojetosfinal *)</div><div class="ttdoc">Cria um grafo de relacionamento de uma lista de projetos. </div><div class="ttdef"><b>Definition:</b> grafos.c:640</div></div>
+<div class="ttc" id="grafos_8h_html_a520e10c45eeaac663faa463c0f766f16"><div class="ttname"><a href="grafos_8h.html#a520e10c45eeaac663faa463c0f766f16">GRF_Grafo_Vazio</a></div><div class="ttdeci">int GRF_Grafo_Vazio(Grafo *)</div><div class="ttdoc">Verifica se um grafo esta vazio. </div><div class="ttdef"><b>Definition:</b> grafos.c:185</div></div>
+<div class="ttc" id="grafos_8h_html_a60cffde955f199e67dfae9367a8fd037"><div class="ttname"><a href="grafos_8h.html#a60cffde955f199e67dfae9367a8fd037">GRF_Verificar_Publicacao</a></div><div class="ttdeci">int GRF_Verificar_Publicacao(Grafo *, string)</div><div class="ttdoc">Verifica por nome ou trecho de nome uma publicacao em um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:297</div></div>
+<div class="ttc" id="structlista_html_a4f5685c442fedb5bdc08059f7336631b"><div class="ttname"><a href="structlista.html#a4f5685c442fedb5bdc08059f7336631b">lista::down</a></div><div class="ttdeci">struct lista * down</div><div class="ttdef"><b>Definition:</b> grafos.h:32</div></div>
+<div class="ttc" id="grafos_8h_html_a5424e2a344bd1acd9fff43252fb3d195"><div class="ttname"><a href="grafos_8h.html#a5424e2a344bd1acd9fff43252fb3d195">GRF_Remove_Publicacao</a></div><div class="ttdeci">Grafo * GRF_Remove_Publicacao(Grafo *, string)</div><div class="ttdoc">Remove uma publicacao de um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:437</div></div>
+<div class="ttc" id="structgrafo_html_aab277b80b92f3b575a931cab8ae194a8"><div class="ttname"><a href="structgrafo.html#aab277b80b92f3b575a931cab8ae194a8">grafo::qnt</a></div><div class="ttdeci">int qnt</div><div class="ttdef"><b>Definition:</b> grafos.h:40</div></div>
+<div class="ttc" id="grafos_8h_html_aa55f8410f1110939f233600159e1a0b5"><div class="ttname"><a href="grafos_8h.html#aa55f8410f1110939f233600159e1a0b5">GRF_ListaPeriodicos_Grafo</a></div><div class="ttdeci">Grafo * GRF_ListaPeriodicos_Grafo(listaDePeriodicosFinal *)</div><div class="ttdoc">Gera um grafo com as informacoes de uma struct listaDePeriodicos. </div><div class="ttdef"><b>Definition:</b> grafos.c:534</div></div>
+<div class="ttc" id="grafos_8h_html_a1fb8b6c48460e242950801a28ab95680"><div class="ttname"><a href="grafos_8h.html#a1fb8b6c48460e242950801a28ab95680">GRF_Gerar_Arquivo</a></div><div class="ttdeci">void GRF_Gerar_Arquivo(Grafo *, string)</div><div class="ttdoc">Gera um arquivo contendo as informacoes de um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:315</div></div>
+<div class="ttc" id="grafos_8h_html_af232876e7a8bdc17dee10d1db6e2266d"><div class="ttname"><a href="grafos_8h.html#af232876e7a8bdc17dee10d1db6e2266d">GRF_Insere_Nova_Publicacao</a></div><div class="ttdeci">Grafo * GRF_Insere_Nova_Publicacao(Grafo *, string, int)</div><div class="ttdoc">Insere nova publicacao em um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:406</div></div>
+<div class="ttc" id="grafos_8h_html_ac52633be7dc1f1546469563f665d417e"><div class="ttname"><a href="grafos_8h.html#ac52633be7dc1f1546469563f665d417e">PLista</a></div><div class="ttdeci">struct lista * PLista</div><div class="ttdef"><b>Definition:</b> grafos.h:36</div></div>
+<div class="ttc" id="grafos_8h_html_a13ac1f849d09ac9c57ebfe743185f02d"><div class="ttname"><a href="grafos_8h.html#a13ac1f849d09ac9c57ebfe743185f02d">GRF_Busca_por_Autor</a></div><div class="ttdeci">void GRF_Busca_por_Autor(Grafo *, string)</div><div class="ttdoc">Busca por nome ou trecho de nome as ocorrencias de um autor em um grafo, imprimindo suas publicacoes...</div><div class="ttdef"><b>Definition:</b> grafos.c:351</div></div>
+<div class="ttc" id="structlista_html_a7638e4b2f2958d0dec8a54880bb6f7db"><div class="ttname"><a href="structlista.html#a7638e4b2f2958d0dec8a54880bb6f7db">lista::ano</a></div><div class="ttdeci">int ano</div><div class="ttdef"><b>Definition:</b> grafos.h:34</div></div>
+<div class="ttc" id="grafos_8h_html_a554f46e5c608d19f6999259eafd1fb8b"><div class="ttname"><a href="grafos_8h.html#a554f46e5c608d19f6999259eafd1fb8b">GRF_Quantidade_Publicacoes</a></div><div class="ttdeci">int GRF_Quantidade_Publicacoes(Grafo *)</div><div class="ttdoc">Consulta quantos projetos, periodicos ou eventos um grafo possui. </div><div class="ttdef"><b>Definition:</b> grafos.c:195</div></div>
+<div class="ttc" id="structlista_html_ac9a99dbba9e3239c7bd5e5cc4b7772d4"><div class="ttname"><a href="structlista.html#ac9a99dbba9e3239c7bd5e5cc4b7772d4">lista::info</a></div><div class="ttdeci">string info</div><div class="ttdef"><b>Definition:</b> grafos.h:31</div></div>
+<div class="ttc" id="grafos_8h_html_aa49f067bcf15575a19b82a146110da0d"><div class="ttname"><a href="grafos_8h.html#aa49f067bcf15575a19b82a146110da0d">GRF_Busca_por_Publicacao</a></div><div class="ttdeci">void GRF_Busca_por_Publicacao(Grafo *, string)</div><div class="ttdoc">Busca por nome ou trecho de nome uma publicacao em um grafo, imprimindo seus autores. </div><div class="ttdef"><b>Definition:</b> grafos.c:249</div></div>
+<div class="ttc" id="grafos_8h_html_a5569ad459d7d9f3b06609ff6bf6db91a"><div class="ttname"><a href="grafos_8h.html#a5569ad459d7d9f3b06609ff6bf6db91a">GRF_Liberar_Grafo</a></div><div class="ttdeci">void GRF_Liberar_Grafo(Grafo *)</div><div class="ttdoc">Destroi um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:204</div></div>
+<div class="ttc" id="grafos_8h_html_ae595f819429c3d86736d7e2adf6f2c10"><div class="ttname"><a href="grafos_8h.html#ae595f819429c3d86736d7e2adf6f2c10">GRF_Insere_Autor</a></div><div class="ttdeci">Grafo * GRF_Insere_Autor(Grafo *, string, string)</div><div class="ttdoc">Insere um novo autor para uma publicacao contida em um grafo. </div><div class="ttdef"><b>Definition:</b> grafos.c:466</div></div>
+<div class="ttc" id="grafos_8h_html_ac01051afccb1209ebc20da589603160e"><div class="ttname"><a href="grafos_8h.html#ac01051afccb1209ebc20da589603160e">GRF_Criar_Grafo</a></div><div class="ttdeci">Grafo * GRF_Criar_Grafo(void)</div><div class="ttdoc">Cria um grafo vazio. </div><div class="ttdef"><b>Definition:</b> grafos.c:392</div></div>
+<div class="ttc" id="grafos_8h_html_abb0ea9ea92ca4c2d1a4e0090c81aa82b"><div class="ttname"><a href="grafos_8h.html#abb0ea9ea92ca4c2d1a4e0090c81aa82b">GRF_Grafo_Relacionamentos_Periodicos</a></div><div class="ttdeci">Grafo * GRF_Grafo_Relacionamentos_Periodicos(listaDePeriodicosFinal *)</div><div class="ttdoc">Cria um grafo de relacionamento de uma lista de periodicos. </div><div class="ttdef"><b>Definition:</b> grafos.c:707</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 10 de Julho de 2015 00:21:05 para Segundo Trabalho De Programação Sitemática por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>

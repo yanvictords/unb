@@ -1,0 +1,479 @@
+/* **TRABALHO 1 DE COMPOSICAO ALGORIT. 2016/1, PAULO, THIAGO E YAN** */
+#include <iostream>
+#include "MuMaterial.h"
+
+using namespace std;
+
+//Constantes
+
+
+const int MAX_MOTIF = 20;
+
+//Organização
+//Imitação é quando há uma frase com escala transposta de uma
+// uma primeira.
+//Compensação por grau conjunto, sempre há um salto de tons
+//há um retorno gradativo rumo à nota central.
+
+
+void Repetition (MuMaterial * pmat); 
+void Sequence (MuMaterial * pmat);			
+void Inversion (MuMaterial * pmat); 
+void Retrograde (MuMaterial * pmat); 
+void RetroInver (MuMaterial * pmat); 
+void Diminution (MuMaterial * pmat); 
+void Augmentation (MuMaterial * pmat); 
+void CicloAlt(MuMaterial * pmat, int vezes);/*Muda a altura da nota anterior para a altura da nota posterior uma a uma até a última ser convertida na primeira. Esse processo pode se repetir uma ou várias vezes.*/
+void CicloRit(MuMaterial * pmat, int vezes); /*Muda o ritmo de forma semelhante ao CicloAlt faz com as alturas. */
+void Variation (MuMaterial * pmat, int k); /* In a variation, some of the main components of the motive are present, but presented slightly differently (different rhythm, different intervals, etc.) */
+int getEscalaNat(MuMaterial material); /* Retorna 0 para atonal, 1 a 12 para Dó a Si Maior e 13 a 24 para Dó a Si Menor. */
+void setEscalaNat(MuMaterial* pmat, int escalaD);	/* Converte o material para a escala desejada. 1 a 12 para Dó a Si Maior. 13 a 24 
+para Dó a Si Menor  */
+int cmpfunc(const void* a, const void *); //Função para auxiliar o qsort usado em outras funções.
+
+/*---------------------------------------------------------------------------*/
+/*---------------------------FUNCAO PRINCIPAL-------------------------------------*/
+int main(void)
+{
+	MuInit();
+	MuMaterial motif, mat1, mat2; //Construcao do motivo, material final e material auxiliar
+	MuNote nota;
+	int j;
+	
+	
+	motif.LoadScore("/home/yan/Documentos/Musical/MuM-master/paulo.sco");	
+
+	
+	cout << endl << "CONSTRUÇÃO:" << endl;
+/*--------------------------FIM DA CONSTRUCAO DO MOTIVO---------------------------------------*/
+	
+	motif.SetInstrument(0,1);
+	mat1 = motif; // material final igual a primeira parte da melodia
+	cout << "*MotivoNormal" << endl; 
+	mat2 = motif;  // material2 auxiliar que vai ser alterado pela funcao variation
+	for(int k=0;k<5;k++){
+		Variation(&mat2, k);   // alterando material2 para adicionar no material1 final
+		mat1+=mat2;         // adicionando material2 ao material1 final
+		j = Between(0,1);
+		if(j==0){    // decide se o material deve permanecer original ou enviar material alterado para a proxima parte
+			if(k<4)
+				cout << "----nao original" << endl; 
+			mat2=motif;
+		}else{
+			if(k<4)
+				cout << "----original" << endl; 
+		}
+	}
+	Retrograde(&motif);	// o final sempre sera com um retrograde para encerrar na nota tonica
+	mat1+=motif;     	// finaliza
+	cout << "*RetrogradeFinal	" << endl; 
+	//cout << endl<<"Tom: " << getEscalaNat(motif) << endl << endl; //pegando o tom da musica 
+/*-------------------------FIM DA CONSTRUCAO DA MUSICA--------------------------------------*/
+	mat1.Show();
+	mat1.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	mat1.SetDefaultFunctionTables();
+	mat1.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
+	mat1.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+
+
+	return 0;	
+
+}
+/*---------------------------------------------------------------------------*/
+/*-------------------------------FUNCOES---------------------------------------*/
+int cmpfunc(const void* a, const void * b)
+{
+	return (*(int*)a - *(int*)b);
+}
+
+
+/*----------------------------------------------*/
+void Repetition (MuMaterial* pmat) //Transpõe o motivo como um todo ou só repete. Altera tom em uma oitava acima ou abaixo ALTERADOOOOOO
+{
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+	if(Between(0,2)) //2/3 de chance de transpor.
+	{
+		if(Between(0,1))
+			(*pmat).Transpose(12); // oitava acima
+		//(*pmat).Transpose(Between(-3,3)); //Transpõe o material para um valor entre três semi tons abaixo e três acima
+		else 
+			(*pmat).Transpose(-12); // oitava abaixo
+
+	}
+
+}
+/*----------------------------------------------*/
+void Sequence (MuMaterial* pmat) //Começo diferente do mesmo motivo; PRIMEIRA NOTA COM ALTURA DIFERENTE ALTERADOOOO
+{
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+	MuNote primeira = (*pmat).GetFirstNote(); //Pega a primeira nota e salva em uma MuNote.
+	int altura = primeira.Pitch(); //Pega a altura da primeira nota.
+	altura += Between(-3,3); //Muda a altura em 3 semi tons.
+	
+	primeira.SetPitch(altura);
+	(*pmat).SetNote(0,primeira); //Coloca a nota no começo do material.
+	
+}
+
+/*----------------------------------------------*/
+void Inversion(MuMaterial* pmat) //Inverte os intervalos entre as alturas das notas.
+{
+	int alt1,alt2, salto=0;
+	int inter[MAX_MOTIF];
+	MuNote nota1,nota2;
+
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+	for(int i =0; i<Num-1; i++) //Repete para cada intervalo entre notas do motivo.
+	{
+		
+		nota1=	(*pmat).GetNote(i); //Pega a nota anterior.
+		nota2=(*pmat).GetNote(i+1); //Nota posterior.
+		alt1 = nota1.Pitch(); 
+		alt2 = nota2.Pitch();
+		salto += 2*(alt1-alt2); //Compara as duas alturas.
+		inter[i] = salto; //Armazena em um vetor de intervalos.
+
+	}
+
+	for(int i=0; i<Num-1;i++)
+	{
+		nota1=(*pmat).GetNote(i+1);
+		alt1 = nota1.Pitch(); 
+		nota1.SetPitch(alt1+inter[i]);
+		(*pmat).SetNote(i+1,nota1);
+	}
+
+
+}
+/*----------------------------------------------*/
+void Retrograde(MuMaterial* pmat) //Inverte a ordem das notas do Material sem alterar a duração.
+{
+	int aux;
+	MuNote nota1, nota2;
+
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+	for(int i =0; i < Num/2; i++) //Laço para trocar a altura das extremidades do material rumo ao centro.
+	{	
+		nota1 = (*pmat).GetNote(i);//Uma ponta.
+		nota2 =	(*pmat).GetNote(Num-1-i);//Outra ponta do material.
+		aux = nota1.Pitch();
+		nota1.SetPitch(nota2.Pitch());
+		nota2.SetPitch(aux); 
+		(*pmat).SetNote(i,nota1);//Nessas duas últimas linhas há a retrogradação.
+		(*pmat).SetNote(Num-1-i,nota2);
+
+	}
+}
+/*----------------------------------------------*/
+void RetroInver(MuMaterial* pmat)//Inverte as notas e seus intervalos.
+{
+	Retrograde(pmat);
+	Inversion(pmat);
+}
+/*----------------------------------------------*/
+void Diminution(MuMaterial* pmat)//Diminui a amplitude do motivo pela metade.
+{
+	int amp;
+	MuNote nota;
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+
+	for(int i=0; i<Num;i++)
+	{
+		nota=(*pmat).GetNote(i);
+		amp = nota.Amp(); 
+		nota.SetAmp(amp/2);
+		(*pmat).SetNote(i,nota);
+	}
+}
+/*----------------------------------------------*/
+void Augmentation(MuMaterial* pmat)//Dobra a intensidade do motivo.
+{
+	int amp;
+	MuNote nota;
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+
+	for(int i=0; i<Num;i++)
+	{
+		nota=(*pmat).GetNote(i);
+		amp = nota.Amp(); 
+		nota.SetAmp(amp*2);
+		(*pmat).SetNote(i,nota);
+	}
+}
+/*----------------------------------------------*/
+void transpose(MuMaterial* pmat, int i){ //transpoe para um outro grau
+	MuMaterial transp=*pmat;        
+	transp.DiatonicTranspose(7,MAJOR_MODE,i,ASCENDING);
+	*pmat = transp;
+}
+
+
+/*----------------------------------------------*/
+void CicloAlt(MuMaterial * pmat, int vezes)//Muda em corrente as alturas das notas do material sem alterar seu ritmo e duração.
+{											//Altura da primeira passa para segunda que passa para a terceira até a última
+											//Assumir o lugar da primeira.
+	//(*pmat).CyclePitch(vezes); //Há problema com a biblioteca, ela não reconhece CyclePitch
+}
+/*----------------------------------------------*/
+void CicloRit(MuMaterial * pmat, int vezes)//Muda em corrente os ritmos das notas do material sem alterar suas alturas e duração.
+{											//Ritmo da primeira passa para segunda que passa para a terceira até o último
+											//assumir o lugar do primeiro.
+	//(*pmat).CycleRhythm(vezes); //Há algum problema com a biblioteca, ela não reconhece o CycleRhythm.
+}
+/*---------------------Variation-------------------------*/
+void Variation (MuMaterial * pmat, int k)//Função para sortear alterações variadas nos motivos. 
+{	
+	int i = Between(1,3);
+	switch(Between(0,11))
+	{
+								//CicloAlt daqui até case 5.
+		case 0:
+			//CicloAlt(pmat, i);
+			cout << "*Retrograde1" << endl; 
+			Retrograde(pmat);
+		break;
+
+		case 1:
+			//CicloAlt(pmat, i);
+			cout << "*Inversion1" << endl;  
+			Inversion(pmat);
+		break;
+
+		case 2:
+			//CicloAlt(pmat, i);
+			cout << "*RetroInver1" << endl; 
+			RetroInver(pmat);
+		break;
+
+		case 3:
+			//CicloAlt(pmat, i);
+			cout << "*Sequence1" << endl; 
+			Sequence(pmat);
+		break;
+
+		case 4:
+			//CicloAlt(pmat, i);
+			cout << "*Repetition1" << endl; 
+			Repetition(pmat);
+		break;
+								//Ciclo Ritmo daqui para baixo.
+		case 5:
+			//CicloRit(pmat, i);
+			cout << "*Retrograde2" << endl; 
+			Retrograde(pmat);
+		break;
+
+		case 6:
+			//CicloRit(pmat, i);
+			cout << "*Inversion2" << endl; 
+			Inversion(pmat);
+		break;
+
+		case 7:
+			//CicloRit(pmat, i);
+			cout << "*RetroInver2" << endl; 
+			RetroInver(pmat);
+		break;
+
+		case 8:
+			//CicloRit(pmat, i);
+			cout << "*Sequence2" << endl; 
+			Sequence(pmat);
+		break;
+
+		case 9:
+			//CicloRit(pmat, i);
+			cout << "*Repetition2" << endl; 
+			Repetition(pmat);
+		break;
+		case 10:
+			//CicloAlt(pmat, i);
+			cout << "*Transpose1" << endl; 
+			if(k==1)k++;
+			transpose(pmat, k);
+		break;
+		case 11:
+			if(k==1)k++;
+			//CicloRit(pmat, i); 
+			cout << "*Transpose2" << endl; 
+			transpose(pmat, k);
+		break;
+	}
+
+}
+/*----------------------------------------------*/
+
+int getEscalaNat(MuMaterial material)//Compara o material com a escala natural                                //mais plausível que ele possa pertencer.
+{                               //Caso haja mais de uma com o igualmente
+                                //aceitável, uma será escolhida.
+                                //Retorna um inteiro entre 0 a 24.
+                                //Sendo as escalas maiores entre 1 a 12.
+                                //As menores entre 13 e 24.
+                                //1 é para DóMaior, 2 é para RéBemol Maior.
+                                //3 é Ré Maior e 13 é para Dó Menor, etc.
+								//0 é atonal.
+
+    int escala[24][7];
+    int i, j, k, tam, ini;
+    int notas[MAX_MOTIF];
+    int dif[24];
+    int menordif=0;
+    MuNote nota_aux;
+
+    tam = material.NumberOfNotes(); //Salva o número de notas do material.
+
+    for(i = 0; i < 23; i++)
+        dif[i]=0; //Troca todos os valores de dif por 0;
+
+   	//Laços de geração das Escalas Naturais.
+    for(j = 0; j < 12; j ++) //Gera as escalas maiores 
+    						//com intervalos TTsTTTs;
+    {
+        ini = j;
+        for(i = 0; i < 3; i ++)
+        {
+            escala[j][i]=(ini+2*i)%12;
+        }
+
+
+        for(i = 0; i < 4; i ++)
+        {
+            escala[j][i+3]=(ini+5+2*i)%12;
+        }
+    }
+
+    for(j = 12; j < 24; j ++) //Gera as escalas menores
+    							//com intervalos TsTTsTTs
+    {
+        ini = j-12;
+        escala[j][0]=ini%12;
+        escala[j][1]=(ini+2)%12;
+        escala[j][2]=(ini+3)%12;
+
+        for(i = 0; i<2; i ++)
+        {
+            escala[j][i+3]=(ini+5+2*i)%12;
+        }
+
+        escala[j][5]=(ini+8)%12;
+        escala[j][6]=(ini+10)%12;
+    }
+
+
+    //Armazena-se a altura de cada nota do material.
+    for( i = 0; i < tam; i++){
+        nota_aux = material.GetNote(i);
+        notas[i] = (nota_aux.Pitch())%12; //Quer-se comparar com as escalas 
+                                            //Independentemente da oitava.
+    }
+
+    //Aqui será feito a comparação entre as notas do material e da
+    //as escalas naturais.
+    for( k = 0; k < 24; k++) //Laço que passa de escala em escala.
+    {
+        for(j = 0; j < tam; j++) //Cada altura de nota do material.
+        {
+            for( i = 0; i < 7; i++) //Cada altura de nota da escala.
+            {
+             if(notas[j] != escala[k][i]) dif[k]++; //Se a nota não for igual
+                                                    //o grau de diferença
+                                                    //entre a escala possível
+                                                    //e a escala real aumenta.
+            }
+            dif[k]-=6; //Fica 0, se há a nota na escala e 1 se não há.
+        }
+        if(dif[menordif] > dif[k]) menordif = k; //Salva a escala com menor
+	                               		       //diferença com a real.
+    }
+    if(dif[menordif] != 0) return 0;//Não encaixou em nenhuma escala natural 
+    								//então é atonal.
+
+    return menordif+1;
+}
+/*----------------------------------------------*/
+void setEscalaNat(MuMaterial* pmat, int escalaD)//Converte o material				
+{												//na escala desejada.
+	int i, j, k, tam, ini;
+	int escala[7], notas[MAX_MOTIF];
+	MuNote nota_aux;
+
+	tam = (*pmat).NumberOfNotes();
+
+	if(escalaD > 24 || escalaD < 1) exit(2); //Número inválido.
+	if(escalaD < 13)//Escala Maior TTsTTTs
+	{
+		ini = escalaD - 1;
+        for(i = 0; i < 3; i ++)
+        {
+            escala[i]=(ini+2*i)%12;
+        }
+
+
+        for(i = 0; i < 4; i ++)
+        {
+            escala[i+3]=(ini+5+2*i)%12;
+        }
+	} else //Escala Menor TsTTsTT
+	{
+		ini = escalaD-1;
+        escala[0]=ini%12;
+        escala[1]=(ini+2)%12;
+        escala[2]=(ini+3)%12;
+
+        for(i = 0; i<2; i ++)
+        {
+            escala[i+3]=(ini+5+2*i)%12;
+        }
+
+        escala[5]=(ini+8)%12;
+        escala[6]=(ini+10)%12;
+	}
+
+	qsort(escala, 7, sizeof(int), cmpfunc);
+
+
+	for( i = 0; i < tam; i++) //Laço para obter as alturas das notas
+	{						// do material.
+        nota_aux = (*pmat).GetNote(i);
+        notas[i] = nota_aux.Pitch();
+    }
+
+    for(j = 0; j < tam; j++)
+    {
+    	for(i = 0; i < 7; i++)
+    	{
+    		if((notas[j])%12 <= escala[i]) //Se a nota estiver fora da escala, ela é convertida
+    		{								//para o grau acima mais próximo.	
+    			cout << endl << notas[j]; 							
+				notas[j]-=(notas[j])%12;
+				notas[j]+=(escala[i]);
+				cout << endl << notas[j] << endl;
+				i=7;
+				
+			} else if(i == 6 && (notas[j])%12 == 11)
+			{
+				cout << endl << notas[j];
+				notas[j] -= (notas[j])%12;
+				notas[j] += (escala[0])%12 + 12;
+				i=7;//Passa para próxima nota.
+			}
+		}
+		nota_aux = (*pmat).GetNote(j);
+		nota_aux.SetPitch(notas[j]);
+		(*pmat).SetNote(j,nota_aux);
+    }
+}

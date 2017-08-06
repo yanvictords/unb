@@ -1,0 +1,250 @@
+#include <iostream>
+#include "MuMaterial.h"
+
+using namespace std;
+
+//Constantes
+
+
+const int MAX_MOTIF = 20;
+
+//Organização
+//Imitação é quando há uma frase com escala transposta de uma
+// uma primeira.
+//Compensação por grau conjunto, sempre há um salto de tons
+//há um retorno gradativo rumo à nota central.
+
+
+void Repetition (MuMaterial * pmat); /* At the original or a different pitch.  Anything important is worth repeating and you’ll notice that
+     most melodies that you remember have a repeated motive in them. Repeating a motive once is good, 2 times is great, 
+     though it is best to vary the 2nd time, but 4 times is usually overkill.*/
+void Sequence (MuMaterial * pmat); /* Try playing your motive several more times starting at a different pitch each time but keeping them
+     intervals the same. */
+void Inversion (MuMaterial * pmat); /* Start on the first note of your motive. Does the next note go up a 5th?  Then, inversion would mean to
+     play the note down a 5th. */
+void Retrograde (MuMaterial * pmat); /* Play the motive backwards.  You can try playing the notes backwards
+ with the rhythm of the forward motive or playing both the notes and rhythm backward */
+void RetroInver (MuMaterial * pmat); /* Invert the backwards motive */
+void Diminution (MuMaterial * pmat); /* Make all of your notes half of their original value. */
+void Augmentation (MuMaterial * pmat); /* Make all of your notes twice their original value. */
+void Variation (MuMaterial * pmat); /* In a variation, some of the main components of the motive are present, but presented slightly differently
+     (different rhythm, different intervals, etc.) */
+void transpose(MuMaterial* pmat, int i);
+MuMaterial Escolha(MuMaterial* mat, int x){
+
+
+	switch(7){
+		case 0:
+			Retrograde(mat);
+			break;
+		case 1:
+			Repetition(mat);
+			break;
+		case 2:
+			Sequence(mat);
+			break;
+		case 3:
+			Inversion(mat);
+			break;
+		case 4:
+			RetroInver(mat);
+			break;
+		case 5:
+			Diminution(mat);
+			break;
+		case 6:
+			Augmentation(mat);
+			break;
+		case 7:
+			transpose(mat, x);
+			break;
+	}
+	
+	return *mat;
+	
+}
+int main(void)
+{
+	MuInit();
+	MuMaterial motif, mat1, mat2, transp, melodiafinal;
+	MuNote nota;
+	int notas[8] = {67,67,67,69,71,67,69,62};
+
+	
+nota.SetAmp(1);
+	for (int i=0;i<8;i++){
+		nota.SetPitch(notas[i]);
+		switch(i){
+			case 0:
+			nota.SetStart(0);
+			nota.SetDur(0.375);
+			break;
+			case 1:
+			nota.SetDur(0.125);
+			break;
+			case 2:
+			nota.SetDur(0.375);
+			break;
+			case 3:
+			nota.SetDur(0.125);
+			break;
+			case 4:
+			nota.SetDur(0.5);
+			break;
+			case 5:
+			nota.SetDur(0.5);
+			break;	
+			case 6:
+			nota.SetDur(1);
+			break;
+			case 7:
+			nota.SetDur(1);
+			break;		
+		}	
+		motif += nota;
+	}
+
+
+	motif.SetInstrument(0,1);
+
+
+        
+int vez=3, conta=1;
+mat1 = motif;
+	while (vez--){
+		conta++;
+		mat1 = mat1 + Escolha(&mat1, conta);
+		
+		
+	}
+
+
+	mat1.SetDefaultFunctionTables();
+ mat1.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
+    mat1.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+
+	return 0;	
+
+
+
+
+}
+
+
+
+
+
+void transpose(MuMaterial* pmat, int i){
+	MuMaterial transp;        
+	transp.DiatonicTranspose(7,MAJOR_MODE,i,ASCENDING);
+	*pmat = transp;
+	
+
+}
+
+void Repetition (MuMaterial* pmat) //Transpõe o motivo como um todo ou só repete.
+{
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+	if(Between(0,2)) //2/3 de chance de transpor.
+	{
+		(*pmat).Transpose(Between(-3,3)); //Transpõe o material para um valor entre três semi tons abaixo e três
+		// acima.
+
+	}
+
+}
+
+void Sequence (MuMaterial* pmat) //Começo diferente do mesmo motivo;
+{
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+	MuNote primeira = (*pmat).GetFirstNote(); //Pega a primeira nota e salva em uma MuNote.
+	int altura = primeira.Pitch(); //Pega a altura da primeira nota.
+	altura += Between(-3,3); //Muda a altura em 3 semi tons.
+	primeira.SetPitch(altura);
+	(*pmat).SetNote(0,primeira); //Coloca a nota no começo do material.
+
+}
+
+
+void Inversion(MuMaterial* pmat) //Inverte os intervalos entre as alturas das notas.
+{
+	int alt1,alt2, salto=0;
+	int inter[MAX_MOTIF];
+	MuNote nota1,nota2;
+
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+	for(int i =0; i<Num-1; i++) //Repete para cada intervalo entre notas do motivo.
+	{
+		
+		nota1=(*pmat).GetNote(i); //Pega a nota anterior.
+		nota2=(*pmat).GetNote(i+1); //Nota posterior.
+		alt1 = nota1.Pitch(); 
+		alt2 = nota2.Pitch();
+		salto += 2*(alt1-alt2); //Compara as duas alturas.
+		inter[i] = salto; //Armazena em um vetor de intervalos.
+
+	}
+
+	for(int i=0; i<Num-1;i++)
+	{
+		nota1=(*pmat).GetNote(i+1);
+		alt1 = nota1.Pitch(); 
+		nota1.SetPitch(alt1+inter[i]);
+		(*pmat).SetNote(i+1,nota1);
+	}
+
+
+}
+
+void Retrograde(MuMaterial* pmat) //Inverte a ordem das notas do Material.
+{
+	(*pmat).Retro();
+
+}
+
+void RetroInver(MuMaterial* pmat)//Inverte as notas e seus intervalos.
+{
+	Retrograde(pmat);
+	Inversion(pmat);
+}
+
+void Diminution(MuMaterial* pmat)//Diminui a amplitude do motivo pela metade.
+{
+	int amp;
+	MuNote nota;
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+
+	for(int i=0; i<Num;i++)
+	{
+		nota=(*pmat).GetNote(i);
+		amp = nota.Amp(); 
+		nota.SetAmp(amp/2);
+		(*pmat).SetNote(i,nota);
+	}
+}
+
+void Augmentation(MuMaterial* pmat)//Dobra a intensidade do motivo.
+{
+	int amp;
+	MuNote nota;
+
+	int Num = (*pmat).NumberOfNotes();
+	if(Num == 0) exit(1); //Verifica se o Material está vazio.
+
+
+	for(int i=0; i<Num;i++)
+	{
+		nota=(*pmat).GetNote(i);
+		amp = nota.Amp(); 
+		nota.SetAmp(amp*2);
+		(*pmat).SetNote(i,nota);
+	}
+}

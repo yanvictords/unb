@@ -1,0 +1,54 @@
+Nome:Pedro Henrique Santos Gonzaga
+Matricula: 140030131
+
+
+Data: 8/6/2015
+Horas Trabalhadas: 2 horas.
+
+Descrição da tarefa realizada:
+	Melhoras no modulo 2 do trabalho 1, assim como no trabalho 1 como um todo, visto que este nao estava funcionando corretamente
+
+------------------------------------------------------------------------------------------
+Data: 10/6/2015
+Horas Trabalhadas: 3 horas 
+
+Descrição da tarefa realizada:
+	-Finalizacao do trabalho 1 
+	-Implementacao do modulo2.c e modulo2.h para o trabalho 2
+	-inicio de testes manuais para o modulo2.c e modulo2.h
+
+----------------------------------------------------------------------------------------------
+Data: 11/6/2015
+Horas Trabalhadas: 3
+Descrição da tarefa realizada:
+	-Correcao de faltas no modulo2.c e modulo2.h
+	-tentativa de compilacao do trabalho 2
+	-Correcao de faltas do trabalho 2
+	
+------------------------------------------------------------------------------------------------
+Data:14/6/2015
+Horas trabalhadas: 2
+Descrição da tarefa realizada:
+	-Testes de compilacao e execuçao do trabalho 2
+	-Correcao de faltas do trabalho 2
+	
+-----------------------------------------------------------------------------------------------------------
+Data:16/6/2015
+Horas trabalhadas: 2 horas e 30 minutos
+Descrição da tarefa realizada:
+	-Revisão de todos os módulos do trabalho
+	-Escritura dos comentarios dos modulos2.c e modulo2.h
+	-Criacao da documentacao(doxygen) do modulo2
+	-Teste de compilacao e execução do trabalho 2 realizado com sucesso
+
+Data:17/6/2015
+Horas trabalhadas: 1 horas e 15 minutos
+Descrição da tarefa realizada:
+	-Documentacao do trabalho com a ferramenta Doxygen
+	-Revisão de todos os módulos do trabalho
+	-Escritura dos comentarios dos modulos2.c e modulo2.h
+	-Criacao da documentacao(doxygen) do modulo2
+	-Teste de compilacao e execução do trabalho 2 realizado com sucesso
+						
+	
+

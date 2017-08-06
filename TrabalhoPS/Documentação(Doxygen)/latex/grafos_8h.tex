@@ -1,0 +1,522 @@
+\hypertarget{grafos_8h}{\section{Referência do Arquivo grafos.\-h}
+\label{grafos_8h}\index{grafos.\-h@{grafos.\-h}}
+}
+
+
+Modulo de declaracao das funcoes e estruturas de grafos.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}modulo2.\-h\char`\"{}}\\*
+\subsection*{Componentes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structlista}{lista}
+\item 
+struct \hyperlink{structgrafo}{grafo}
+\end{DoxyCompactItemize}
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{grafos_8h_ace4b77adead3c3b8441d5e8fe061bdbe}{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{grafos_8h_af67fe47da7b9c2b664d41c852044850c}{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{grafos_8h_a4e79e7219655717cf59caed2db5e68ab}{M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\end{DoxyCompactItemize}
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef char $\ast$ \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string}
+\item 
+typedef struct \hyperlink{structlista}{lista} $\ast$ \hyperlink{grafos_8h_ac52633be7dc1f1546469563f665d417e}{P\-Lista}
+\item 
+typedef struct \hyperlink{structgrafo}{grafo} \hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo}
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{grafos_8h_a520e10c45eeaac663faa463c0f766f16}{G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$)
+\begin{DoxyCompactList}\small\item\em Verifica se um grafo esta vazio. \end{DoxyCompactList}\item 
+int \hyperlink{grafos_8h_a6aee6e449325bd79d0f7f5fdf264cba7}{G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Verifica se um autor existe no Grafo. \end{DoxyCompactList}\item 
+int \hyperlink{grafos_8h_a60cffde955f199e67dfae9367a8fd037}{G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Verifica por nome ou trecho de nome uma publicacao em um grafo. \end{DoxyCompactList}\item 
+int \hyperlink{grafos_8h_a554f46e5c608d19f6999259eafd1fb8b}{G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$)
+\begin{DoxyCompactList}\small\item\em Consulta quantos projetos, periodicos ou eventos um grafo possui. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_a8d44231ee2639ad76be824cf162adf23}{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Busca por ano uma publicacao em um grafo, imprimindo seus autores. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_a5569ad459d7d9f3b06609ff6bf6db91a}{G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$)
+\begin{DoxyCompactList}\small\item\em Destroi um grafo. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_a4ea0457f86f5a8ae77966336a63d999d}{G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$)
+\begin{DoxyCompactList}\small\item\em Imprime em tela as informacoes de um grafo. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_aa49f067bcf15575a19b82a146110da0d}{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Busca por nome ou trecho de nome uma publicacao em um grafo, imprimindo seus autores. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_a1fb8b6c48460e242950801a28ab95680}{G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Gera um arquivo contendo as informacoes de um grafo. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_a13ac1f849d09ac9c57ebfe743185f02d}{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Busca por nome ou trecho de nome as ocorrencias de um autor em um grafo, imprimindo suas publicacoes. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_ac01051afccb1209ebc20da589603160e}{G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo} (void)
+\begin{DoxyCompactList}\small\item\em Cria um grafo vazio. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_af232876e7a8bdc17dee10d1db6e2266d}{G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string}, int)
+\begin{DoxyCompactList}\small\item\em Insere nova publicacao em um grafo. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_a5424e2a344bd1acd9fff43252fb3d195}{G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Remove uma publicacao de um grafo. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_ae595f819429c3d86736d7e2adf6f2c10}{G\-R\-F\-\_\-\-Insere\-\_\-\-Autor} (\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string}, \hyperlink{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{string})
+\begin{DoxyCompactList}\small\item\em Insere um novo autor para uma publicacao contida em um grafo. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_aa55f8410f1110939f233600159e1a0b5}{G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo} (\hyperlink{main_8c_ae70eddd91a19226dd2cf9eaadf0f7c00}{lista\-De\-Periodicos\-Final} $\ast$)
+\begin{DoxyCompactList}\small\item\em Gera um grafo com as informacoes de uma struct lista\-De\-Periodicos. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_af0ef867bc29a0fc3719c51edea64b027}{G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo} (\hyperlink{main_8c_a5d911c1f0ca0f6a22063a062d48186d0}{lista\-De\-Eventos\-Final} $\ast$)
+\begin{DoxyCompactList}\small\item\em Gera um grafo com as informacoes de uma struct lista\-De\-Eventos. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_a9fd743d7cfb17d99006ecef43a96728a}{G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo} (\hyperlink{main_8c_a76bbb460da96aebda430bcfc1abd1bd8}{listadeprojetosfinal} $\ast$)
+\begin{DoxyCompactList}\small\item\em Gera um grafo com as informacoes de uma struct lista\-De\-Projetos. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_a364e44df02c3921e28cf00cbff7154b7}{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos} (\hyperlink{main_8c_a76bbb460da96aebda430bcfc1abd1bd8}{listadeprojetosfinal} $\ast$)
+\begin{DoxyCompactList}\small\item\em Cria um grafo de relacionamento de uma lista de projetos. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_a2f1cf77774600369bb60a499560f1d03}{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos} (\hyperlink{main_8c_a5d911c1f0ca0f6a22063a062d48186d0}{lista\-De\-Eventos\-Final} $\ast$)
+\begin{DoxyCompactList}\small\item\em Cria um grafo de relacionamento de uma lista de eventos. \end{DoxyCompactList}\item 
+\hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$ \hyperlink{grafos_8h_abb0ea9ea92ca4c2d1a4e0090c81aa82b}{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos} (\hyperlink{main_8c_ae70eddd91a19226dd2cf9eaadf0f7c00}{lista\-De\-Periodicos\-Final} $\ast$)
+\begin{DoxyCompactList}\small\item\em Cria um grafo de relacionamento de uma lista de periodicos. \end{DoxyCompactList}\item 
+void \hyperlink{grafos_8h_aaa3b2c8d0a408bcae5c979293241001c}{G\-R\-F\-\_\-\-Pause} (void)
+\begin{DoxyCompactList}\small\item\em \char`\"{}\-Para\char`\"{} a execucao do programa, pedindo ao usuario que digite uma tecla. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Modulo de declaracao das funcoes e estruturas de grafos. \begin{DoxyAuthor}{Autor}
+Icaro Marcelino Miranda. 
+\end{DoxyAuthor}
+\begin{DoxySince}{Desde}
+01/06/2015. 
+\end{DoxySince}
+\begin{DoxyVersion}{Versão}
+2.\-0. 
+\end{DoxyVersion}
+
+
+\subsection{Definições e macros}
+\hypertarget{grafos_8h_a4e79e7219655717cf59caed2db5e68ab}{\index{grafos.\-h@{grafos.\-h}!M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!grafos.h@{grafos.\-h}}
+\subsubsection[{M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-O\-D\-U\-L\-O2\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{grafos_8h_a4e79e7219655717cf59caed2db5e68ab}
+\hypertarget{grafos_8h_ace4b77adead3c3b8441d5e8fe061bdbe}{\index{grafos.\-h@{grafos.\-h}!S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!grafos.h@{grafos.\-h}}
+\subsubsection[{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{grafos_8h_ace4b77adead3c3b8441d5e8fe061bdbe}
+\hypertarget{grafos_8h_af67fe47da7b9c2b664d41c852044850c}{\index{grafos.\-h@{grafos.\-h}!S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!grafos.h@{grafos.\-h}}
+\subsubsection[{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{grafos_8h_af67fe47da7b9c2b664d41c852044850c}
+
+
+\subsection{Definições dos tipos}
+\hypertarget{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{\index{grafos.\-h@{grafos.\-h}!Grafo@{Grafo}}
+\index{Grafo@{Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{Grafo}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf grafo} {\bf Grafo}}}\label{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}
+\hypertarget{grafos_8h_ac52633be7dc1f1546469563f665d417e}{\index{grafos.\-h@{grafos.\-h}!P\-Lista@{P\-Lista}}
+\index{P\-Lista@{P\-Lista}!grafos.h@{grafos.\-h}}
+\subsubsection[{P\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf lista}$\ast$ {\bf P\-Lista}}}\label{grafos_8h_ac52633be7dc1f1546469563f665d417e}
+\hypertarget{grafos_8h_a4505c08c065b48840a30eedd9845cce2}{\index{grafos.\-h@{grafos.\-h}!string@{string}}
+\index{string@{string}!grafos.h@{grafos.\-h}}
+\subsubsection[{string}]{\setlength{\rightskip}{0pt plus 5cm}typedef char$\ast$ {\bf string}}}\label{grafos_8h_a4505c08c065b48840a30eedd9845cce2}
+
+
+\subsection{Funções}
+\hypertarget{grafos_8h_a8d44231ee2639ad76be824cf162adf23}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano@{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano}}
+\index{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano@{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Ano (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{int}]{Ano}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a8d44231ee2639ad76be824cf162adf23}
+
+
+Busca por ano uma publicacao em um grafo, imprimindo seus autores. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo contendo a publicacao. \\
+\hline
+{\em Ano} & Ano da publicacao. \\
+\hline
+\end{DoxyParams}
+\hypertarget{grafos_8h_a13ac1f849d09ac9c57ebfe743185f02d}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor@{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor}}
+\index{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor@{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Autor (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Nome}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a13ac1f849d09ac9c57ebfe743185f02d}
+
+
+Busca por nome ou trecho de nome as ocorrencias de um autor em um grafo, imprimindo suas publicacoes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo a ser pesquisado. \\
+\hline
+{\em Nome} & String com o nome do autor. \\
+\hline
+\end{DoxyParams}
+\hypertarget{grafos_8h_aa49f067bcf15575a19b82a146110da0d}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao}}
+\index{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Busca\-\_\-por\-\_\-\-Publicacao (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Nome}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_aa49f067bcf15575a19b82a146110da0d}
+
+
+Busca por nome ou trecho de nome uma publicacao em um grafo, imprimindo seus autores. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo contendo a publicacao. \\
+\hline
+{\em Nome} & String com o nome da pulicacao. \\
+\hline
+\end{DoxyParams}
+\hypertarget{grafos_8h_ac01051afccb1209ebc20da589603160e}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo}}
+\index{G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Criar\-\_\-\-Grafo (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_ac01051afccb1209ebc20da589603160e}
+
+
+Cria um grafo vazio. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para o novo grafo. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a1fb8b6c48460e242950801a28ab95680}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo@{G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo}}
+\index{G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo@{G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Gerar\-\_\-\-Arquivo (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Nome}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a1fb8b6c48460e242950801a28ab95680}
+
+
+Gera um arquivo contendo as informacoes de um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & grafo a ser impresso. \\
+\hline
+{\em Nome} & String com o nome desejado para o novo arquivo. \\
+\hline
+\end{DoxyParams}
+\hypertarget{grafos_8h_a2f1cf77774600369bb60a499560f1d03}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos}}
+\index{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Eventos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Eventos\-Final} $\ast$}]{L}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a2f1cf77774600369bb60a499560f1d03}
+
+
+Cria um grafo de relacionamento de uma lista de eventos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em L} & Lista de eventos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Grafo de relacionamento dos participantes. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_abb0ea9ea92ca4c2d1a4e0090c81aa82b}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos}}
+\index{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Periodicos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Periodicos\-Final} $\ast$}]{L}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_abb0ea9ea92ca4c2d1a4e0090c81aa82b}
+
+
+Cria um grafo de relacionamento de uma lista de periodicos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em L} & Lista de periodicos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Grafo de relacionamento dos participantes. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a364e44df02c3921e28cf00cbff7154b7}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos}}
+\index{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Grafo\-\_\-\-Relacionamentos\-\_\-\-Projetos (
+\begin{DoxyParamCaption}
+\item[{{\bf listadeprojetosfinal} $\ast$}]{L}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a364e44df02c3921e28cf00cbff7154b7}
+
+
+Cria um grafo de relacionamento de uma lista de projetos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em L} & Lista de projetos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Grafo de relacionamento dos participantes. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a520e10c45eeaac663faa463c0f766f16}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio}}
+\index{G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio@{G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio}]{\setlength{\rightskip}{0pt plus 5cm}int G\-R\-F\-\_\-\-Grafo\-\_\-\-Vazio (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a520e10c45eeaac663faa463c0f766f16}
+
+
+Verifica se um grafo esta vazio. 
+
+Funcoes de manipulacao de grafos.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Grafo a ser testado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+1 para grafo vazio, 0 para grafo nao vazio. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a4ea0457f86f5a8ae77966336a63d999d}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo}}
+\index{G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Imprimir\-\_\-\-Grafo (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a4ea0457f86f5a8ae77966336a63d999d}
+
+
+Imprime em tela as informacoes de um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo a ser impresso. \\
+\hline
+\end{DoxyParams}
+\hypertarget{grafos_8h_ae595f819429c3d86736d7e2adf6f2c10}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Insere\-\_\-\-Autor@{G\-R\-F\-\_\-\-Insere\-\_\-\-Autor}}
+\index{G\-R\-F\-\_\-\-Insere\-\_\-\-Autor@{G\-R\-F\-\_\-\-Insere\-\_\-\-Autor}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Insere\-\_\-\-Autor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Insere\-\_\-\-Autor (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Autor, }
+\item[{{\bf string}}]{Publicacao}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_ae595f819429c3d86736d7e2adf6f2c10}
+
+
+Insere um novo autor para uma publicacao contida em um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo contendo a publicacao. \\
+\hline
+{\em Autor} & String com o nome do autor. \\
+\hline
+{\em Publicacao} & String com o nome da pulicacao. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para o grafo atualizado. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_af232876e7a8bdc17dee10d1db6e2266d}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao}}
+\index{G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Insere\-\_\-\-Nova\-\_\-\-Publicacao (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Nome, }
+\item[{int}]{ano}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_af232876e7a8bdc17dee10d1db6e2266d}
+
+
+Insere nova publicacao em um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo. \\
+\hline
+{\em Nome} & String contendo o nome da publicacao. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para o grafo atualizado. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a5569ad459d7d9f3b06609ff6bf6db91a}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo}}
+\index{G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Liberar\-\_\-\-Grafo (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a5569ad459d7d9f3b06609ff6bf6db91a}
+
+
+Destroi um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo a ser destruido. \\
+\hline
+\end{DoxyParams}
+\hypertarget{grafos_8h_af0ef867bc29a0fc3719c51edea64b027}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo}}
+\index{G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Lista\-Eventos\-\_\-\-Grafo (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Eventos\-Final} $\ast$}]{L}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_af0ef867bc29a0fc3719c51edea64b027}
+
+
+Gera um grafo com as informacoes de uma struct lista\-De\-Eventos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em L} & lista a ser colocada no Grafo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Grafo de relacionamento dos eventos. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_aa55f8410f1110939f233600159e1a0b5}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo}}
+\index{G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Lista\-Periodicos\-\_\-\-Grafo (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Periodicos\-Final} $\ast$}]{L}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_aa55f8410f1110939f233600159e1a0b5}
+
+
+Gera um grafo com as informacoes de uma struct lista\-De\-Periodicos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em L} & lista a ser colocada no Grafo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Grafo de relacionamento dos periodicos. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a9fd743d7cfb17d99006ecef43a96728a}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo}}
+\index{G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo@{G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Lista\-Projetos\-\_\-\-Grafo (
+\begin{DoxyParamCaption}
+\item[{{\bf listadeprojetosfinal} $\ast$}]{L}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a9fd743d7cfb17d99006ecef43a96728a}
+
+
+Gera um grafo com as informacoes de uma struct lista\-De\-Projetos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em L} & lista a ser colocada no Grafo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Grafo de relacionamento dos projetos. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_aaa3b2c8d0a408bcae5c979293241001c}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Pause@{G\-R\-F\-\_\-\-Pause}}
+\index{G\-R\-F\-\_\-\-Pause@{G\-R\-F\-\_\-\-Pause}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Pause}]{\setlength{\rightskip}{0pt plus 5cm}void G\-R\-F\-\_\-\-Pause (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_aaa3b2c8d0a408bcae5c979293241001c}
+
+
+\char`\"{}\-Para\char`\"{} a execucao do programa, pedindo ao usuario que digite uma tecla. 
+
+Funcões genericas \hypertarget{grafos_8h_a554f46e5c608d19f6999259eafd1fb8b}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes@{G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes}}
+\index{G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes@{G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes}]{\setlength{\rightskip}{0pt plus 5cm}int G\-R\-F\-\_\-\-Quantidade\-\_\-\-Publicacoes (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a554f46e5c608d19f6999259eafd1fb8b}
+
+
+Consulta quantos projetos, periodicos ou eventos um grafo possui. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Grafo a ser consultado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Numero de projetos. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a5424e2a344bd1acd9fff43252fb3d195}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao}}
+\index{G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Grafo}$\ast$ G\-R\-F\-\_\-\-Remove\-\_\-\-Publicacao (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Publicacao}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a5424e2a344bd1acd9fff43252fb3d195}
+
+
+Remove uma publicacao de um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o Grafo desejado. \\
+\hline
+{\em Publicacao} & Nome da publicacao a ser removida. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para o Grafo atualizado. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a6aee6e449325bd79d0f7f5fdf264cba7}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor@{G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor}}
+\index{G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor@{G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor}]{\setlength{\rightskip}{0pt plus 5cm}int G\-R\-F\-\_\-\-Verificar\-\_\-\-Autor (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Nome}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a6aee6e449325bd79d0f7f5fdf264cba7}
+
+
+Verifica se um autor existe no Grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo a ser pesquisado. \\
+\hline
+{\em Nome} & String com o nome do autor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+1 se encontrar, 0 se nao encontrar. 
+\end{DoxyReturn}
+\hypertarget{grafos_8h_a60cffde955f199e67dfae9367a8fd037}{\index{grafos.\-h@{grafos.\-h}!G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao}}
+\index{G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao@{G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao}!grafos.h@{grafos.\-h}}
+\subsubsection[{G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao}]{\setlength{\rightskip}{0pt plus 5cm}int G\-R\-F\-\_\-\-Verificar\-\_\-\-Publicacao (
+\begin{DoxyParamCaption}
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf string}}]{Nome}
+\end{DoxyParamCaption}
+)}}\label{grafos_8h_a60cffde955f199e67dfae9367a8fd037}
+
+
+Verifica por nome ou trecho de nome uma publicacao em um grafo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em G} & Ponteiro para o grafo contendo a publicacao. \\
+\hline
+{\em Nome} & String com o nome da pulicacao. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+1 se encontrar, 0 se nao encontrar. 
+\end{DoxyReturn}

@@ -1,0 +1,19 @@
+Trabalho II - Programacao Sistematica - Turma A - 1/2015
+Relatorio de atividades individual
+_____________________________________________________________________________________________________________________________________
+| Icaro Marcelino Miranda - 14/0022139                                                                                              |
+_____________________________________________________________________________________________________________________________________
+| -- | Data       |Tempo | Tipo de Tarefa        | Descricao da Tarefa Realizada                                                    |
+_____________________________________________________________________________________________________________________________________
+| 01 | 23/05/2015 | 0:45 | Estudar o projeto     | Entender e dividir as tarefas do trabalho (Grupo).                               |
+| 02 | 30/05/2015 | 0:30 | Especificar modulo    | Modelagem conceitual do modulo de grafos.                                        |
+| 03 | 02/06/2015 | 1:15 | Especificar modulo    | Modelagem fisica do modulo e projeto de funcoes basicas.                         |
+| 04 | 03/06/2015 | 2:00 | Implementacao         | Implementacao de algumas funcoes basicas de manipulacao de grafos.               |
+| 05 | 04/06/2015 | 5:00 | Codificar modulo      | Implementacao de todas as funcoes planejadas que nao tinham sido feitas.         |
+| 06 | 04/06/2015 | 1:00 | Revisar codigo        | Testes manuais e melhorias na exibicao do programa.                              |
+| 07 | 05/06/2015 | 1:30 | Redigir casos teste   | Criacao de asssertivas para teste do modulo com CUnit.                           |
+| 08 | 06/06/2015 | 1:00 | Corrigir erros        | Correcao de erros de compatibilidade com a biblioteca listas.h                   |
+| 09 | 16/06/2015 | 2:00 | Corrigir problemas    | Correcao de algumas funções que apresentaram falha de segmentacao                |
+| 10 | 16/06/2015 | 1:00 | Documentacao final    | Finalizacao do arquivo READ ME do modulo e ultimos ajustes na documentacao       |
+-------------------------------------------------------------------------------------------------------------------------------------
+| -- |Tempo Total | 16:00| Data de Entrega do Trabalho: 17/06/2015

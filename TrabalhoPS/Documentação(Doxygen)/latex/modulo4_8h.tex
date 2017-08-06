@@ -1,0 +1,72 @@
+\hypertarget{modulo4_8h}{\section{Referência do Arquivo modulo4.\-h}
+\label{modulo4_8h}\index{modulo4.\-h@{modulo4.\-h}}
+}
+
+
+Modulo de declaracao das funcoes e estruturas do \hyperlink{modulo4_8c}{modulo4.\-c}.  
+
+
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structlistadeprojetos}{listadeprojetos} \hyperlink{modulo4_8h_a76bbb460da96aebda430bcfc1abd1bd8}{listadeprojetosfinal}
+\item 
+typedef struct \hyperlink{structlistaEventosFinal}{lista\-Eventos\-Final} \hyperlink{modulo4_8h_a5d911c1f0ca0f6a22063a062d48186d0}{lista\-De\-Eventos\-Final}
+\item 
+typedef struct \hyperlink{structlistaPeriodicosFinal}{lista\-Periodicos\-Final} \hyperlink{modulo4_8h_ae70eddd91a19226dd2cf9eaadf0f7c00}{lista\-De\-Periodicos\-Final}
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{modulo4_8h_afd0c3a75d5158c17843df823a89b2c30}{print} (\hyperlink{main_8c_a5d911c1f0ca0f6a22063a062d48186d0}{lista\-De\-Eventos\-Final} $\ast$lista\-Final, \hyperlink{main_8c_a76bbb460da96aebda430bcfc1abd1bd8}{listadeprojetosfinal} $\ast$lista\-Final2, \hyperlink{main_8c_ae70eddd91a19226dd2cf9eaadf0f7c00}{lista\-De\-Periodicos\-Final} $\ast$lista\-Final3, \hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$G, \hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$H, \hyperlink{grafos_8h_ad2ceaa7fd9c9bab870e4fd852607631a}{Grafo} $\ast$I)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Modulo de declaracao das funcoes e estruturas do \hyperlink{modulo4_8c}{modulo4.\-c}. 
+
+\subsection{Definições dos tipos}
+\hypertarget{modulo4_8h_a5d911c1f0ca0f6a22063a062d48186d0}{\index{modulo4.\-h@{modulo4.\-h}!lista\-De\-Eventos\-Final@{lista\-De\-Eventos\-Final}}
+\index{lista\-De\-Eventos\-Final@{lista\-De\-Eventos\-Final}!modulo4.h@{modulo4.\-h}}
+\subsubsection[{lista\-De\-Eventos\-Final}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf lista\-Eventos\-Final} {\bf lista\-De\-Eventos\-Final}}}\label{modulo4_8h_a5d911c1f0ca0f6a22063a062d48186d0}
+\hypertarget{modulo4_8h_ae70eddd91a19226dd2cf9eaadf0f7c00}{\index{modulo4.\-h@{modulo4.\-h}!lista\-De\-Periodicos\-Final@{lista\-De\-Periodicos\-Final}}
+\index{lista\-De\-Periodicos\-Final@{lista\-De\-Periodicos\-Final}!modulo4.h@{modulo4.\-h}}
+\subsubsection[{lista\-De\-Periodicos\-Final}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf lista\-Periodicos\-Final} {\bf lista\-De\-Periodicos\-Final}}}\label{modulo4_8h_ae70eddd91a19226dd2cf9eaadf0f7c00}
+\hypertarget{modulo4_8h_a76bbb460da96aebda430bcfc1abd1bd8}{\index{modulo4.\-h@{modulo4.\-h}!listadeprojetosfinal@{listadeprojetosfinal}}
+\index{listadeprojetosfinal@{listadeprojetosfinal}!modulo4.h@{modulo4.\-h}}
+\subsubsection[{listadeprojetosfinal}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf listadeprojetos} {\bf listadeprojetosfinal}}}\label{modulo4_8h_a76bbb460da96aebda430bcfc1abd1bd8}
+
+
+\subsection{Funções}
+\hypertarget{modulo4_8h_afd0c3a75d5158c17843df823a89b2c30}{\index{modulo4.\-h@{modulo4.\-h}!print@{print}}
+\index{print@{print}!modulo4.h@{modulo4.\-h}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void print (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Eventos\-Final} $\ast$}]{lista\-Final, }
+\item[{{\bf listadeprojetosfinal} $\ast$}]{lista\-Final2, }
+\item[{{\bf lista\-De\-Periodicos\-Final} $\ast$}]{lista\-Final3, }
+\item[{{\bf Grafo} $\ast$}]{G, }
+\item[{{\bf Grafo} $\ast$}]{H, }
+\item[{{\bf Grafo} $\ast$}]{I}
+\end{DoxyParamCaption}
+)}}\label{modulo4_8h_afd0c3a75d5158c17843df823a89b2c30}
+Escreve no arquivo as informacoes referentes as listas de projetos. 
+\begin{DoxyParams}{Parâmetros}
+{\em lista} & de projetos final\\
+\hline
+\end{DoxyParams}
+Escreve no arquivo as informacoes referentes as listas de periodicos 
+\begin{DoxyParams}{Parâmetros}
+{\em lista} & de periodicos final\\
+\hline
+\end{DoxyParams}
+Escreve no arquivo as informacoes referentes as listas de eventos. 
+\begin{DoxyParams}{Parâmetros}
+{\em lista} & de eventos final.\\
+\hline
+\end{DoxyParams}
+Escreve no arquivo os grafos de relacionamento gerados a partir das listas 
+\begin{DoxyParams}{Parâmetros}
+{\em Grafo} & de relacionamentos\\
+\hline
+\end{DoxyParams}

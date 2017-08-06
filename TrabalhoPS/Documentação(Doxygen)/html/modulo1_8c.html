@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Segundo Trabalho De Programação Sitemática: Referência do Arquivo modulo1.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Segundo Trabalho De Programação Sitemática
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;Arquivos</span></a></li>
+      <li><a href="globals.html"><span>Arquivos&#160;Membros</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Todos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Arquivos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de Tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Definições e Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Páginas</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definições e Macros</a> &#124;
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle">
+<div class="title">Referência do Arquivo modulo1.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Modulo de implementacao de listas e leitura do arquivo.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="listas_8h_source.html">listas.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="modulo1_8h_source.html">modulo1.h</a>&quot;</code><br/>
+<code>#include &lt;ctype.h&gt;</code><br/>
+<code>#include &lt;dirent.h&gt;</code><br/>
+<code>#include &lt;sys/types.h&gt;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Definições e Macros</h2></td></tr>
+<tr class="memitem:a223c90b3533df0ad0426b8ddd81724de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a223c90b3533df0ad0426b8ddd81724de">DIR_PUBLICACAO</a>&#160;&#160;&#160;&quot;Arquivos Publicacao/&quot;</td></tr>
+<tr class="separator:a223c90b3533df0ad0426b8ddd81724de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aecc12275944eb5c1afe9983bb97c6d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a9aecc12275944eb5c1afe9983bb97c6d">STDIO_H_INCLUDED</a></td></tr>
+<tr class="separator:a9aecc12275944eb5c1afe9983bb97c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace4b77adead3c3b8441d5e8fe061bdbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#ace4b77adead3c3b8441d5e8fe061bdbe">STDLIB_H_INCLUDED</a></td></tr>
+<tr class="separator:ace4b77adead3c3b8441d5e8fe061bdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67fe47da7b9c2b664d41c852044850c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#af67fe47da7b9c2b664d41c852044850c">STRING_H_INCLUDED</a></td></tr>
+<tr class="separator:af67fe47da7b9c2b664d41c852044850c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9949390462f9d6f5c21bd6a03b3435c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#aa9949390462f9d6f5c21bd6a03b3435c">LISTAS_H_INCLUDED</a></td></tr>
+<tr class="separator:aa9949390462f9d6f5c21bd6a03b3435c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb30ab4b8080f7a62321cb0764d158c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#acfb30ab4b8080f7a62321cb0764d158c">MODULO1_H_INCLUDED</a></td></tr>
+<tr class="separator:acfb30ab4b8080f7a62321cb0764d158c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e695e5ae206af8ab817c2b2d980c69f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a8e695e5ae206af8ab817c2b2d980c69f">CTYPE_H_INCLUDED</a></td></tr>
+<tr class="separator:a8e695e5ae206af8ab817c2b2d980c69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a663a813212f0be47cbce445909be08c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a663a813212f0be47cbce445909be08c9">corrigeNome</a> (char nome[100])</td></tr>
+<tr class="separator:a663a813212f0be47cbce445909be08c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001ff79402000ce1ac77bd4467f5f195"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a001ff79402000ce1ac77bd4467f5f195">corrigeNome2</a> (char nome[100])</td></tr>
+<tr class="separator:a001ff79402000ce1ac77bd4467f5f195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa421295e24398cbae04a0631914876"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modulo2_8h.html#a53ab37bd37ac6addbc6c32e5807c5516">listaDeAlunos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a5aa421295e24398cbae04a0631914876">txtDiscentesEmLista</a> (char *arquivo_doutorado, char *arquivo_mestrado)</td></tr>
+<tr class="memdesc:a5aa421295e24398cbae04a0631914876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcao que le do arquivo os dados referentes aos discentes e gera uma lista com os nomes.  <a href="#a5aa421295e24398cbae04a0631914876">Mais...</a><br/></td></tr>
+<tr class="separator:a5aa421295e24398cbae04a0631914876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1afdbf93b1ff3cc1c1c6cadfa7b0071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modulo2_8h.html#a5b7c248cd8032e15eeff66322e6c4331">listaDeProfessores</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#ab1afdbf93b1ff3cc1c1c6cadfa7b0071">txtDocentesEmLista</a> (char *arquivo)</td></tr>
+<tr class="memdesc:ab1afdbf93b1ff3cc1c1c6cadfa7b0071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcao que le do arquivo os nomes de todos os professores e gera uma lista com os mesmos.  <a href="#ab1afdbf93b1ff3cc1c1c6cadfa7b0071">Mais...</a><br/></td></tr>
+<tr class="separator:ab1afdbf93b1ff3cc1c1c6cadfa7b0071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6add2280033385b1ffed1b67c693c975"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modulo2_8h.html#a5bb322f8eb7baf76f6e64a5b75c3d4dc">listaDeProjetos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a6add2280033385b1ffed1b67c693c975">txtProjetosEmLista</a> (char *arquivo)</td></tr>
+<tr class="memdesc:a6add2280033385b1ffed1b67c693c975"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcao que le do arquivo as informacoes referentes aos projetos e gera uma lista com as informacoes.  <a href="#a6add2280033385b1ffed1b67c693c975">Mais...</a><br/></td></tr>
+<tr class="separator:a6add2280033385b1ffed1b67c693c975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac1d56506d1880ce1aec53ae13f93b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modulo2_8h.html#a6215d8719040a95712db726a1e08832c">listaDeEventos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a1ac1d56506d1880ce1aec53ae13f93b3">txtEventosEmLista</a> (char *str, char *arquivo, char *nomepasta)</td></tr>
+<tr class="memdesc:a1ac1d56506d1880ce1aec53ae13f93b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcao que le do arquivo as informacoes referentes aos eventos e gera uma lista com as informacoes.  <a href="#a1ac1d56506d1880ce1aec53ae13f93b3">Mais...</a><br/></td></tr>
+<tr class="separator:a1ac1d56506d1880ce1aec53ae13f93b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a72467b94fef42ca1d75f66bbcc6aca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="modulo2_8h.html#a6c51e2b84575de8011ddfe78b5ac5abe">listaDePeriodicos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modulo1_8c.html#a1a72467b94fef42ca1d75f66bbcc6aca">txtPeriodicosEmLista</a> (char *src, char *arquivo, char *nomepasta)</td></tr>
+<tr class="memdesc:a1a72467b94fef42ca1d75f66bbcc6aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcao que le do arquivo as informacoes referentes aos periodicos e gera uma lista com as informacoes.  <a href="#a1a72467b94fef42ca1d75f66bbcc6aca">Mais...</a><br/></td></tr>
+<tr class="separator:a1a72467b94fef42ca1d75f66bbcc6aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
+<div class="textblock"><p>Modulo de implementacao de listas e leitura do arquivo. </p>
+<dl class="section author"><dt>Autor</dt><dd>Hugo Fagundes </dd></dl>
+<dl class="section since"><dt>Desde</dt><dd>01/06/2015. </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.6. </dd></dl>
+</div><h2 class="groupheader">Definições e macros</h2>
+<a class="anchor" id="a8e695e5ae206af8ab817c2b2d980c69f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CTYPE_H_INCLUDED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a223c90b3533df0ad0426b8ddd81724de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DIR_PUBLICACAO&#160;&#160;&#160;&quot;Arquivos Publicacao/&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa9949390462f9d6f5c21bd6a03b3435c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LISTAS_H_INCLUDED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acfb30ab4b8080f7a62321cb0764d158c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MODULO1_H_INCLUDED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9aecc12275944eb5c1afe9983bb97c6d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STDIO_H_INCLUDED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ace4b77adead3c3b8441d5e8fe061bdbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STDLIB_H_INCLUDED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af67fe47da7b9c2b664d41c852044850c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STRING_H_INCLUDED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Funções</h2>
+<a class="anchor" id="a663a813212f0be47cbce445909be08c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void corrigeNome </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>nome</em>[100]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a001ff79402000ce1ac77bd4467f5f195"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void corrigeNome2 </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>nome</em>[100]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5aa421295e24398cbae04a0631914876"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modulo2_8h.html#a53ab37bd37ac6addbc6c32e5807c5516">listaDeAlunos</a>* txtDiscentesEmLista </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arquivo_doutorado</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arquivo_mestrado</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcao que le do arquivo os dados referentes aos discentes e gera uma lista com os nomes. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arquivo_doutorado</td><td>Arquivos com os nomes dos doutorandos. </td></tr>
+    <tr><td class="paramname">arquivo_mestrado</td><td>Arquivos com os nomes dos mestrandos. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>lista de alunos </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab1afdbf93b1ff3cc1c1c6cadfa7b0071"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modulo2_8h.html#a5b7c248cd8032e15eeff66322e6c4331">listaDeProfessores</a>* txtDocentesEmLista </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arquivo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcao que le do arquivo os nomes de todos os professores e gera uma lista com os mesmos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arquivo</td><td>arquivo de leitura </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>lista de professores. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1ac1d56506d1880ce1aec53ae13f93b3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modulo2_8h.html#a6215d8719040a95712db726a1e08832c">listaDeEventos</a>* txtEventosEmLista </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arquivo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomepasta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcao que le do arquivo as informacoes referentes aos eventos e gera uma lista com as informacoes. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arquivo</td><td>arquivo de leitura com informacoes dos eventos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>lista de eventos </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1a72467b94fef42ca1d75f66bbcc6aca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modulo2_8h.html#a6c51e2b84575de8011ddfe78b5ac5abe">listaDePeriodicos</a>* txtPeriodicosEmLista </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arquivo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomepasta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcao que le do arquivo as informacoes referentes aos periodicos e gera uma lista com as informacoes. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arquivo</td><td>arquivo de leitura com informacoes dos periodicos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>lista de periodicos </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6add2280033385b1ffed1b67c693c975"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="modulo2_8h.html#a5bb322f8eb7baf76f6e64a5b75c3d4dc">listaDeProjetos</a>* txtProjetosEmLista </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arquivo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcao que le do arquivo as informacoes referentes aos projetos e gera uma lista com as informacoes. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arquivo</td><td>arquivo de leitura com informacoes dos projetos. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>lista de projetos </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sexta, 10 de Julho de 2015 00:21:05 para Segundo Trabalho De Programação Sitemática por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>

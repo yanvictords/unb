@@ -1,0 +1,205 @@
+\hypertarget{modulo1_8c}{\section{Referência do Arquivo modulo1.\-c}
+\label{modulo1_8c}\index{modulo1.\-c@{modulo1.\-c}}
+}
+
+
+Modulo de implementacao de listas e leitura do arquivo.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}listas.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}modulo1.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$ctype.\-h$>$}\\*
+{\ttfamily \#include $<$dirent.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{modulo1_8c_a223c90b3533df0ad0426b8ddd81724de}{D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O}~\char`\"{}Arquivos Publicacao/\char`\"{}
+\item 
+\#define \hyperlink{modulo1_8c_a9aecc12275944eb5c1afe9983bb97c6d}{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{modulo1_8c_ace4b77adead3c3b8441d5e8fe061bdbe}{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{modulo1_8c_af67fe47da7b9c2b664d41c852044850c}{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{modulo1_8c_aa9949390462f9d6f5c21bd6a03b3435c}{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{modulo1_8c_acfb30ab4b8080f7a62321cb0764d158c}{M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{modulo1_8c_a8e695e5ae206af8ab817c2b2d980c69f}{C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{modulo1_8c_a663a813212f0be47cbce445909be08c9}{corrige\-Nome} (char nome\mbox{[}100\mbox{]})
+\item 
+void \hyperlink{modulo1_8c_a001ff79402000ce1ac77bd4467f5f195}{corrige\-Nome2} (char nome\mbox{[}100\mbox{]})
+\item 
+\hyperlink{modulo2_8h_a53ab37bd37ac6addbc6c32e5807c5516}{lista\-De\-Alunos} $\ast$ \hyperlink{modulo1_8c_a5aa421295e24398cbae04a0631914876}{txt\-Discentes\-Em\-Lista} (char $\ast$arquivo\-\_\-doutorado, char $\ast$arquivo\-\_\-mestrado)
+\begin{DoxyCompactList}\small\item\em Funcao que le do arquivo os dados referentes aos discentes e gera uma lista com os nomes. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a5b7c248cd8032e15eeff66322e6c4331}{lista\-De\-Professores} $\ast$ \hyperlink{modulo1_8c_ab1afdbf93b1ff3cc1c1c6cadfa7b0071}{txt\-Docentes\-Em\-Lista} (char $\ast$arquivo)
+\begin{DoxyCompactList}\small\item\em Funcao que le do arquivo os nomes de todos os professores e gera uma lista com os mesmos. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a5bb322f8eb7baf76f6e64a5b75c3d4dc}{lista\-De\-Projetos} $\ast$ \hyperlink{modulo1_8c_a6add2280033385b1ffed1b67c693c975}{txt\-Projetos\-Em\-Lista} (char $\ast$arquivo)
+\begin{DoxyCompactList}\small\item\em Funcao que le do arquivo as informacoes referentes aos projetos e gera uma lista com as informacoes. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a6215d8719040a95712db726a1e08832c}{lista\-De\-Eventos} $\ast$ \hyperlink{modulo1_8c_a1ac1d56506d1880ce1aec53ae13f93b3}{txt\-Eventos\-Em\-Lista} (char $\ast$str, char $\ast$arquivo, char $\ast$nomepasta)
+\begin{DoxyCompactList}\small\item\em Funcao que le do arquivo as informacoes referentes aos eventos e gera uma lista com as informacoes. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a6c51e2b84575de8011ddfe78b5ac5abe}{lista\-De\-Periodicos} $\ast$ \hyperlink{modulo1_8c_a1a72467b94fef42ca1d75f66bbcc6aca}{txt\-Periodicos\-Em\-Lista} (char $\ast$src, char $\ast$arquivo, char $\ast$nomepasta)
+\begin{DoxyCompactList}\small\item\em Funcao que le do arquivo as informacoes referentes aos periodicos e gera uma lista com as informacoes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Modulo de implementacao de listas e leitura do arquivo. \begin{DoxyAuthor}{Autor}
+Hugo Fagundes 
+\end{DoxyAuthor}
+\begin{DoxySince}{Desde}
+01/06/2015. 
+\end{DoxySince}
+\begin{DoxyVersion}{Versão}
+1.\-6. 
+\end{DoxyVersion}
+
+
+\subsection{Definições e macros}
+\hypertarget{modulo1_8c_a8e695e5ae206af8ab817c2b2d980c69f}{\index{modulo1.\-c@{modulo1.\-c}!C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-T\-Y\-P\-E\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{modulo1_8c_a8e695e5ae206af8ab817c2b2d980c69f}
+\hypertarget{modulo1_8c_a223c90b3533df0ad0426b8ddd81724de}{\index{modulo1.\-c@{modulo1.\-c}!D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O@{D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O}}
+\index{D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O@{D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\-I\-R\-\_\-\-P\-U\-B\-L\-I\-C\-A\-C\-A\-O~\char`\"{}Arquivos Publicacao/\char`\"{}}}\label{modulo1_8c_a223c90b3533df0ad0426b8ddd81724de}
+\hypertarget{modulo1_8c_aa9949390462f9d6f5c21bd6a03b3435c}{\index{modulo1.\-c@{modulo1.\-c}!L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{modulo1_8c_aa9949390462f9d6f5c21bd6a03b3435c}
+\hypertarget{modulo1_8c_acfb30ab4b8080f7a62321cb0764d158c}{\index{modulo1.\-c@{modulo1.\-c}!M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-O\-D\-U\-L\-O1\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{modulo1_8c_acfb30ab4b8080f7a62321cb0764d158c}
+\hypertarget{modulo1_8c_a9aecc12275944eb5c1afe9983bb97c6d}{\index{modulo1.\-c@{modulo1.\-c}!S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{modulo1_8c_a9aecc12275944eb5c1afe9983bb97c6d}
+\hypertarget{modulo1_8c_ace4b77adead3c3b8441d5e8fe061bdbe}{\index{modulo1.\-c@{modulo1.\-c}!S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{modulo1_8c_ace4b77adead3c3b8441d5e8fe061bdbe}
+\hypertarget{modulo1_8c_af67fe47da7b9c2b664d41c852044850c}{\index{modulo1.\-c@{modulo1.\-c}!S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{modulo1_8c_af67fe47da7b9c2b664d41c852044850c}
+
+
+\subsection{Funções}
+\hypertarget{modulo1_8c_a663a813212f0be47cbce445909be08c9}{\index{modulo1.\-c@{modulo1.\-c}!corrige\-Nome@{corrige\-Nome}}
+\index{corrige\-Nome@{corrige\-Nome}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{corrige\-Nome}]{\setlength{\rightskip}{0pt plus 5cm}void corrige\-Nome (
+\begin{DoxyParamCaption}
+\item[{char}]{nome\mbox{[}100\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_a663a813212f0be47cbce445909be08c9}
+\hypertarget{modulo1_8c_a001ff79402000ce1ac77bd4467f5f195}{\index{modulo1.\-c@{modulo1.\-c}!corrige\-Nome2@{corrige\-Nome2}}
+\index{corrige\-Nome2@{corrige\-Nome2}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{corrige\-Nome2}]{\setlength{\rightskip}{0pt plus 5cm}void corrige\-Nome2 (
+\begin{DoxyParamCaption}
+\item[{char}]{nome\mbox{[}100\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_a001ff79402000ce1ac77bd4467f5f195}
+\hypertarget{modulo1_8c_a5aa421295e24398cbae04a0631914876}{\index{modulo1.\-c@{modulo1.\-c}!txt\-Discentes\-Em\-Lista@{txt\-Discentes\-Em\-Lista}}
+\index{txt\-Discentes\-Em\-Lista@{txt\-Discentes\-Em\-Lista}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{txt\-Discentes\-Em\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Alunos}$\ast$ txt\-Discentes\-Em\-Lista (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{arquivo\-\_\-doutorado, }
+\item[{char $\ast$}]{arquivo\-\_\-mestrado}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_a5aa421295e24398cbae04a0631914876}
+
+
+Funcao que le do arquivo os dados referentes aos discentes e gera uma lista com os nomes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em arquivo\-\_\-doutorado} & Arquivos com os nomes dos doutorandos. \\
+\hline
+{\em arquivo\-\_\-mestrado} & Arquivos com os nomes dos mestrandos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+lista de alunos 
+\end{DoxyReturn}
+\hypertarget{modulo1_8c_ab1afdbf93b1ff3cc1c1c6cadfa7b0071}{\index{modulo1.\-c@{modulo1.\-c}!txt\-Docentes\-Em\-Lista@{txt\-Docentes\-Em\-Lista}}
+\index{txt\-Docentes\-Em\-Lista@{txt\-Docentes\-Em\-Lista}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{txt\-Docentes\-Em\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Professores}$\ast$ txt\-Docentes\-Em\-Lista (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{arquivo}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_ab1afdbf93b1ff3cc1c1c6cadfa7b0071}
+
+
+Funcao que le do arquivo os nomes de todos os professores e gera uma lista com os mesmos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em arquivo} & arquivo de leitura \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+lista de professores. 
+\end{DoxyReturn}
+\hypertarget{modulo1_8c_a1ac1d56506d1880ce1aec53ae13f93b3}{\index{modulo1.\-c@{modulo1.\-c}!txt\-Eventos\-Em\-Lista@{txt\-Eventos\-Em\-Lista}}
+\index{txt\-Eventos\-Em\-Lista@{txt\-Eventos\-Em\-Lista}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{txt\-Eventos\-Em\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Eventos}$\ast$ txt\-Eventos\-Em\-Lista (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str, }
+\item[{char $\ast$}]{arquivo, }
+\item[{char $\ast$}]{nomepasta}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_a1ac1d56506d1880ce1aec53ae13f93b3}
+
+
+Funcao que le do arquivo as informacoes referentes aos eventos e gera uma lista com as informacoes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em arquivo} & arquivo de leitura com informacoes dos eventos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+lista de eventos 
+\end{DoxyReturn}
+\hypertarget{modulo1_8c_a1a72467b94fef42ca1d75f66bbcc6aca}{\index{modulo1.\-c@{modulo1.\-c}!txt\-Periodicos\-Em\-Lista@{txt\-Periodicos\-Em\-Lista}}
+\index{txt\-Periodicos\-Em\-Lista@{txt\-Periodicos\-Em\-Lista}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{txt\-Periodicos\-Em\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Periodicos}$\ast$ txt\-Periodicos\-Em\-Lista (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{src, }
+\item[{char $\ast$}]{arquivo, }
+\item[{char $\ast$}]{nomepasta}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_a1a72467b94fef42ca1d75f66bbcc6aca}
+
+
+Funcao que le do arquivo as informacoes referentes aos periodicos e gera uma lista com as informacoes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em arquivo} & arquivo de leitura com informacoes dos periodicos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+lista de periodicos 
+\end{DoxyReturn}
+\hypertarget{modulo1_8c_a6add2280033385b1ffed1b67c693c975}{\index{modulo1.\-c@{modulo1.\-c}!txt\-Projetos\-Em\-Lista@{txt\-Projetos\-Em\-Lista}}
+\index{txt\-Projetos\-Em\-Lista@{txt\-Projetos\-Em\-Lista}!modulo1.c@{modulo1.\-c}}
+\subsubsection[{txt\-Projetos\-Em\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Projetos}$\ast$ txt\-Projetos\-Em\-Lista (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{arquivo}
+\end{DoxyParamCaption}
+)}}\label{modulo1_8c_a6add2280033385b1ffed1b67c693c975}
+
+
+Funcao que le do arquivo as informacoes referentes aos projetos e gera uma lista com as informacoes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em arquivo} & arquivo de leitura com informacoes dos projetos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+lista de projetos 
+\end{DoxyReturn}

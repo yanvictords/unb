@@ -1,0 +1,10 @@
+1+1
+(2*3)-3
+not(2>3)
+let x=10 in (x*x)
+let x=5 in (x+subtracao(2,1))
+soma(2,1)
+subtracao(2,1)
+multiplicacao(2,1)
+divisao(2,1)
+if((5>=5) && (2>4)) then 5+5 else multiplicacao(50,3)

@@ -1,0 +1,461 @@
+#include <iostream>
+#include "MuMaterial.h"
+
+using namespace std;
+
+//Constantes
+const int MAX_MOTIF	=	20;
+
+
+//Funcoes
+void setEscalaNat(MuMaterial* pmat, int escalaD);	/* Converte o material para a escala desejada. 1 a 12 para Dó a Si Maior. 13 a 24 
+para Dó a Si Menor  */
+
+int cmpfunc(const void* a, const void *); //Função para auxiliar o qsort usado em outras funções.
+
+MuNote setProxMel(MuMaterial* pmat, int ind, int voz);/* Verifica na voz escolhida, a nota anterior ao índice
+ colocado para decidir a próxima nota.		*/
+MuNote setProxHar(MuMaterial* pmat, int ind, int voz1, int voz2);/*Retorna a ṕróxima nota que pode ser adicionada 
+ao à segunda voz em relação a primeira voz*/
+
+MuNote setProxRep(MuMaterial* pmat,int ind, int voz1, int voz2); /*Rertona a próxima nota que pode ser adicionada 
+em relação à repetição de notas na própria voz. */
+
+
+int main(void) //Main criada para testar as funções.
+{
+	short contrapt(MuNote nota, MuNote tonicacf){
+	short pitch;
+
+
+	
+	switch(Between(0,7)){
+		case 0:
+			pitch =  tonicacf.Pitch()-12; // 1J 
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 1:
+			pitch =  tonicacf.Pitch()-12+2; // 2M
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 2:
+			pitch =  tonicacf.Pitch()-12+3; // 3m 
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 3:
+			pitch =  tonicacf.Pitch()-12+5; //4J 
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 4:
+			pitch =  tonicacf.Pitch()-12+7; //5J
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 5:
+			pitch = tonicacf.Pitch()-12+8; // 6m
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 6:
+			pitch = tonicacf.Pitch()-12+10; // 7m
+			cout << "PITCH: " << pitch<< endl;
+			break;
+		case 7:
+			pitch = tonicacf.Pitch(); // 1J 
+			cout << "PITCH: " << pitch<< endl;
+			break;
+
+	}
+	return pitch;
+
+}
+
+int main(void)
+{
+	MuInit();
+	MuMaterial cantusfirmus, contraponto, materialfinal; //Construcao do motivo, material final e material auxiliar
+	MuNote nota, tonicacp, tonicacf;
+	int j;
+
+		
+	cantusfirmus.LoadScore("/home/yan/Documentos/Musical/MuM-master/ET.sco");	
+	//motif.LoadScore("/home/yan/Documentos/Musical/MuM-master/ET1.sco");
+	cantusfirmus.SetInstrument(0,1);
+	contraponto.SetInstrument(0,1);
+
+	//motif.SetInstrument(0,1);
+	//cout << endl << "CONSTRUÇÃO:" << endl;
+/*--------------------------FIM DA CONSTRUCAO DO MOTIVO---------------------------------------*/
+	
+	nota.SetInstr(1); //fixo
+	nota.SetAmp(0.7); //fixo
+	nota.SetDur(1); //fixo
+
+	tonicacf =cantusfirmus.GetNote(0, 0);
+	cout << "NOTA TONICA DO CANTUSFIRMUS: " << tonicacf.Pitch() << endl;
+
+for(int j=0; j<cantusfirmus.NumberOfNotes()-1 ; j++){ //Enquanto j < (numero de compasso do CantusFirmus -1) para inserir a tonica no fim do contraponto
+
+	nota = cantusfirmus.GetNote(0, j);
+	nota.SetPitch(contrapt(nota,tonicacf));
+	
+	
+	nota.SetStart(j);
+	if(j==0) tonicacp = nota; // guardando a nota tonica
+	contraponto+=nota;
+}
+contraponto+=tonicacp; // inserindo a tonica no fim do contraponto
+cout << "PITCH: " << tonicacp.Pitch()<< endl;
+
+//nota.Pitch() pega o numero da nota
+//SetNote = ( int  voiceNumber, long  noteNumber,MuNote inNote )
+//GetNote = (int  voiceNumber, long  	noteNumber)
+
+
+
+	materialfinal = cantusfirmus*contraponto;
+	materialfinal.Show();
+	materialfinal.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste1");
+	materialfinal.SetDefaultFunctionTables();
+	materialfinal.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
+	materialfinal.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+
+
+	return 0;	
+
+}
+
+}
+
+
+MuNote setProxMel(MuMaterial* pmat, int ind, int voz)//Material com a voz que deve ser analisada. Índice deve ser da nota que se quer colocar.
+{
+	MuMaterial material_aux;
+	MuNote note_aux;
+	int alt;
+
+	note_aux 	=	(*pmat).GetNote(voz,ind-1);//Verifica a nota anterior.
+	alt 		= 	note_aux.Pitch();
+
+	cout << alt << endl;
+
+	switch(Between(0,29))
+	{
+	
+	//2ªm -  s(1)
+		case 0:
+		case 1:
+		case 2: //Ascendente
+			alt +=	1;
+		break;
+
+		case 3:
+		case 4:
+		case 5://Descendente
+			alt -=	1;
+		break;
+
+
+	//2ªM -  T(2)
+		case 6:
+		case 7:
+		case 8: //Ascen.
+			alt +=	2;
+		break;
+
+		case 9:
+		case 10:
+		case 11://Descen.
+			alt -= 	2;
+		break;
+
+
+	//3ªm - sT(3)
+		case 12:
+		case 13:
+		case 14://Ascen.
+			alt +=	3;
+		break;
+
+		case 17:
+		case 15:
+		case 16://Descen.
+			alt -=	3;
+		break;
+
+
+	//3ªM - TT(4)
+		case 20:
+		case 18:
+		case 19://Ascen.
+			alt +=	4;
+		break;
+
+		case 23:
+		case 21:
+		case 22://Descen.
+			alt -=	4;
+		break;
+
+
+	//5ªP - TTTs(7)
+		case 25:
+		case 24://Ascen.
+			alt +=	7;
+		break;
+
+		case 27:
+		case 26://Descen.
+			alt -=	7;
+		break;
+
+
+	//6ªM - TTTTs(9)
+		case 28://Ascen.
+			alt +=	9;
+		break;
+
+	//8ªP - TTTTTT(12)
+		case 29://Ascen.
+			alt +=	12;
+		break;
+
+		case 30://Descen.
+			alt -=	12;
+		break;
+	}
+
+
+	if(alt > 127) 	alt 	=	 127;//Garantindo que a altura fique dentro da escala Midi.
+	if(alt < 0) 	alt 	=	 0;
+
+	note_aux.SetPitch( alt );
+	material_aux	 +=		note_aux;
+	setEscalaNat( &material_aux , 1 ); //Converte para Dó Maior, que não possui acidentes.
+
+	note_aux	= 	material_aux.GetNote(0);
+	alt 		=	note_aux.Pitch();
+	
+	if(alt%12 == 11) //Transforma Si em Sibemol.
+	{
+		 alt -=	1;
+		 note_aux.SetPitch(alt);
+	}
+
+	cout << alt << endl;
+	return note_aux;
+}
+
+
+
+MuNote setProxHar(MuMaterial* pmat, int ind, int voz1, int voz2)/*Retorna uma possível nota para a voz 2
+com base na harmonia que essa tem com a voz 1.*/
+{
+	MuNote note_aux, note_harm;
+	MuMaterial material_aux;
+	int alt1, alt2, correto = 1, quinta;
+
+
+	note_aux		=	 (*pmat).GetNote( voz1 , 0 ); //Supondo que a primeira nota defina a escala da música.
+	quinta 			=	 note_aux.Pitch()%12 + 7; //Uma quinta justa. 
+	note_aux.SetPitch( quinta );
+	material_aux 	+=	 note_aux;
+	setEscalaNat( &material_aux , 1 ); //Converte para modal.
+	quinta 			= 	note_aux.Pitch(); //Quinta sem acidente.
+
+
+	note_harm 	= 	(*pmat).GetNote( voz1 , ind );
+	alt1 		= 	note_harm.Pitch()%12; //Pega o semitom da nota da voz1.
+
+
+	do
+	{
+
+		correto 	=	1;
+		note_aux 	= 	setProxMel( pmat , ind , voz2 );
+		alt2 		=	note_aux.Pitch()%12; //Semitom da nota da voz2.
+		if(alt1 == quinta && alt2 == quinta) correto = 0; //Quintas paralelas, o laço roda mais uma vez.
+		
+	} while(!correto);
+
+	cout << alt1 << endl;
+
+	return note_aux;
+
+}
+
+
+MuNote setProxRep(MuMaterial* pmat,int ind, int voz1, int voz2) //Material, índice da nota a ser adicionada, voz 1 e voz 2.
+{
+	MuNote note_aux1, note_aux2, note_aux3, note_aux4;
+	MuMaterial material_aux;
+	int alt1, alt2, alt3, alt4, correto = 1, terca, sexta, oitava;
+
+
+	note_aux1		=	(*pmat).GetNote( voz1 , 0 ); //Supondo que a primeira nota defina a escala da música.
+	terca			=	(note_aux1.Pitch()%12 + 3 ); //Uma terca maior.
+	sexta 			= 	(note_aux1.Pitch()%12 + 9 );
+	oitava			=   (note_aux1.Pitch()%12);  //Armazena a oitava dessa escala.
+
+
+	note_aux1.SetPitch(terca);
+	material_aux 	+=	 note_aux1;
+	setEscalaNat( &material_aux , 1); //Converte para modal.
+	note_aux1 		= 	material_aux.GetNote(0);
+	terca 			= 	note_aux1.Pitch(); //Armazena a sexta dessa escala.
+	material_aux.Clear();
+
+
+	note_aux1.SetPitch(sexta);
+	material_aux 	+=	note_aux1;
+	setEscalaNat( &material_aux , 1 ); //Converte para modal.
+	note_aux1 		= 	material_aux.GetNote(0);
+	sexta			= 	note_aux1.Pitch(); //Armazena a sexta dessa escala.
+	material_aux.Clear();
+
+
+
+	do
+	{
+		correto = 1;
+
+		note_aux4	=	setProxHar( pmat , ind , voz1 , voz2 );
+		alt4 		= 	note_aux4.Pitch()%12;
+
+
+		if(ind > 2) //Verifica se há quarta repetição da terca ou da sexta.
+		{
+
+			note_aux1 = (*pmat).GetNote( voz2 , ind - 3 );
+			note_aux2 = (*pmat).GetNote( voz2 , ind - 2 );
+			note_aux3 = (*pmat).GetNote( voz2 , ind - 1 );
+			
+			alt1 = (note_aux1.Pitch())%12;
+			alt2 = (note_aux2.Pitch())%12;
+			alt3 = (note_aux3.Pitch())%12;
+
+			if(alt1 == alt2 && alt2 == alt3 && alt3 == alt4)
+			{
+				if(alt1 == terca || alt1 == sexta) correto = 0;
+			}
+		}
+
+		if(ind > 0) //Verifica se há repetição de oitava.
+		{
+			note_aux3	= 	(*pmat).GetNote(voz2, ind-1);
+			alt3 		= 	(note_aux3.Pitch())%12;
+
+			if( alt4 == alt3 && alt3 == oitava ) correto = 0;
+		}
+
+	} while(!correto);
+
+	cout << alt4 << endl;
+
+	return note_aux4;
+}
+
+
+int cmpfunc(const void* a, const void * b)
+{
+	return (*(int*)a - *(int*)b);
+}
+
+
+void setEscalaNat(MuMaterial* pmat, int escalaD)//Converte o material				
+{												//na escala desejada.
+	int i, j, k, tam, ini;
+	int escala[7], notas[MAX_MOTIF];
+	MuNote nota_aux;
+
+	tam = (*pmat).NumberOfNotes();
+
+	if(escalaD > 24 || escalaD < 1) exit(2); //Número inválido.
+	if(escalaD < 13)//Escala Maior TTsTTTs
+	{
+		ini = escalaD - 1;
+        for(i = 0; i < 3; i ++)
+        {
+            escala[i]=(ini+2*i)%12;
+        }
+
+
+        for(i = 0; i < 4; i ++)
+        {
+            escala[i+3]=(ini+5+2*i)%12;
+        }
+	} else //Escala Menor TsTTsTT
+	{
+		ini = escalaD-1;
+        escala[0]=ini%12;
+        escala[1]=(ini+2)%12;
+        escala[2]=(ini+3)%12;
+
+        for(i = 0; i<2; i ++)
+        {
+            escala[i+3]=(ini+5+2*i)%12;
+        }
+
+        escala[5]=(ini+8)%12;
+        escala[6]=(ini+10)%12;
+	}
+
+	qsort(escala, 7, sizeof(int), cmpfunc);
+
+
+	for( i = 0; i < tam; i++) //Laço para obter as alturas das notas
+	{						// do material.
+        nota_aux = (*pmat).GetNote(i);
+        notas[i] = nota_aux.Pitch();
+    }
+
+    for(j = 0; j < tam; j++)
+    {
+    	for(i = 0; i < 7; i++)
+    	{
+    		if((notas[j])%12 <= escala[i]) //Se a nota estiver fora da escala, ela é convertida
+    		{								//para o grau acima mais próximo.	 							
+				notas[j]-=(notas[j])%12;
+				notas[j]+=(escala[i]);
+				i=7;
+				
+			} else if(i == 6 && (notas[j])%12 == 11)
+			{
+				notas[j] -= (notas[j])%12;
+				notas[j] += (escala[0])%12 + 12;
+				i=7;//Passa para próxima nota.
+			}
+		}
+		nota_aux = (*pmat).GetNote(j);
+		nota_aux.SetPitch(notas[j]);
+		(*pmat).SetNote(j,nota_aux);
+    }
+}
+
+
+
+
+
+/*
+
+//2ª e 3ª Maior ou Menor
+//5ª Justa
+//6ª Maior em Ascendente
+//8ª Justa.
+
+
+
+- Começa e termina na tônica;
+- a Penultima nota é o 2º grau da escala;
+- Fazer movimentos naturais;
+- Pode usar 2ª e 3ª maior ou menor
+-  Pode usar 5ª justa;
+- Pode usar 6ª maior em ascendente;
+- Pode usar a 8ª. 
+- Alteração cromática: 1)Penúltimo compasso, para se ter a sensação de conclusão, pode usar um sustenido. Por exemplo: Modo dórico, posso usar C# para a penúltima.
+2) Quando houver situação conflitante, entre F e B, posso trocar o B por Bb.
+- Não pode 4ª e 7ª;
+- Não pode 5ªs paralelas;
+- 5ªs não podem aparecer 2x seguidas e nem uníssonas;
+- 3ªs e 6ªs podem aparecer consecutivamente no máximo até 3x;
+- Os dois últimos compassos tem que ser em grau conjunto.
+
+*/

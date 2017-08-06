@@ -1,0 +1,26 @@
+Grafo de Relacionamentos
+
+<publics.txt>
+Quantidade de Publicacoes: 5
+
+LP (2015):
+Icaro Miranda
+-
+
+PS (2014):
+Icaro M Miranda
+Icaro M
+-
+
+C3 (2013):
+Icaro MM
+-
+
+CA (2011):
+Icaro Miranda
+-
+
+LC (2000):
+Icaro M Miranda
+-
+

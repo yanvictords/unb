@@ -1,0 +1,422 @@
+\hypertarget{listas_8c}{\section{Referência do Arquivo listas.\-c}
+\label{listas_8c}\index{listas.\-c@{listas.\-c}}
+}
+
+
+Modulo de implementacao de listas.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}listas.\-h\char`\"{}}\\*
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{listas_8c_a9aecc12275944eb5c1afe9983bb97c6d}{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{listas_8c_ace4b77adead3c3b8441d5e8fe061bdbe}{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{listas_8c_af67fe47da7b9c2b664d41c852044850c}{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\item 
+\#define \hyperlink{listas_8c_aa9949390462f9d6f5c21bd6a03b3435c}{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{modulo2_8h_a5bb322f8eb7baf76f6e64a5b75c3d4dc}{lista\-De\-Projetos} $\ast$ \hyperlink{listas_8c_a73e2fdfda8882592e24f6f39c2c65e79}{cria\-Lista\-De\-Projetos} (void)
+\begin{DoxyCompactList}\small\item\em Cria uma lista de projetos. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a5b7c248cd8032e15eeff66322e6c4331}{lista\-De\-Professores} $\ast$ \hyperlink{listas_8c_aaae47a83efe85799ec1c3aff5475adb7}{cria\-Lista\-De\-Professores} (void)
+\begin{DoxyCompactList}\small\item\em Cria uma lista de professores. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a53ab37bd37ac6addbc6c32e5807c5516}{lista\-De\-Alunos} $\ast$ \hyperlink{listas_8c_a8d36f953ee5c8d21a9f616bd10c75f34}{cria\-Lista\-De\-Alunos} (void)
+\begin{DoxyCompactList}\small\item\em Cria uma lista de alunos. \end{DoxyCompactList}\item 
+\hyperlink{listas_8h_a7b72642de6d282ff86dd2393f8f88e54}{lista\-De\-Autores} $\ast$ \hyperlink{listas_8c_a5793e9d9e8bf13b628bfccbf492aca9c}{cria\-Lista\-De\-Autores} (void)
+\begin{DoxyCompactList}\small\item\em Cria uma lista de autores. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a6215d8719040a95712db726a1e08832c}{lista\-De\-Eventos} $\ast$ \hyperlink{listas_8c_a421ff7f2082464b029943bd0cd6120fe}{cria\-Lista\-De\-Eventos} (void)
+\begin{DoxyCompactList}\small\item\em Cria uma lista de eventos. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a6c51e2b84575de8011ddfe78b5ac5abe}{lista\-De\-Periodicos} $\ast$ \hyperlink{listas_8c_afc860b318e00ae90853ab299c834c481}{cria\-Lista\-De\-Periodicos} (void)
+\begin{DoxyCompactList}\small\item\em Cria uma lista de periodicos. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a6c51e2b84575de8011ddfe78b5ac5abe}{lista\-De\-Periodicos} $\ast$ \hyperlink{listas_8c_a8aba0595adf3a35c153ce930c2d1ea65}{insere\-Em\-Lista\-De\-Periodicos} (\hyperlink{modulo2_8h_a6c51e2b84575de8011ddfe78b5ac5abe}{lista\-De\-Periodicos} $\ast$Lista\-Periodicos, \hyperlink{listas_8h_a7b72642de6d282ff86dd2393f8f88e54}{lista\-De\-Autores} $\ast$Lista\-Autores, char $\ast$nome\-Professor, char $\ast$nome\-Para\-Citacao\-\_\-\-Professor, char $\ast$natureza, char $\ast$titulo\-Artigo, char $\ast$titulo\-Periodico, char $\ast$idioma, char $\ast$ano, char $\ast$serie, char $\ast$volume, char $\ast$pagina\-Inicial, char $\ast$pagina\-Final)
+\begin{DoxyCompactList}\small\item\em Insere um novo periodico em uma lista de periodicos. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a6215d8719040a95712db726a1e08832c}{lista\-De\-Eventos} $\ast$ \hyperlink{listas_8c_a58608f0316842aac0ba2148a82df45ce}{insere\-Em\-Lista\-De\-Eventos} (\hyperlink{modulo2_8h_a6215d8719040a95712db726a1e08832c}{lista\-De\-Eventos} $\ast$Lista\-Eventos, \hyperlink{listas_8h_a7b72642de6d282ff86dd2393f8f88e54}{lista\-De\-Autores} $\ast$Lista\-Autores, char $\ast$nome\-Professor, char $\ast$nome\-Para\-Citacao\-\_\-\-Professor, char $\ast$natureza, char $\ast$titulo, char $\ast$pais, char $\ast$idioma, char $\ast$nome\-Evento, char $\ast$ano, char $\ast$proceedings, char $\ast$volume, char $\ast$pagina\-Inicial, char $\ast$pagina\-Final)
+\begin{DoxyCompactList}\small\item\em Insere um novo evento em uma lista de eventos. \end{DoxyCompactList}\item 
+\hyperlink{listas_8h_a7b72642de6d282ff86dd2393f8f88e54}{lista\-De\-Autores} $\ast$ \hyperlink{listas_8c_abab05c43a2eaf7074f72ea1ca97e9df6}{insere\-Em\-Lista\-De\-Autores} (\hyperlink{listas_8h_a7b72642de6d282ff86dd2393f8f88e54}{lista\-De\-Autores} $\ast$Lista, char $\ast$nome\-Autor, char $\ast$nome\-Para\-Citacao, char $\ast$ordem\-De\-Autoria)
+\begin{DoxyCompactList}\small\item\em Insere um novo autor em uma lista de autores. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a5bb322f8eb7baf76f6e64a5b75c3d4dc}{lista\-De\-Projetos} $\ast$ \hyperlink{listas_8c_a3858725619e502092384b90b2c34ea2c}{insere\-Em\-Lista\-De\-Projetos} (\hyperlink{modulo2_8h_a5bb322f8eb7baf76f6e64a5b75c3d4dc}{lista\-De\-Projetos} $\ast$Lista, char $\ast$nome\-Projeto, int ano\-Inicio, int mes\-Fim, int ano\-Fim, char $\ast$situacao, char $\ast$natureza, char $\ast$descricao, char $\ast$responsavel, char $\ast$integrante1, char $\ast$integrante2)
+\begin{DoxyCompactList}\small\item\em Insere um novo projeto em uma lista de projetos. \end{DoxyCompactList}\item 
+int \hyperlink{listas_8c_af1d14c9fc969793af05407ccff06daeb}{confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista} (\hyperlink{modulo2_8h_a5b7c248cd8032e15eeff66322e6c4331}{lista\-De\-Professores} $\ast$Lista, char $\ast$nome\-Professor)
+\begin{DoxyCompactList}\small\item\em Confere se um Professor esta presente em uma lista de professores. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a5b7c248cd8032e15eeff66322e6c4331}{lista\-De\-Professores} $\ast$ \hyperlink{listas_8c_a2b734b12c1e67c660a6bca5d89a016c2}{insere\-Em\-Lista\-De\-Professores} (\hyperlink{modulo2_8h_a5b7c248cd8032e15eeff66322e6c4331}{lista\-De\-Professores} $\ast$Lista, char $\ast$nome\-Professor, char $\ast$nome\-Para\-Citacao)
+\begin{DoxyCompactList}\small\item\em Insere um nome de professor em uma lista de professores. \end{DoxyCompactList}\item 
+\hyperlink{modulo2_8h_a53ab37bd37ac6addbc6c32e5807c5516}{lista\-De\-Alunos} $\ast$ \hyperlink{listas_8c_a9101ac241db4290d2a9ac98a9862a47f}{insere\-Em\-Lista\-De\-Alunos} (\hyperlink{modulo2_8h_a53ab37bd37ac6addbc6c32e5807c5516}{lista\-De\-Alunos} $\ast$Lista, char $\ast$nome\-Aluno, char $\ast$matricula, int tipo)
+\begin{DoxyCompactList}\small\item\em Insere um nome de aluno em uma lista de alunos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Modulo de implementacao de listas. 
+
+\subsection{Definições e macros}
+\hypertarget{listas_8c_aa9949390462f9d6f5c21bd6a03b3435c}{\index{listas.\-c@{listas.\-c}!L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!listas.c@{listas.\-c}}
+\subsubsection[{L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-I\-S\-T\-A\-S\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{listas_8c_aa9949390462f9d6f5c21bd6a03b3435c}
+\hypertarget{listas_8c_a9aecc12275944eb5c1afe9983bb97c6d}{\index{listas.\-c@{listas.\-c}!S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!listas.c@{listas.\-c}}
+\subsubsection[{S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-D\-I\-O\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{listas_8c_a9aecc12275944eb5c1afe9983bb97c6d}
+\hypertarget{listas_8c_ace4b77adead3c3b8441d5e8fe061bdbe}{\index{listas.\-c@{listas.\-c}!S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!listas.c@{listas.\-c}}
+\subsubsection[{S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-D\-L\-I\-B\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{listas_8c_ace4b77adead3c3b8441d5e8fe061bdbe}
+\hypertarget{listas_8c_af67fe47da7b9c2b664d41c852044850c}{\index{listas.\-c@{listas.\-c}!S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}
+\index{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D@{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}!listas.c@{listas.\-c}}
+\subsubsection[{S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-R\-I\-N\-G\-\_\-\-H\-\_\-\-I\-N\-C\-L\-U\-D\-E\-D}}\label{listas_8c_af67fe47da7b9c2b664d41c852044850c}
+
+
+\subsection{Funções}
+\hypertarget{listas_8c_af1d14c9fc969793af05407ccff06daeb}{\index{listas.\-c@{listas.\-c}!confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista@{confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista}}
+\index{confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista@{confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista}!listas.c@{listas.\-c}}
+\subsubsection[{confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista}]{\setlength{\rightskip}{0pt plus 5cm}int confere\-Se\-Professor\-Ja\-Esta\-Na\-Lista (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Professores} $\ast$}]{Lista, }
+\item[{char $\ast$}]{nome\-Professor}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_af1d14c9fc969793af05407ccff06daeb}
+
+
+Confere se um Professor esta presente em uma lista de professores. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista} & Ponteiro para lista de professores a ser verificada. \\
+\hline
+{\em nome\-Professor} & Nome do professor a ser pesquisado (ate 100 caracteres).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Se o nome do professor consta na lista retorna 1, se nao retorna 0. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a8d36f953ee5c8d21a9f616bd10c75f34}{\index{listas.\-c@{listas.\-c}!cria\-Lista\-De\-Alunos@{cria\-Lista\-De\-Alunos}}
+\index{cria\-Lista\-De\-Alunos@{cria\-Lista\-De\-Alunos}!listas.c@{listas.\-c}}
+\subsubsection[{cria\-Lista\-De\-Alunos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Alunos}$\ast$ cria\-Lista\-De\-Alunos (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a8d36f953ee5c8d21a9f616bd10c75f34}
+
+
+Cria uma lista de alunos. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista vazia. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a5793e9d9e8bf13b628bfccbf492aca9c}{\index{listas.\-c@{listas.\-c}!cria\-Lista\-De\-Autores@{cria\-Lista\-De\-Autores}}
+\index{cria\-Lista\-De\-Autores@{cria\-Lista\-De\-Autores}!listas.c@{listas.\-c}}
+\subsubsection[{cria\-Lista\-De\-Autores}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Autores}$\ast$ cria\-Lista\-De\-Autores (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a5793e9d9e8bf13b628bfccbf492aca9c}
+
+
+Cria uma lista de autores. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista vazia. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a421ff7f2082464b029943bd0cd6120fe}{\index{listas.\-c@{listas.\-c}!cria\-Lista\-De\-Eventos@{cria\-Lista\-De\-Eventos}}
+\index{cria\-Lista\-De\-Eventos@{cria\-Lista\-De\-Eventos}!listas.c@{listas.\-c}}
+\subsubsection[{cria\-Lista\-De\-Eventos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Eventos}$\ast$ cria\-Lista\-De\-Eventos (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a421ff7f2082464b029943bd0cd6120fe}
+
+
+Cria uma lista de eventos. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista vazia. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_afc860b318e00ae90853ab299c834c481}{\index{listas.\-c@{listas.\-c}!cria\-Lista\-De\-Periodicos@{cria\-Lista\-De\-Periodicos}}
+\index{cria\-Lista\-De\-Periodicos@{cria\-Lista\-De\-Periodicos}!listas.c@{listas.\-c}}
+\subsubsection[{cria\-Lista\-De\-Periodicos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Periodicos}$\ast$ cria\-Lista\-De\-Periodicos (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_afc860b318e00ae90853ab299c834c481}
+
+
+Cria uma lista de periodicos. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista vazia. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_aaae47a83efe85799ec1c3aff5475adb7}{\index{listas.\-c@{listas.\-c}!cria\-Lista\-De\-Professores@{cria\-Lista\-De\-Professores}}
+\index{cria\-Lista\-De\-Professores@{cria\-Lista\-De\-Professores}!listas.c@{listas.\-c}}
+\subsubsection[{cria\-Lista\-De\-Professores}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Professores}$\ast$ cria\-Lista\-De\-Professores (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_aaae47a83efe85799ec1c3aff5475adb7}
+
+
+Cria uma lista de professores. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista vazia. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a73e2fdfda8882592e24f6f39c2c65e79}{\index{listas.\-c@{listas.\-c}!cria\-Lista\-De\-Projetos@{cria\-Lista\-De\-Projetos}}
+\index{cria\-Lista\-De\-Projetos@{cria\-Lista\-De\-Projetos}!listas.c@{listas.\-c}}
+\subsubsection[{cria\-Lista\-De\-Projetos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Projetos}$\ast$ cria\-Lista\-De\-Projetos (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a73e2fdfda8882592e24f6f39c2c65e79}
+
+
+Cria uma lista de projetos. 
+
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista vazia. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a9101ac241db4290d2a9ac98a9862a47f}{\index{listas.\-c@{listas.\-c}!insere\-Em\-Lista\-De\-Alunos@{insere\-Em\-Lista\-De\-Alunos}}
+\index{insere\-Em\-Lista\-De\-Alunos@{insere\-Em\-Lista\-De\-Alunos}!listas.c@{listas.\-c}}
+\subsubsection[{insere\-Em\-Lista\-De\-Alunos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Alunos}$\ast$ insere\-Em\-Lista\-De\-Alunos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Alunos} $\ast$}]{Lista, }
+\item[{char $\ast$}]{nome\-Aluno, }
+\item[{char $\ast$}]{matricula, }
+\item[{int}]{tipo}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a9101ac241db4290d2a9ac98a9862a47f}
+
+
+Insere um nome de aluno em uma lista de alunos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista} & Ponteiro para lista de alunos a receber a informacao. \\
+\hline
+{\em nome\-Aluno} & Nome do aluno a ser inserido (ate 100 caracteres). \\
+\hline
+{\em matricula} & Matricula do aluno (ate 10 caracteres). \\
+\hline
+{\em tipo} & 1 para mestrado, 2 para doutorado.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista atualizada. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_abab05c43a2eaf7074f72ea1ca97e9df6}{\index{listas.\-c@{listas.\-c}!insere\-Em\-Lista\-De\-Autores@{insere\-Em\-Lista\-De\-Autores}}
+\index{insere\-Em\-Lista\-De\-Autores@{insere\-Em\-Lista\-De\-Autores}!listas.c@{listas.\-c}}
+\subsubsection[{insere\-Em\-Lista\-De\-Autores}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Autores}$\ast$ insere\-Em\-Lista\-De\-Autores (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Autores} $\ast$}]{Lista, }
+\item[{char $\ast$}]{nome\-Autor, }
+\item[{char $\ast$}]{nome\-Para\-Citacao, }
+\item[{char $\ast$}]{ordem\-De\-Autoria}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_abab05c43a2eaf7074f72ea1ca97e9df6}
+
+
+Insere um novo autor em uma lista de autores. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista} & Ponteiro para lista de autores a receber a informacao. \\
+\hline
+{\em nome\-Autor} & Nome do autor a ser inserido (ate 100 caracteres). \\
+\hline
+{\em nome\-Para\-Citacao} & String com nomes para citacao do professor (ate 300 caracteres). \\
+\hline
+{\em ordem\-De\-Autoria} & Ordem de autoria (ate 4 caracteres).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista atualizada. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a58608f0316842aac0ba2148a82df45ce}{\index{listas.\-c@{listas.\-c}!insere\-Em\-Lista\-De\-Eventos@{insere\-Em\-Lista\-De\-Eventos}}
+\index{insere\-Em\-Lista\-De\-Eventos@{insere\-Em\-Lista\-De\-Eventos}!listas.c@{listas.\-c}}
+\subsubsection[{insere\-Em\-Lista\-De\-Eventos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Eventos}$\ast$ insere\-Em\-Lista\-De\-Eventos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Eventos} $\ast$}]{Lista\-Eventos, }
+\item[{{\bf lista\-De\-Autores} $\ast$}]{Lista\-Autores, }
+\item[{char $\ast$}]{nome\-Professor, }
+\item[{char $\ast$}]{nome\-Para\-Citacao\-\_\-\-Professor, }
+\item[{char $\ast$}]{natureza, }
+\item[{char $\ast$}]{titulo, }
+\item[{char $\ast$}]{pais, }
+\item[{char $\ast$}]{idioma, }
+\item[{char $\ast$}]{nome\-Evento, }
+\item[{char $\ast$}]{ano, }
+\item[{char $\ast$}]{proceedings, }
+\item[{char $\ast$}]{volume, }
+\item[{char $\ast$}]{pagina\-Inicial, }
+\item[{char $\ast$}]{pagina\-Final}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a58608f0316842aac0ba2148a82df45ce}
+
+
+Insere um novo evento em uma lista de eventos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista\-Eventos} & Ponteiro para a lista de eventos a reeber as informacoes. \\
+\hline
+{\em Lista\-Autores} & Ponteiro para a lista de autores do evento. \\
+\hline
+{\em nome\-Para\-Citacao\-\_\-\-Professor} & Nome do professor (ate 100 caracteres). \\
+\hline
+{\em nome\-Para\-Citacao\-\_\-\-Professor} & String com os nomes para citacao do professor (ate 300 caracteres). \\
+\hline
+{\em natureza} & Natureza do evento (ate 30 caracteres). \\
+\hline
+{\em titulo} & Titulo da publicacao (ate 200 caracteres). \\
+\hline
+{\em pais} & Pais em que o evento foi realizado (ate 30 caracteres). \\
+\hline
+{\em idioma} & Idioma da publicacao (ate 30 caracteres). \\
+\hline
+{\em nome\-Evento} & Nome do evento (ate 100 caracteres). \\
+\hline
+{\em ano} & Ano da realizacao (ate 10 caracteres). \\
+\hline
+{\em proceedings} & Procedimentos (ate 300 caracteres) \\
+\hline
+{\em volume} & Volume (ate 30 caracteres). \\
+\hline
+{\em pagina\-Inicial} & Pagina inicial (ate 10 caracteres). \\
+\hline
+{\em pagina\-Final} & Pagina final (ate 10 caracteres).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista atualizada. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a8aba0595adf3a35c153ce930c2d1ea65}{\index{listas.\-c@{listas.\-c}!insere\-Em\-Lista\-De\-Periodicos@{insere\-Em\-Lista\-De\-Periodicos}}
+\index{insere\-Em\-Lista\-De\-Periodicos@{insere\-Em\-Lista\-De\-Periodicos}!listas.c@{listas.\-c}}
+\subsubsection[{insere\-Em\-Lista\-De\-Periodicos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Periodicos}$\ast$ insere\-Em\-Lista\-De\-Periodicos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Periodicos} $\ast$}]{Lista\-Periodicos, }
+\item[{{\bf lista\-De\-Autores} $\ast$}]{Lista\-Autores, }
+\item[{char $\ast$}]{nome\-Professor, }
+\item[{char $\ast$}]{nome\-Para\-Citacao\-\_\-\-Professor, }
+\item[{char $\ast$}]{natureza, }
+\item[{char $\ast$}]{titulo\-Artigo, }
+\item[{char $\ast$}]{titulo\-Periodico, }
+\item[{char $\ast$}]{idioma, }
+\item[{char $\ast$}]{ano, }
+\item[{char $\ast$}]{serie, }
+\item[{char $\ast$}]{volume, }
+\item[{char $\ast$}]{pagina\-Inicial, }
+\item[{char $\ast$}]{pagina\-Final}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a8aba0595adf3a35c153ce930c2d1ea65}
+
+
+Insere um novo periodico em uma lista de periodicos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista\-Periodicos} & Lista a receber as informacoes. \\
+\hline
+{\em Lista\-Autores} & Lista de autores do periodico. \\
+\hline
+{\em nome\-Professor} & Nome do professor (ate 100 caracteres). \\
+\hline
+{\em nome\-Para\-Citacao\-\_\-\-Professor} & String com nomes para citacao do professor (ate 300 caracteres). \\
+\hline
+{\em natureza} & Natureza do periodico (ate 30 caracteres). \\
+\hline
+{\em titulo\-Artigo} & Titulo do artigo (ate 200 caracteres). \\
+\hline
+{\em titulo\-Periodico} & Titulo do periodico (ate 200 caracteres). \\
+\hline
+{\em idioma} & Idioma do periodico (ate 30 caracteres). \\
+\hline
+{\em ano} & Ano da publicacao (ate 10 caracteres). \\
+\hline
+{\em serie} & Serie (ate 50 caracteres). \\
+\hline
+{\em volume} & Volume (ate 30 caracteres). \\
+\hline
+{\em pagina\-Inicial} & Pagina Inicial (ate 10 caracteres). \\
+\hline
+{\em pagina\-Final} & Pagina final (ate 10 caracteres).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para lista atualizada. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a2b734b12c1e67c660a6bca5d89a016c2}{\index{listas.\-c@{listas.\-c}!insere\-Em\-Lista\-De\-Professores@{insere\-Em\-Lista\-De\-Professores}}
+\index{insere\-Em\-Lista\-De\-Professores@{insere\-Em\-Lista\-De\-Professores}!listas.c@{listas.\-c}}
+\subsubsection[{insere\-Em\-Lista\-De\-Professores}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Professores}$\ast$ insere\-Em\-Lista\-De\-Professores (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Professores} $\ast$}]{Lista, }
+\item[{char $\ast$}]{nome\-Professor, }
+\item[{char $\ast$}]{nome\-Para\-Citacao}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a2b734b12c1e67c660a6bca5d89a016c2}
+
+
+Insere um nome de professor em uma lista de professores. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista} & Ponteiro para lista de professores a receber a informacao. \\
+\hline
+{\em nome\-Professor} & Nome do professor a ser inserido (ate 100 caracteres). \\
+\hline
+{\em nome\-Para\-Citacao} & String com os nomes para citacao do professor (ate 300 caracteres).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista atualizada. 
+\end{DoxyReturn}
+\hypertarget{listas_8c_a3858725619e502092384b90b2c34ea2c}{\index{listas.\-c@{listas.\-c}!insere\-Em\-Lista\-De\-Projetos@{insere\-Em\-Lista\-De\-Projetos}}
+\index{insere\-Em\-Lista\-De\-Projetos@{insere\-Em\-Lista\-De\-Projetos}!listas.c@{listas.\-c}}
+\subsubsection[{insere\-Em\-Lista\-De\-Projetos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\-De\-Projetos}$\ast$ insere\-Em\-Lista\-De\-Projetos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\-De\-Projetos} $\ast$}]{Lista, }
+\item[{char $\ast$}]{nome\-Projeto, }
+\item[{int}]{ano\-Inicio, }
+\item[{int}]{mes\-Fim, }
+\item[{int}]{ano\-Fim, }
+\item[{char $\ast$}]{situacao, }
+\item[{char $\ast$}]{natureza, }
+\item[{char $\ast$}]{descricao, }
+\item[{char $\ast$}]{responsavel, }
+\item[{char $\ast$}]{integrante1, }
+\item[{char $\ast$}]{integrante2}
+\end{DoxyParamCaption}
+)}}\label{listas_8c_a3858725619e502092384b90b2c34ea2c}
+
+
+Insere um novo projeto em uma lista de projetos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em Lista} & Lista de projetos a receber a informacao. \\
+\hline
+{\em nome\-Projeto} & Nome do projeto (ate 300 caracteres). \\
+\hline
+{\em ano\-Inicio} & Ano de incio. \\
+\hline
+{\em mes\-Fim} & Mes do fim do projeto. \\
+\hline
+{\em ano\-Fim} & Ano do fim do projeto. \\
+\hline
+{\em situacao} & Situação do projeto (ate 20 caracteres). \\
+\hline
+{\em natureza} & Natureza do projeto (ate 20 caracteres). \\
+\hline
+{\em descricao} & Descricao do projeto (ate 500 caracteres). \\
+\hline
+{\em responsavel} & Responsavel do projeto (ate 100 caracteres). \\
+\hline
+{\em integrante1} & Nome de participante (ate 100 caracteres). \\
+\hline
+{\em integrante2} & Nome de participante (ate 100 caracteres).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista atualizada. 
+\end{DoxyReturn}

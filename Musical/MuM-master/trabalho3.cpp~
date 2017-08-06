@@ -1,0 +1,170 @@
+#include <iostream>
+#include "CaMaterial.h"
+using namespace std;
+
+int acorde_anterior(int verifica[3], int acordes[3][3], int anterior, int *escala);
+int verif_acorde(MuMaterial aux, int compasso, int *inotaeq, int *escala, int* anterior);
+
+
+
+int main(void)
+{
+
+   	MuInit();
+	MuMaterial musica, aux; //aux = material contendo os acordes. musica = material com a melodia e depois recebe aux pra voz 1
+	int *compassos, *escala, num_compassos, inotaeq, posicao, anterior=-1;
+//compassos = vetor que separa os compassos
+//escala = vetor contendo a escala onde escala[0] é o tom (para usar graus)
+//num_compassos para o laço for abaixo
+//inotaeq = indice do vetor escala que contem a mesma nota, em uma oitava diferente (para criar acordes nao tao agudos)
+//posicao qual das 3 triades contendo a primeira nota do compasso que ele irá usar
+//anterior = pitch() da nota fundamento do acorde do compasso anterior
+
+	musica.LoadScore("/home/yan/Documentos/Musical/MuM-master/melodia3.sco"); 	
+	musica.SetInstrument(0,2);
+	compassos = getCompassos(2,&musica, &num_compassos); //vetor contendo todos os tempos de cada compasso
+
+	escala = getVetorEscala(1); //vetor composto pela escala do tom; 1 = C MAIOR
+
+	for(int cont=0; cont<num_compassos; cont++){ //enquanto nao acabar o numero de compassos, busca a melhor triade e insere em aux
+		
+		inotaeq=0; //indice do vetor escala
+		posicao = verif_acorde(musica, compassos[cont], &inotaeq, escala, &anterior); //vai verificar o melhor acorde
+		GeraTriade(escala[inotaeq], posicao, &musica, &aux);
+		
+	}  
+
+ // A FUNCAO SETVOICE ABAIXO COPIA A VOZ 0 DO aux, PARA A VOZ 1 DO musica, FICANDO EM UM SO MATERIAL
+	musica.SetVoice(1, aux, 0);
+	musica.SetInstrument(1,1);
+	musica.Show();
+
+	musica.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	musica.SetDefaultFunctionTables();
+	musica.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+	musica.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
+
+	delete[] escala;
+	delete[] compassos;
+    return 0;
+}
+//A funcao abaixo recebe os acordes preferidos, verifica qual e o mais preferido de acordo com o acorde anterior, e retorna o valor que indica qual o melhor acorde.
+int acorde_anterior(int verifica[3], int acordes[3][3], int anterior, int *escala){ 
+	int index, position[3];
+//index indica qual sera a linha da matriz a ser verificada, ou seja, qual era a nota fundamental, indicada em graus, do acorde anterior
+//position indica qual dos 3 acordes selecionados na funcao verif_acorde tem a maior preferencia. Quanto menor a posicao, maior preferencia
+
+	int preferencias[7][8]={ //matriz mostrando as preferencias de acordes sucessores
+//a primeira coluna da matriz é o acorde anterior.  As outras colunas sao as preferencias em ordem. A Preferencia é da esq. para a dir.
+	{ escala[0], escala[3], escala[4], escala[1], escala[5], escala[2], escala[6], escala[0]}, 
+	{ escala[1], escala[4], escala[3], escala[2], escala[6], escala[0], escala[1], escala[5]},
+	{ escala[2], escala[5], escala[3], escala[6], escala[1], escala[4], escala[0], escala[2]},
+	{ escala[3], escala[4], escala[6], escala[5], escala[0], escala[1], escala[2], escala[3]},
+	{ escala[4], escala[0], escala[5], escala[2], escala[3], escala[6], escala[4], escala[1]},
+	{ escala[5], escala[1], escala[3], escala[4], escala[6], escala[0], escala[5], escala[2]},
+	{ escala[6], escala[0], escala[2], escala[4], escala[5], escala[1], escala[6], escala[3]},
+	};
+
+
+
+	position[0]=100; //100 e um numero aleatoriamente alto. Pode ser qualquer outro maior que o numero de colunas da matriz
+	position[1]=100;
+	position[2]=100;
+
+	for(int i = 0; anterior%12!=preferencias[i][0]%12 && i<7 ; i++){ //procurando qual linha da matriz sera verificada
+		if(anterior%12==preferencias[i][0]%12)
+			index = i;	
+	}
+
+	for(int k=0; k<3;k++){ //procurando a nota fundamental percorrendo a linha selecionada da matriz
+		if(verifica[k]==-1){
+			for(int i=1; i<8; i++)
+				if(acordes[k][0]%12 == preferencias[index][i]%12)
+					position[k]=i; //ao encontrar, indica a posicao encontrada para aquela triade
+		}
+	}
+	int min = verifica[0];  //min = posical minima encontrada na linha selecionada da matriz (para preferencia do acorde)
+	int retorna = 0; 
+		for(int k=1;k<3;k++){  //verificando qual dos acordes e o mais preferido. Quanto menor for o nº da coluna(min), melhor
+			if(verifica[k]<min){
+				min=verifica[k];
+				retorna = k;
+			}
+		}
+	
+return retorna;
+}
+
+int verif_acorde(MuMaterial aux, int compasso, int *inotaeq, int *escala, int* anterior){ //constroi as 3 triades e retorna qual a melhor
+	int acordes[3][3], notaref, verifica[3];
+	MuNote nota;
+	MuMaterial auxiliar;
+	
+//acordes = matriz 3x3 contendo os 3 acordes que possuem a "primeira nota do compasso"
+//notaref vai ser o indice da posicao do vetor escala(tem todas as notas da escala), que contera a nota de referencia para fazer os acordes
+//verifica = vetor que acumula score para anunciar quais dos 3 acordes são mais queridos para a escolha
+
+	auxiliar = aux.GetNotesStartingAt(0, compasso); // pegando a "primeira" nota de cada compasso
+	nota = auxiliar.GetNote(0,0);  // pegando a "primeira" nota de cada compasso
+
+	verifica[0]=0; //inicializando o verifica com score zero para todos
+	verifica[1]=0;
+	verifica[2]=0;
+	
+	while(nota.Pitch()%12!=escala[*inotaeq]%12)  //buscando a primeira nota do compasso dentro do vetor escala
+		*inotaeq= *inotaeq+1; //enquanto nao achar ele incrementa o indice
+	
+		
+	notaref = *inotaeq + 7; //para nao correr o risco de voltar antes do 48, ele usa uma oitava acima somando 7 graus
+	
+//criacao dos 3 acordes	
+	acordes[0][0]= escala[notaref];
+	acordes[0][1]= escala[notaref+2];
+	acordes[0][2]= escala[notaref+4];
+
+	acordes[1][0]= escala[notaref-2];
+	acordes[1][1]= escala[notaref];
+	acordes[1][2]= escala[notaref+2];
+
+	acordes[2][0]= escala[notaref-4];
+	acordes[2][1]= escala[notaref-2];
+	acordes[2][2]= escala[notaref];
+
+//o laço abaixo ira preencher o vetor verifica, somando o score para cada nota pertencente à triade verificada
+	for(int k=0; (nota.Start() < compasso+2)&&k<aux.NumberOfNotes(); k++){ //limita para verificar somente as notas de tal compasso
+		
+		nota = aux.GetNote(0, k); //pegando as notas do material contendo a melodia
+		if((nota.Start()>=compasso)&&(nota.Start() < compasso+2)){ //limita para verificar somente as notas de tal compasso
+
+			for(int i=0;i<3;i++){
+				for(int j=0;j<3;j++){
+					if(nota.Pitch()%12==(acordes[i][j]%12)){ //verifica se aquela nota do compasso esta na triade
+						verifica[i]++; // se tiver, o triade ganha um ponto
+					}					
+				}
+			}
+
+		}		
+	} 
+	int max = verifica[0]; //verificando qual a maior pontuaçao
+	for(int k=1;k<3;k++){ 
+		if(verifica[k]>max)
+			max=verifica[k];
+	}
+	int k;
+	for( k=0; k<3;k++){ //verificando quais triades chegaram na maior pontuacao
+		if(verifica[k]==max)
+			if(compasso==0){
+				*anterior = acordes[k][0];
+				return k;
+			}
+			verifica[k]==-1; //indica que ele pode ser comparado na outra funcao
+	}
+	if(compasso!=0){
+		int fundamental= acorde_anterior(verifica, acordes, *anterior, escala);
+		*anterior = acordes[fundamental][0];
+		return fundamental;
+	}
+	*anterior = acordes[0][0];
+	return 0;	
+}

@@ -1,0 +1,276 @@
+/*
+ * Funções principais:
+ -Reconhecer intervalos
+ -Analizar notas anteriores
+ -Analizar as posibilidades de escolha
+ -Gerar notas
+ -priorizar movimentos contrarios
+
+ * Dentro de "Analizar as possilibidades de escolha":
+ -Verificar tessitura (limite entre a nota mais grave e mais aguda deve ser de 12a)
+ -Verificar nota culminatória (mais aguda)
+ -Verificar se nota repete 3 vezes
+ -Verificar se nota é possível (3,6,5,8 e 10 pode)
+ -Verificar 5a e 8a paralela (proibido)
+ -Verificar se há 3 terças ou sextas paralelas
+ -Verificar uníssono (início e fim pode) ou cruzamento de vozes
+ -Verificar saltos em mesma direção (não pode)
+ * 
+ * notas contralto 55-76
+*/
+
+#include "MuMaterial.h"
+
+
+//prototipos das funcoes
+short GeraNota(short notecf[], short notecp[], int i);
+int QualIntervalo(short nota1, short nota2);
+bool VerificaValidade(short notecf[], short notecp[], int i);
+
+
+int main() {
+  
+  MuInit();
+  MuMaterial cantusfirmus, contraponto;
+  MuNote notes;
+  short newnote;
+  short notecp[11];
+  short notecf[11];
+  int i;
+
+for (i=0;i<11;i++){
+	notecf[i] = 0;
+	notecp[i] = 0;
+}
+
+//valores fixos do contraponto
+  notecp[0] = 62;
+  notecp[10] = 62;
+  notecp[9] = 61;
+  
+  
+cantusfirmus.LoadScore("contra_ponto.sco");
+
+int total = cantusfirmus.NumberOfNotes();
+cout << total;
+
+//primeiro geramos um vetor com os pitchs do material cantus firmus
+	for (i=0;i<=total;i++){
+		notes = cantusfirmus.GetNote(i);
+		notecf[i]= notes.Pitch();
+	}
+	
+	for (i=0;i<=total;i++){
+		cout << endl << "cantus firmus: " << notecf[i] << " ";
+	}
+	cout << "ENTROU AQUI";
+//aqui iremos gerar o contra ponto para cada nota, a partir da segunda nota ate antepenultima
+	for (i=1;i<total-1;i++){
+		
+		newnote = GeraNota(notecf, notecp, i); //gera a nota	
+		notecp[i]=newnote; //adiciona ela no vetor de pitchs do contra ponto
+		if (!(VerificaValidade(notecp,notecf,i))) //verifica se eh nota valida, se nao for, ira gerar ela novamente
+			i--;
+	  }
+	 // contraponto = GerarMaterial(notecp, total); //lembrar de gerar na voz 1
+	 // contraponto = contraponto*cantusfirmus; //se nao funcionar tentar usar mix
+	  for (i=0;i<=total;i++)
+		cout << endl << "NOTAS CONTRAPONTO : " << notecp[i] << " ";
+  return 0;
+}
+
+
+
+short GeraNota (short notecf[], short notecp[], int i){
+	
+	short contralto[11] = {55,57,59,60,62,64,65,67,69,71,72};
+	short notacf, notagerada;
+	int sorteado, cont, pos = -1, flag = 1;
+	int intervalo;
+	
+	notacf = notecf[i];
+	
+ //caso a ultima nota gerada tenha sido um si bemol (pela excessao do si-fa), a proxima nota nao pode ser mi, entao tiramos mi das possiveis proximas notas.
+	if ((notecp[i-1] == 70) || (notecp[i-1] == 58))
+		contralto[5] = 0;
+		
+		
+		
+		
+	
+	for (cont=0;cont<11;cont++){
+		if (notacf == contralto[cont])
+			pos = cont;
+	}
+	
+	while (flag == 1){
+	
+	sorteado = Between(0,cont-2);
+	
+	while(contralto[sorteado]==0)
+		sorteado = Between(0,cont-2);
+	
+	notagerada = contralto[sorteado];
+	
+	intervalo = QualIntervalo(notacf, notagerada);
+cout << intervalo << endl;
+	switch (intervalo){
+		case 31:
+	
+		case 32:
+
+		case 59:
+
+		case 61:
+
+		case 62:
+
+		case 89:
+			flag = 0;
+			break;
+
+	} 
+}
+	return notagerada;
+}
+
+
+bool VerificaValidade(short notecf[], short notecp[], int i){
+	short notaanterior = notecp[i-1];
+	short notaatual = notecp[i];
+	short notaanterior2 = -1;
+	int flag = 1;
+	int intervalo;
+	
+	if (i>2)
+		notaanterior2 = notecp[i-2];
+		
+	intervalo = QualIntervalo(notaanterior, notaatual);
+	
+	
+	switch(intervalo){
+		case 21:	
+		case 22:
+		case 31:
+		case 32:
+		case 49:
+		case 59:
+		case 61:
+		case 89:
+		case -21:	
+		case -22:
+		case -31:
+		case -32:
+		case -49:
+		case -59:
+		case -89:
+			flag = 0;
+			break;
+		case 50: //SE TIVER SI BEMOL NAO PODE BOTAR MI NO PROXIMO LEMBRETEEEEEEEEEEEE
+			if (notaanterior2 != 64){
+				if (notaatual == 71){
+					notaatual--;
+					flag = 0;
+					break;
+				}
+				if (notaanterior == 59){
+					notaanterior--;
+					flag = 0;
+					break;
+				}			
+			}
+			
+		case -50:
+			if (notaanterior2 != 64){
+				if (notaanterior == 71){
+					notaanterior--;
+					flag = 0;
+					break;
+				}
+				if (notaatual == 59){
+					notaatual--;
+					flag = 0;
+					break;
+				}
+			}
+	}
+	
+	
+	notecp[i-1] = notaanterior;
+	notecp[i] = notaatual;
+	
+	if (flag == 0)
+		return true;
+	else
+		return false;
+	
+	
+	
+}
+
+
+/* Reconhecer Intervalo
+
+   Esta função retorna o intervalo entre uma nota e outra.
+   O retorno é dado com um ponto flutuante onde o número antes do ponto indica qual o intervalo 
+   (2 para segunda, 3 para terça, 4 para quarta, 5 para quinta, 6 para sexta, etc) e o número depois do ponto indica se é 
+   diminuto (0), menor (1), maior (2), diminuto (3) ou justo (9) */
+   //nota1 eh a nota de referencia e nota2 eh a que a gente quer comparar
+int QualIntervalo(short nota1, short nota2){
+  short aux;
+  aux=nota1-nota2;
+    
+  switch(aux){
+  case 0: return(19);
+  case 1: return(21);
+  case 2: return(22);
+  case 3: return(31);
+  case 4: return(32);
+  case 5: return(49);
+  case 6: return(50);
+  case 7: return(59);
+  case 8: return(61);
+  case 9: return(62);
+  case 10: return(71);
+  case 11: return(72);
+  case -1: return(-21);
+  case -2: return(-22);
+  case -3: return(-31);
+  case -4: return(-32);
+  case -5: return(-49);
+  case -6: return(-50);
+  case -7: return(-59);
+  case -8: return(-61);
+  case -9: return(-62);
+  case -10: return(-71);
+  case -11: return(-72);
+  default: return (-1);
+
+  }
+}
+
+
+/* Verifica se a mesma nota se repete 3 vezes */
+/*
+bool repeteTresVezes(short notas[], int i){
+  int i;
+    if(notas[i]==notas[i-1]&&notas[i-1]==notas[i-2]){
+      return true;
+    }
+    else{
+      return false;
+    } 
+}
+   */
+
+/* Verifica se a nota é válida ou não */
+/*
+bool verificaNota(int notas){
+  if((notas==3)||(notas==5)||(notas==6)||(notas==8)||(notas==10)){
+    return true;
+  }
+  else{
+    return false;
+  }       
+}
+*/
