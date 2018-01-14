@@ -8,4 +8,4 @@ This Library was created by Dr. Carlos Eduardo Mello, at Universidade de Brasíl
 Documentation for MuM is generated from the source code comments using Doxigen, which produces a complete reference in HTML format. A zipped copy of the updated HTML files is kept in this repository under mum-docs.zip
 
 * A copy of this paper is included in the repository for reference: MuM.pdf.
-Nota: Este repositório contém apenas o trabalho desenvolvido na disciplina de Composiço ALgorítmica, Universidade de Brasília, juntamente com o professor Carlos Eduardo Mello.
+* Nota: Este repositório contém apenas o trabalho desenvolvido na disciplina de Composição Algorítmica, em Universidade de Brasília, juntamente com o professor Carlos Eduardo Mello.
