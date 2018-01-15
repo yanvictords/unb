@@ -37,7 +37,7 @@ o-o----ol-----olo-----<br />
 <br />
  |<br />
  o<br />
- |<br />
+ | <br />
 <br />
 Digite uma letra:c<br />
 Letras usadas:|o||l||z||x||c|<br />
@@ -45,7 +45,7 @@ o-o----ol-----olo-----<br />
 <br />
   |<br />
   O<br />
- /|<br />
+ /|
 <br />
 Digite uma letra:z<br />
 Letras usadas:|o||l||z|<br />
@@ -54,7 +54,7 @@ o-o----ol-----olo-----<br />
 <br />
   |<br />
   O<br />
- /|\<br /> 
+ /|\ <br /> 
 <br />
 Digite uma letra:m<br />
 Letras usadas:|o||l||z||x||c||z||m|<br />
@@ -62,8 +62,8 @@ o-o----ol-----olo-----<br />
 
   |<br />
   O<br />
- /|\<br /> 
- /<br /> 
+ /|\ <br /> 
+ / <br /> 
 <br />
 Digite uma letra:n<br />
 Letras usadas:|o||l||z||x||c||z||m||n|<br />
@@ -73,9 +73,9 @@ Digite uma letra:q<br />
 Letras usadas:|o||l||z||x||c||z||m||n||q|<br />
 o-o---nol---n-olo-----<br />
 <br />
-  |<br />
-  O<br />
- /|\<br /> 
- / \<br /> 
+  | <br />
+  O <br />
+ /|\ <br /> 
+ / \ <br /> 
 <br />
 ***GAME OVER***<br />
