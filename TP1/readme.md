@@ -1,1 +1,1 @@
-# Disciplina: Técnicas de Programação 1
+# Técnicas de Programação 1

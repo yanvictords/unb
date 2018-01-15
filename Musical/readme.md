@@ -1,1 +1,1 @@
-# Disciplinas: Tecnologia Musical Básica e Composição Algorítmica.
+# Tecnologia Musical Básica e Composição Algorítmica.

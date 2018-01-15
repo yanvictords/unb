@@ -1,1 +1,1 @@
-# Disciplina: Autômatos e Computabilidade
+# Autômatos e Computabilidade
