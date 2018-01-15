@@ -36,7 +36,7 @@ Letras usadas:|o||l||z||x|<br />
 o-o----ol-----olo-----<br />
 <br />
  |<br />
- o<br />
+ O<br />
  | <br />
 <br />
 Digite uma letra:c<br />

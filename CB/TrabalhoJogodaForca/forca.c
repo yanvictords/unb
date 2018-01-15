@@ -67,7 +67,7 @@ qualquer palavra que quisermos colocar. Eu usei traços ao invés de underlines 
             printf("\n");
             printf(" |");
             printf("\n");
-            printf(" o");
+            printf(" O");
             printf("\n");
             printf(" |");
             printf("\n\n");
