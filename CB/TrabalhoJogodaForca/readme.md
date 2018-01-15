@@ -14,6 +14,7 @@ Demonstração: <br />
 <br />
 A palavra possui 22 letra(s).<br />
 ----------------------<br />
+<br />
 Veja, uma corda!: |<br />
 Digite uma letra:o<br />
 Letras usadas:|o|<br />
