@@ -1,4 +1,4 @@
-#Disciplina: Mini Haskell
+#Trabalho: Mini Haskell
 
 - Para executar o interpretador, é preciso preparar o ambiente. Para usar a API ANTLR, rode os seguintes comandos (Linux):
 cd /usr/local/lib
