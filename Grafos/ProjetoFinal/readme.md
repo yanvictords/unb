@@ -19,7 +19,7 @@
 
 - Ferramentas: Utilizamos a MathLab para a representação dos dados, e a implementação da Kmeans: http://mnemstudio.org/clustering-k-means-example-1.htm.
 
-- Execução: Para executar o programa, basta executar os seguintes comandos:
+Execução: Para executar o programa, basta executar os seguintes comandos:
 
 g++ trab.cpp kmeans.cpp -o t
 
