@@ -1,7 +1,7 @@
 # Segurança de Dados
 
 Este pequeno projeto apresenta uma solução simples para decriptação usando cifra de Vigenere. <br />
-Como executar o programa: Execute os seguintes comandos:<br />
+- Como executar o programa: Execute os seguintes comandos:<br />
 gcc vigenere.c -o vigenere <br />
 ./vigenere <br />
 
