@@ -2,7 +2,9 @@
 
 Este repositório contém exercícios ensinados em aula.
 Para executar os algoritmos, execute os seguintes comandos:
+
 g++ NomeArquivo.cpp -o nome
+
 ./nome
 
 - bellman.cpp: O grafo criado para a simulação do algoritmo está no arquivo 'g1.in'. A leitura é feita a partir de uma matriz de adjacência. A primeira linha contém o número n de vértices, e as próximas n linhas descrevem a matriz.
