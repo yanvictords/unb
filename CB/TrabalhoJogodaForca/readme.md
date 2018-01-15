@@ -20,11 +20,9 @@ Digite uma letra:o<br />
 Letras usadas:|o|<br />
 o-o----o------o-o-----<br />
 <br />
-<br />
 Digite uma letra:l<br />
 Letras usadas:|o||l|<br />
 o-o----ol-----olo-----<br />
-<br />
 <br />
 Digite uma letra:z<br />
 Letras usadas:|o||l||z|<br />
@@ -32,7 +30,6 @@ o-o----ol-----olo-----<br />
 <br />
  |<br />
  O<br />
-<br />
 <br />
 Digite uma letra:x<br />
 Letras usadas:|o||l||z||x|<br />
@@ -42,7 +39,6 @@ o-o----ol-----olo-----<br />
  o<br />
  |<br />
 <br />
-<br />
 Digite uma letra:c<br />
 Letras usadas:|o||l||z||x||c|<br />
 o-o----ol-----olo-----<br />
@@ -50,7 +46,6 @@ o-o----ol-----olo-----<br />
   |<br />
   O<br />
  /|<br />
-<br />
 <br />
 Digite uma letra:z<br />
 Letras usadas:|o||l||z|<br />
@@ -61,7 +56,6 @@ o-o----ol-----olo-----<br />
   O<br />
  /|\<br /> 
 <br />
-<br />
 Digite uma letra:m<br />
 Letras usadas:|o||l||z||x||c||z||m|<br />
 o-o----ol-----olo-----<br />
@@ -71,11 +65,9 @@ o-o----ol-----olo-----<br />
  /|\<br /> 
  /<br /> 
 <br />
-<br />
 Digite uma letra:n<br />
 Letras usadas:|o||l||z||x||c||z||m||n|<br />
 o-o---nol---n-olo-----<br />
-<br />
 <br />
 Digite uma letra:q<br />
 Letras usadas:|o||l||z||x||c||z||m||n||q|<br />
@@ -85,4 +77,5 @@ o-o---nol---n-olo-----<br />
   O<br />
  /|\<br /> 
  / \<br /> 
+<br />
 ***GAME OVER***<br />
