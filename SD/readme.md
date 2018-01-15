@@ -8,7 +8,6 @@ gcc vigenere.c -o vigenere <br />
 - Descrição: O arquivo "mensagem.txt" está criptografado. Seu conteúdo contém apenas números cuja representação está no formato ASCII. O programa vigenere.c recebe o conteúdo deste arquivo como entrada, faz a decriptação e gera como saída um novo arquivo chamado "mensagemfinal.txt" contendo a verdadeira mensagem, além de um outro arquivo chamado "chave.txt" contendo a chave encontrada.
 
 - Metadados: 
-Criptograma gerado por "Cripto_1.exe" a partir do arquivo "m164.txt"
 
 {150, 151, 148, 21, 65, 24, 117, 149}<br />
 
