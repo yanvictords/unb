@@ -1,12 +1,14 @@
 # Segurança de Dados
 
-Este pequeno projeto apresenta uma solução simples para decriptação usando cifra de Vigenere. 
+Este pequeno projeto apresenta uma solução simples para decriptação usando cifra de Vigenere. <br />
+Como executar o programa: Execute os seguintes comandos:<br />
+gcc vigenere.c -o vigenere <br />
+./vigenere <br />
 
 - Descrição: O arquivo "mensagem.txt" está criptografado. Seu conteúdo contém apenas números. O programa vigenere.c recebe o conteúdo deste arquivo como entrada, faz a decriptação e gera como saída um novo arquivo chamado "mensagemfinal.txt" contendo a verdadeira mensagem, além de um outro arquivo chamado "chave.txt" contendo a chave.
 
 - Metadados: 
 Criptograma gerado por "Cripto_1.exe" a partir do arquivo "m164.txt"
-
 
 {150, 151, 148, 21, 65, 24, 117, 149}<br />
 
