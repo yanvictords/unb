@@ -7,6 +7,7 @@ Objetivo: Este programa tem como objetivo simular um sistema de reserva de mesas
 Descrição: O sistema pode ser acessado apenas por funcionários, utilizando o cadastro abaixo:
 - login: admin
 - senha: admin
+
 Caso o acesso seja por cliente, então o mesmo pode efetuar reservas de mesas.
 
 Como executar: Pelo terminal do linux pelo seguinte comando
