@@ -17,7 +17,7 @@ csound NomeDoArquivo.csd<br />
 - Trabalho 2: Cantus firmus e contraponto.<br />
 - Trabalho 3: Adição de acordes em melodia pronta.<br />
 - Trabalho 4: Adição de melodia em sequência de acordes pronta.<br />
-- Projeto Final: Trabalho 3 e 4 juntos. Usuário insere uma sequência de acordes quaisquer, e o programa deve se adaptar a esta sequência e gerar uma melodia com mais de um instrumento solo.<br />
+- Projeto Final: Trabalho 3 e 4 juntos. Usuário insere uma sequência de acordes qualquer, e o programa deve se adaptar a esta sequência e gerar uma melodia com mais de um instrumento solo.<br />
 - Execução de trabalhos e projeto final:<br />
 1) Altere a variável "MAIN" dentro do arquivo "compile" na primeira linha, para o nome do arquivo que deseja executar.<br />
 Exemplo: "MAIN=trabalho3" (Obs.: Não precisa adicionar .cpp). <br />
