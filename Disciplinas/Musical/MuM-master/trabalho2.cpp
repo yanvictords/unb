@@ -2,7 +2,7 @@
 #include "MuMaterial.h"
 
 using namespace std;
-
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 //Constantes
 const int MAX_MOTIF	=	20;
 const int MENOR2	=	1; // SEGUNDA MENOR
@@ -69,7 +69,7 @@ int main(void)
 	MuNote nota, tonicacp, tonicacf, anterior;
 	int j, flag8=0, flag5=0, flag3=0, flag6=0, intervalo;
 
-	cantusfirmus.LoadScore("/home/yan/Documentos/Musical/MuM-master/cantusfirmus.sco");
+	cantusfirmus.LoadScore((string) PATH + "cantusfirmus.sco");
 	//cantusfirmus.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste1");	
 	cantusfirmus.SetInstrument(0,2);
 	contraponto.SetInstrument(0,2);
@@ -118,10 +118,10 @@ for(int j=0; j<cantusfirmus.NumberOfNotes()-1 ; j++){ //Enquanto j < (numero de 
 	cantusfirmus.SetInstrument(1,2);
 	materialfinal = cantusfirmus; // MATERIAL FINAL CRIADO
 	materialfinal.Show();
-	materialfinal.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	materialfinal.PlaybackWithCsound((string) PATH + "teste");
 	materialfinal.SetDefaultFunctionTables();
-	materialfinal.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
-	materialfinal.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+	materialfinal.Score((string) PATH + "Saida");
+	materialfinal.Orchestra((string) PATH + "Saida");
 
 
 	return 0;	

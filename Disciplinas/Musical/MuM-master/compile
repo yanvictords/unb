@@ -1,4 +1,4 @@
-MAIN=trabalho2
+MAIN=ProjetoFinalOficial
 OUTFOLDER=compiledFiles
 echo "Compilando Main..."
 g++ -o ${MAIN} ${MAIN}.cpp ${OUTFOLDER}/MuUtil.o ${OUTFOLDER}/MuError.o ${OUTFOLDER}/MuParamBlock.o ${OUTFOLDER}/MuNote.o ${OUTFOLDER}/MuVoice.o ${OUTFOLDER}/MuMaterial.o ${OUTFOLDER}/CaMaterial.o ${OUTFOLDER}/funtrabalho3.o

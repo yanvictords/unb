@@ -2,7 +2,7 @@
 #include "MuMaterial.h"
 #include "CaMaterial.h"
 using namespace std;
-
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 void pausa();
 int tempo();
 int * vet_graus(int tom, int maiormenor);
@@ -17,6 +17,15 @@ MuMaterial seleciona_acordes(int acorde[], MuNote notas, int *graus, int maiorme
 /*sup*/void melhora_pitch_prob(int probPitch[], int notant, int notas[]); //altera probabilidades baseada na nota anterior. Menores saltos + preferencia
 /*sup*/int num_compassos(MuMaterial acorde, MuNote lastnote); //retorna o numero de compassos
 /*sup*/void vet_infors(int *compassos, int *duracao, MuMaterial acorde, MuNote lastnote); //cria 2 vetores de informaçoes (inicio, dur)
+/*sup*/void Repetition (MuMaterial * pmat); 
+/*sup*/void Sequence (MuMaterial * pmat, int notas[]);			
+/*sup*/void Inversion (MuMaterial * pmat); 
+/*sup*/void Retrograde (MuMaterial * pmat); 
+/*sup*/void RetroInver (MuMaterial * pmat); 
+/*sup*/void Diminution (MuMaterial * pmat); 
+/*sup*/void Augmentation (MuMaterial * pmat); 
+/*sup*/void CicloAlt(MuMaterial * pmat, int vezes);/*Muda a altura da nota anterior para a altura da nota posterior uma a uma até a última ser convertida na primeira. Esse processo pode se repetir uma ou várias vezes.*/
+/*sup*/void CicloRit(MuMaterial * pmat, int vezes); /*Muda o ritmo de forma semelhante ao CicloAlt faz com as alturas. */
 MuMaterial mat_acorde(MuMaterial acorde, int compasso); //retorna material contendo todas as notas de um compasso
 short SorteiaPitch(int pitches[], int probPitch[]); //Retorna uma nota sorteada
 
@@ -136,9 +145,8 @@ int main(void){
 	improvisoT += improvisoA;//MOTIVO improvisoA ORIGINAL DA PARTEA (nao perca este motivo, varie o improvisoA usando um auxiliar)
 	improvisoT += nota;
 
-	//********** ->>> VARIE AQUI O IMPROVISOA PARA INSERIR O PRIMEIRO MOTIVO VARIADO ABAIXO (usando funcao)
 	improvisoT += improvisoA;
-	//********** ->>> VARIE AQUI O IMPROVISOA PARA INSERIR O SEGUNDO MOTIVO VARIADO ABAIXO
+	
 	improvisoT += improvisoA; 	
 
 	improvisoT += improvisoB; //MOTIVO improvisoB ORIGINAL DA PARTEB (nao perca este motivo, varie o improvisoB usando um auxiliar)
@@ -164,7 +172,6 @@ int main(void){
 	nota.SetPitch(60);
 	improvisoT+=nota;
 	
-	//********** ->>> VARIE AQUI O IMPROVISOA PARA INSERIR O TERCEIRO MOTIVO VARIADO ABAIXO
 	improvisoT += improvisoA; 
 
 	improvisoT += improvisoA; //original(NAO VARIA)
@@ -215,10 +222,14 @@ int main(void){
 	nota.SetPitch(estrutural(melodiaA,auxiliar,-1));
 	afinal.AddNote(1,nota);
 	afinal.Show();
-	afinal.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	afinal.PlaybackWithCsound((string) PATH + "teste");
 	afinal.SetDefaultFunctionTables();
-	afinal.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
-	afinal.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+	afinal.Score((string) PATH + "Saida");
+	afinal.Orchestra((string) PATH + "Saida");
+	
+	delete[] melodiaA;
+	delete[] melodiaB;
+
 return 0;
 }
 
@@ -785,4 +796,3 @@ void Zera_probPitch(int probPitch[]){
 	for (int i =0; i<10;i++)
 		probPitch[i] = 0; 
 }
-

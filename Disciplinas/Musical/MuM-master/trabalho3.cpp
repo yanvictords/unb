@@ -1,11 +1,9 @@
 #include <iostream>
 #include "funtrabalho3.h"
 using namespace std;
-
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 int acorde_anterior(int verifica[3], int acordes[3][3], int anterior, int *escala);
 int verif_acorde(MuMaterial aux, int compasso, int *inotaeq, int *escala, int* anterior);
-
-
 
 int main(void)
 {
@@ -20,7 +18,7 @@ int main(void)
 //posicao qual das 3 triades contendo a primeira nota do compasso que ele irá usar
 //anterior = pitch() da nota fundamento do acorde do compasso anterior
 
-	musica.LoadScore("/home/yan/Documentos/Musical/MuM-master/melodia3.sco"); 	
+	musica.LoadScore((string) PATH + "melodia3.sco"); 	
 	musica.SetInstrument(0,2);
 	compassos = getCompassos(2,&musica, &num_compassos); //vetor contendo todos os tempos de cada compasso
 
@@ -39,10 +37,10 @@ int main(void)
 	musica.SetInstrument(1,1);
 	musica.Show();
 
-	musica.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	musica.PlaybackWithCsound((string) PATH + "teste");
 	musica.SetDefaultFunctionTables();
-	musica.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
-	musica.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
+	musica.Orchestra((string) PATH + "Saida");
+	musica.Score((string) PATH + "Saida");
 
 	delete[] escala;
 	delete[] compassos;

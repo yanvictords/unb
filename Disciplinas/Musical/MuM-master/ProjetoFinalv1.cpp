@@ -2,7 +2,7 @@
 #include "MuMaterial.h"
 #include "CaMaterial.h"
 using namespace std;
-
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 int * vet_graus(int tom, int maiormenor);
 void show_tom(int tom, int maiormenor);
 
@@ -100,10 +100,10 @@ int main(void){
 		afinal+=acordes;
 	afinal.SetInstrument(0,1);
 	afinal.Show();
-	afinal.PlaybackWithCsound("/home/baragund/Google Drive/Profissional/Engenharia da Computação/2016.1/Composição Algoritmica/Programações/Trabalho FInal/MuM-master/teste");
+	afinal.PlaybackWithCsound((string) PATH + "teste");
 	afinal.SetDefaultFunctionTables();
-	afinal.Score("/home/baragund/Google Drive/Profissional/Engenharia da Computação/2016.1/Composição Algoritmica/Programações/Trabalho FInal/MuM-master/Saida");
-	afinal.Orchestra("/home/baragund/Google Drive/Profissional/Engenharia da Computação/2016.1/Composição Algoritmica/Programações/Trabalho FInal/MuM-master/Saida");
+	afinal.Score((string) PATH + "Saida");
+	afinal.Orchestra((string) PATH + "Saida");
 
 
 

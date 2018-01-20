@@ -3,7 +3,7 @@
 #include "MuMaterial.h"
 
 using namespace std;
-
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 //Constantes
 
 
@@ -40,8 +40,7 @@ int main(void)
 	MuNote nota;
 	int j;
 	
-	
-	motif.LoadScore("/home/yan/Documentos/Musical/MuM-master/paulo.sco");	
+	motif.LoadScore((string) PATH + "paulo.sco");	
 
 	
 	cout << endl << "CONSTRUÇÃO:" << endl;
@@ -70,10 +69,10 @@ int main(void)
 	//cout << endl<<"Tom: " << getEscalaNat(motif) << endl << endl; //pegando o tom da musica 
 /*-------------------------FIM DA CONSTRUCAO DA MUSICA--------------------------------------*/
 	mat1.Show();
-	mat1.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	mat1.PlaybackWithCsound((string) PATH + "teste");
 	mat1.SetDefaultFunctionTables();
-	mat1.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
-	mat1.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+	mat1.Score((string) PATH + "Saida");
+	mat1.Orchestra((string) PATH + "Saida");
 
 
 	return 0;	

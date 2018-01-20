@@ -37,8 +37,8 @@ int main(void){
 
 	int i, num_comp;// num. de compassos e probabilidades 
 	
-	afinal.LoadOrchestra("/home/aluno/Documentos/MuM-master/TrompetePiano.orc");
-    afinal.LoadFunctionTables("/home/aluno/Documentos/MuM-master/TrompetePiano.tbl");
+	afinal.LoadOrchestra("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.orc");
+    afinal.LoadFunctionTables("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/TrompetePiano.tbl");
 
 
 	acordesA.SetInstrument(0,1);
@@ -188,10 +188,10 @@ int main(void){
 	nota.SetPitch(estrutural(melodiaA,auxiliar,-1));
 	afinal.AddNote(1,nota);
 	afinal.Show();
-	afinal.PlaybackWithCsound("/home/aluno/Documentos/MuM-master/teste");
+	afinal.PlaybackWithCsound("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/teste");
 	afinal.SetDefaultFunctionTables();
-	afinal.Score("/home/aluno/Documentos/MuM-master/Saida");
-	afinal.Orchestra("/home/aluno/Documentos/MuM-master/Saida");
+	afinal.Score("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/Saida");
+	afinal.Orchestra("/root/Documentos/UnB/Disciplinas/Musical/MuM-master/Saida");
 	
 	delete[] melodiaA;
 	delete[] melodiaB;
@@ -842,3 +842,4 @@ void cria_oito_compassos(MuMaterial* oitocomp, MuMaterial afinal, int* inf_acord
 	}
 
 }
+

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MuMaterial.h"
 using namespace std;
+#define PATH "/root/Documentos/UnB/Disciplinas/Musical/MuM-master/"
 /*-------------- Declarando funcoes suporte e funcoes com mais relevancia --------------*/
 /*sup*/short estrutural(short notas[], MuMaterial auxiliar, int); //retorna o sorteio de uma nota estrutural
 /*sup*/void Zera_probPitch(int probPitch[]); //zera o vetor probabilidades de pitch
@@ -34,7 +35,7 @@ int main(void)
 	float somadur, tempo, tant, tempovet[8] = {0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4}; // tempos possiveis para este trabalho
 	short ant, notas[7] = {72, 74, 76, 77, 79, 81, 83}; // notas para improviso
 	int i, num_comp, probPitch[7], probPitch2[7], probtempo[8] = {5, 7, 4, 6, 3, 1, 1, 1}; // num. de compassos e probabilidades 
-	acorde.LoadScore("/home/yan/Documentos/Musical/MuM-master/acordes1.sco");
+	acorde.LoadScore((string) PATH + "acordes1.sco");
 	lastnote = acorde.GetNote(0, acorde.NumberOfNotes(0)-1); //pegando a ultima nota do ultimo compasso ou material
 	num_comp = num_compassos(acorde, lastnote); //encontrando o numero total de compassos
 	int compassos[num_comp]; //contem o inicio em segundos de cada compasso
@@ -113,10 +114,10 @@ int main(void)
 	acorde.SetAmp(1, 0.3);
 	acorde.SetAmp(2, 0.5);
 	acorde.Show();
-	acorde.PlaybackWithCsound("/home/yan/Documentos/Musical/MuM-master/teste");
+	acorde.PlaybackWithCsound((string) PATH + "teste");
 	acorde.SetDefaultFunctionTables();
-	acorde.Score("/home/yan/Documentos/Musical/MuM-master/Saida");
-	acorde.Orchestra("/home/yan/Documentos/Musical/MuM-master/Saida");
+	acorde.Score((string) PATH + "Saida");
+	acorde.Orchestra((string) PATH + "Saida");
 	return 0;	
 }
 /*---------------------------------------------------------------------------*/

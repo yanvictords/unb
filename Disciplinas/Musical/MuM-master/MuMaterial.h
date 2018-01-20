@@ -94,7 +94,7 @@ const short EIGHTH_DEGREE = 7;
 
 // FILE PATHS
 
-#define CSOUND_PATH "csound"
+#define CSOUND_PATH ""
 
 // SCORE LOADING MODES:
 const short LOAD_MODE_TIME = 0;
