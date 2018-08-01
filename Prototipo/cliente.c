@@ -45,7 +45,7 @@ int main()
 
 	while(1)
 	{
-		if((slen = recv(sockfd, buffer, LEN, 0)) > 0)
+		if((slen = recv(sockfd, buffer, LEN, 0)) > 0) // Na primeira vez, espera a mensagem de bem-vindo do proxy; Recebe pedidos do proxy
 		{
 			buffer[slen] = '\0';
 			printf("\n=> Mensagem Recebida do proxy: %s\n", buffer);
@@ -53,7 +53,7 @@ int main()
 		memset(buffer, 0x0, LEN);
 		printf("Peca algo ao servidor: ");
 		scanf("%s", buffer);
-		if(send(sockfd, buffer, strlen(buffer), 0))
+		if(send(sockfd, buffer, strlen(buffer), 0)) // faz um pedido ao proxy
 		{
 			if(!strcmp(buffer, "exit"))
 				break;

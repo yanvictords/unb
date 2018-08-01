@@ -52,16 +52,17 @@ int main()
 
 // --- SOCKET -> PORTA -> SERVER ONLINE ESCUTANDO -> CLIENTE FALA -> CLIENTE SE CONECTA VIA TCP -> TROCAM MENSAGENS ABAIXO
 
-		(1){ // *A PARTIR DAQUI OCORRE A TROCA DE MENSAGENS
-		if((tam_buff = recv(proxy, buffer, LEN, 0)) > 0) // *RECV FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE (proxy), salva em "buffer"
+	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
+	{ 
+		if((tam_buff = recv(proxy, buffer, LEN, 0)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE (proxy), salva em "buffer"
 		{
 			printf("=> Mensagem recebida do proxy: %s\n\n", buffer);
 			buffer[tam_buff] = '\0';
-			if(!strcmp(buffer, "exit")) // se a mensagem for exit, fecha a conexão
+			if(!strcmp(buffer, "exit")) // se a mensagem do cliente for exit, fecha a conexão
 				break;
 			
 			char resposta[LEN] = "RESPOSTA\0";
-			if(send(proxy, resposta, strlen(resposta), 0)) // *AQUI ELE RESPONDE ALGUMA COISA PARA O CLIENTE DE VOLTA (proxy). Não fica travado
+			if(send(proxy, resposta, strlen(resposta), 0)) // *AQUI ELE RESPONDE ALGUMA COISA PARA O CLIENTE, DE VOLTA (proxy). Não fica travado
 			{
 				//printf("A requisicao foi respondida com sucesso!\n");
 				perror("SERVIDOR: A requisicao foi respondida com sucesso!\n");
@@ -72,7 +73,7 @@ int main()
 				//printf("Problemas ao responder a requisicao!\n");
 				perror("SERVIDOR: Problemas ao responder a requisicao!\n");
 			}
-		} //AQUI ELE VOLTA PRO LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
+		} //AQUI ELE VOLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
 	close(proxy);
 	close(sck_servidor);

@@ -82,7 +82,7 @@ int main()
 //=========================================================== RECEBE DO CLIENTE, ENVIA AO SERVIDOR E REENVIA A RESPOSTA
 
 	strcpy(buffer, "Seja bem-vindo...\n\0");
-	if(send(cliente, buffer, strlen(buffer), 0)){
+	if(send(cliente, buffer, strlen(buffer), 0)){ // envia bem-vindo para o cliente
 		//printf("Aguardando pedido do cliente...\n");
 		perror("Estamos aguardando a requisicao...\n");
 	}
@@ -91,7 +91,7 @@ int main()
 
 	while(1) // espera em loop a mensagem do cliente
 	{
-		if((slen = recv(cliente, buffer, LEN, 0)) > 0) // caso o tamanho da mensagem recebida em buffer seja maior que zero
+		if((slen = recv(cliente, buffer, LEN, 0)) > 0) // caso o tamanho da mensagem recebida em buffer do cliente seja maior que zero
 		{
 			buffer[slen] = '\0';
 			printf("\n=> Mensagem recebida do cliente: %s\n", buffer);
