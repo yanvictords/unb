@@ -9,8 +9,8 @@ Rode os três ao mesmo tempo, na ordem listada acima.
 
 Interface: Execute-os e espere até que as conexões entre eles estejam estabelecidas. Em seguida, envie qualquer string por meio de cliente.c via terminal do linux. <br />
 
-Para executar cada programa:
-gcc programa.c -o programa
+Para executar cada programa:<br />
+gcc programa.c -o programa<br />
 ./programa
  <br />
 
