@@ -1,9 +1,9 @@
 # Prototipo Cliente-Proxy-Servidor
 A configuração das portas estão em #define's dentro dos arquivos.<br />
 Ordem de execução:<br />
-1) servidor.c<br />
-2) refdec.c<br />
-3) cliente.c<br />
+1) servidor<br />
+2) refdec (proxy) <br />
+3) cliente<br />
 
 Rode os três ao mesmo tempo, cada um em um terminal, na ordem listada acima.
 
