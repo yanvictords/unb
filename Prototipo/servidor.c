@@ -11,7 +11,7 @@ struct sockaddr_in cli_proxy;
 int main()
 {
 	int proxy, len_proxy = sizeof(cli_proxy);
-	int sck_servidor = socket(AF_INET, SOCK_STREAM, 0); // AF_INET = LINUX, SOCK_STREAM = TCP
+	int sck_servidor = socket(AF_INET, SOCK_STREAM, 0); // AF_INET = protocolo usado
 	int tam_buff;
 	char buffer[LEN];
 
