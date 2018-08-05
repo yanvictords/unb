@@ -6,7 +6,7 @@
 
 struct sockaddr_in servidor;
 struct sockaddr_in cli_proxy;
-#define PORTA 8080
+#define PORTA 2001
 #define LEN 4096
 int main()
 {
@@ -63,20 +63,33 @@ int main()
 		{
 			printf("=> Mensagem recebida do proxy: %s\n\n", buffer);
 			buffer[tam_buff] = '\0';
-			if(!strcmp(buffer, "exit")) // se a mensagem do cliente for exit, fecha a conexão
+
+			if(!strcmp(buffer, "kill")) // se a mensagem do cliente for exit, fecha a conexão			
 				break;
-			
-			char resposta[LEN] = "RESPOSTA\0";
-			if(send(proxy, resposta, strlen(resposta), 0)) // *AQUI ELE RESPONDE ALGUMA COISA PARA O CLIENTE, DE VOLTA (proxy). Não fica travado
+			if(!strcmp(buffer, "exit")) // se a mensagem do cliente for exit, fecha a conexão
 			{
-				//printf("A requisicao foi respondida com sucesso!\n");
-				perror("SERVIDOR: A requisicao foi respondida com sucesso!\n");
-				printf("Mensagem enviada: %s\n", resposta);
+				if((proxy = accept(sck_servidor, (struct sockaddr*) &cli_proxy, &len_proxy)) == -1)
+					perror("A conexao nao foi efetuada com sucesso!\n");
+				else
+					printf("A conexao foi efetuada com sucesso!\n");	
 			}
 			else
 			{
-				//printf("Problemas ao responder a requisicao!\n");
-				perror("SERVIDOR: Problemas ao responder a requisicao!\n");
+				char resposta[LEN];
+				printf("Digite algo para o cliente: ");
+				fgets(resposta, sizeof(resposta), stdin);
+				resposta[sizeof(resposta)]='\0';
+				if(send(proxy, resposta, strlen(resposta), 0)) // *AQUI ELE RESPONDE ALGUMA COISA PARA O CLIENTE, DE VOLTA (proxy). Não fica travado
+				{
+					//printf("A requisicao foi respondida com sucesso!\n");
+					perror("SERVIDOR: A requisicao foi respondida com sucesso!\n");
+					printf("Mensagem enviada: %s\n", resposta);
+				}
+				else
+				{
+					//printf("Problemas ao responder a requisicao!\n");
+					perror("SERVIDOR: Problemas ao responder a requisicao!\n");
+				}
 			}
 		} //AQUI ELE VOLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}

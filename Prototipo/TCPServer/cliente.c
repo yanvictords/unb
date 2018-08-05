@@ -5,8 +5,8 @@
 #include "refdec.h"
 
 struct sockaddr_in remoto;
-
-#define PORTA 2000
+#define _IP 1.1.1.1.1.1
+#define PORTA 2001
 #define LEN 4096
 int main()
 {
@@ -29,7 +29,7 @@ int main()
 	
 	remoto.sin_family = AF_INET;
 	remoto.sin_port = htons(PORTA);
-	remoto.sin_addr.s_addr = inet_addr("127.0.0.1");
+	remoto.sin_addr.s_addr = inet_addr(_IP);
 	memset(remoto.sin_zero, 0x0, 8);
 
 	struct sockaddr *cast_remoto = (struct sockaddr *) &remoto;
@@ -46,8 +46,9 @@ int main()
 	while(1)
 	{
 		memset(buffer, 0x0, LEN);
-		printf("Peca algo ao servidor: ");
-		scanf("%s", buffer);
+		printf("Digite algo para o servidor: ");
+		fgets(buffer, sizeof(buffer), stdin);
+		buffer[sizeof(buffer)]='\0';
 		if(send(sockfd, buffer, strlen(buffer), 0)) // faz um pedido ao proxy
 		{
 			if(!strcmp(buffer, "exit"))
