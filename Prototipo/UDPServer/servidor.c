@@ -45,6 +45,7 @@ int main()
 	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
 	{ 
 		memset(buffer, 0x0, LEN);
+		printf("Esperando por cliente...\n");
 		if((tam_buff = recvfrom(sck_servidor, buffer, LEN, 0, cast_addr_serv, &tam_addr_serv)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE, salva em "buffer"
 		{
 			printf("=> Mensagem recebida: %s\n\n", buffer);

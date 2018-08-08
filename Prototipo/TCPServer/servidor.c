@@ -46,6 +46,8 @@ int main()
 
 	printf("\nEscutando na porta %d...\n", PORTA);
 
+	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
+	{ 
 	if((proxy = accept(sck_servidor, (struct sockaddr*) &cli_proxy, &len_proxy)) == -1) // apos falar, o cliente tenta conexao com o servidor
 	{ // *proxy é o cliente do nosso servidor
 		//printf("A conexao nao foi efetuada com sucesso!\n");
@@ -56,9 +58,8 @@ int main()
 
 // --- SOCKET -> PORTA -> SERVER ONLINE ESCUTANDO -> CLIENTE FALA -> CLIENTE SE CONECTA VIA TCP -> TROCAM MENSAGENS ABAIXO
 
-	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
-	{ 
 		memset(buffer, 0x0, LEN);
+		printf("Esperando novo cliente...\n");
 		if((tam_buff = recv(proxy, buffer, LEN, 0)) > 0) // *RECV: FICA TRAVADO AQUI ATÉ RECEBER UMA MENSAGEM DO CLIENTE (proxy), salva em "buffer"
 		{
 			printf("=> Mensagem recebida do proxy: %s\n\n", buffer);
@@ -82,8 +83,10 @@ int main()
 				if(send(proxy, resposta, strlen(resposta), 0)) // *AQUI ELE RESPONDE ALGUMA COISA PARA O CLIENTE, DE VOLTA (proxy). Não fica travado
 				{
 					//printf("A requisicao foi respondida com sucesso!\n");
-					perror("SERVIDOR: A requisicao foi respondida com sucesso!\n");
-					printf("Mensagem enviada: %s\n", resposta);
+					perror("\nSERVIDOR: A requisicao foi respondida com sucesso!\n");
+					printf("Mensagem enviada: %s\n\n", resposta);
+					close(proxy);
+
 				}
 				else
 				{
@@ -94,7 +97,7 @@ int main()
 		} //AQUI ELE VOLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
 
-	close(proxy);
+//	close(proxy);
 	close(sck_servidor);
 
 	printf("\n\nFinalizando o servidor...\n");

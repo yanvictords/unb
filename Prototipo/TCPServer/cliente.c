@@ -4,19 +4,37 @@
 
 #include "refdec.h"
 
-struct sockaddr_in remoto;
-#define _IP 1.1.1.1.1.1
-#define PORTA 2001
+struct addrinfo hints, *results;
+
+#define PORTA "80"
 #define LEN 4096
 int main()
 {
+	FILE *arq;
+	arq=fopen("entrada.txt", "r+");
 
 	printf("================ CLIENTE - TCP =================\n\n");
 
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0); //UDP
-	int len = sizeof(remoto);
+	int sockfd;
 	int slen;
 	char buffer[LEN];
+	char domain[100];
+
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	
+	printf("Digite o endereco: \n");
+	scanf("%s", domain);
+	
+	if(getaddrinfo(domain, PORTA, &hints, &results) != 0)
+	{
+		printf("Deu ruim na hora de pegar o IP do dominio\n");
+		exit(1);
+	}
+
+	sockfd = socket(results->ai_family, results->ai_socktype, results->ai_protocol);
+
 	if(sockfd == -1)
 	{
 		perror("O socket nao foi criado com sucesso!\n");
@@ -26,16 +44,8 @@ int main()
 	{
 		printf("O socket foi criado com sucesso!\n");
 	}
-	
-	remoto.sin_family = AF_INET;
-	remoto.sin_port = htons(PORTA);
-	remoto.sin_addr.s_addr = inet_addr(_IP);
-	memset(remoto.sin_zero, 0x0, 8);
 
-	struct sockaddr *cast_remoto = (struct sockaddr *) &remoto;
-	int tam_addr_remoto = sizeof(remoto);
-
-	if(connect(sockfd, cast_remoto, tam_addr_remoto)==-1)
+	if(connect(sockfd, results->ai_addr, results->ai_addrlen)==-1)
 	{
 		perror("O servidor final nao conectou!\n");	
 		exit(1);
@@ -46,10 +56,10 @@ int main()
 	while(1)
 	{
 		memset(buffer, 0x0, LEN);
-		printf("Digite algo para o servidor: ");
-		fgets(buffer, sizeof(buffer), stdin);
-		buffer[sizeof(buffer)]='\0';
-		if(send(sockfd, buffer, strlen(buffer), 0)) // faz um pedido ao proxy
+		printf("Lendo arquivo\n");
+		fread(buffer, sizeof(buffer), 1, arq);
+
+		if(send(sockfd, buffer, sizeof(buffer), 0)) // faz um pedido ao proxy
 		{
 			if(!strcmp(buffer, "exit"))
 				break;
@@ -63,6 +73,7 @@ int main()
 			buffer[slen] = '\0';
 			printf("\n=> Mensagem Recebida do proxy: %s\n", buffer);
 		}
+		break;
 	}
 	
 	close(sockfd);
