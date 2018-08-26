@@ -1,4 +1,4 @@
-#include "analyzer.h"
+#include "../include/analyzer.h"
 
 int package_analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 {
