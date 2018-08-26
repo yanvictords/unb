@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <inttypes.h>
+#include <arpa/inet.h>
+
+#include "identifier.h"
+#include "feedback.h"
+
+//===== PACKAGES
+#define _QUERY 0
+#define _RESPONSE 1
+#define _UNKNOWN_QUERY_TYPE -1
+
+#define _1BIT 1
+#define _4BITS 4
+
+//===== MODULE
+#define _MODULE_DECODER "DECODER"
+
+typedef uint16_t byte_2;
+struct DNS_HEADER
+{
+    byte_2 id;
+    unsigned char rd:	_1BIT; 
+    unsigned char opcode:	_4BITS; 
+    unsigned char aa:	_1BIT; 
+    unsigned char tc:	_1BIT;
+    unsigned char qr:	_1BIT; 
+    unsigned char ra:	_1BIT; 
+    unsigned char z:	_1BIT; 
+    unsigned char rcode:	_4BITS;
+    unsigned char cd:	_1BIT; 
+    unsigned char ad:	_1BIT; 
+    byte_2 qd_count; 
+    byte_2 an_count; 
+    byte_2 ns_count; 
+    byte_2 ar_count; 
+};
+
+int packageDecoder(int protocol,  char * buffer);
+int getDnsOperation(char * buffer);
+int getNtpOperation(char * buffer);
+int getSnmpOperation(char * buffer);
+int getSsdpOperation(char * buffer);
