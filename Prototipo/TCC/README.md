@@ -11,7 +11,7 @@ chmod 755 make.sh<br />
 ~> Digite um IP de qualquer servidor DNS válido para executar a query (ex.: 8.8.8.8, 8.8.4.4, etc.)<br />
  <br />
 
-Ambiente: Linux.
+Ambiente: Linux. <br />
 
-Orientação: João José Costa Gondim
-Universidade de Brasília - 2018/1 ~ 2019/1
+Orientação: João José Costa Gondim  <br />
+Universidade de Brasília - 2018/1 ~ 2019/1 <br />
