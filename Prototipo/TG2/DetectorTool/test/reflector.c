@@ -27,7 +27,7 @@ void checkSocket()
 		exit(1);
 	}
 	else
-		printf("Socket was created successfully!\n");
+		printf("Socket was successfully created!\n");
 }
 
 void bindPort()
@@ -42,7 +42,7 @@ void bindPort()
 		exit(1);
 	}
 	else
-		printf("Port %d was opened successfully! Listening...\n", _VICTIM_PORT);
+		printf("Port %d was successfully opened to simulate a DNS server!!!\n", _DNS_PORT);
 }
 
 void toAttack()

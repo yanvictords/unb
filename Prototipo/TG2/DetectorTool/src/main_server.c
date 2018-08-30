@@ -67,7 +67,7 @@ void checkSocket(int socket)
 		exit(1);
 	}
 	else
-		printf("[%s]: Socket was created successfully!\n", _MAIN_SERVER);
+		printf("[%s]: Socket was successfully created!\n", _MAIN_SERVER);
 }
 
 struct sockaddr_in setAddrInfors(unsigned int ipAddress, unsigned int port)
@@ -100,7 +100,7 @@ void bindPort(int sck, struct sockaddr_in addr, int port)
 		exit(1);
 	}
 	else
-		printf("[%s]: Port %d was opened successfully! Listening...\n", _MAIN_SERVER, port);
+		printf("[%s]: Port %d was successfully opened! Listening...\n", _MAIN_SERVER, port);
 }
 
 void localPackageListener(char * buffer)
@@ -150,7 +150,7 @@ void localPackageSender(char * buffer, int buffer_size)
 	if (sendto(sckLocal, (char*)buffer, buffer_size, 0, (struct sockaddr*)&sendLocalArea, sizeof(sendLocalArea)) < 0)
         printf("[%s]: Sendto local host failed!\n", _MAIN_SERVER);
 	else
-		printf("[%s]: The package was forwarded to local host successfully!\n", _MAIN_SERVER);
+		printf("[%s]: The package was successfully forwarded to local host!\n", _MAIN_SERVER);
 }
 
 void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in destAddr)
@@ -160,7 +160,7 @@ void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in de
 	if (sendto(sckNonLocal, buffer, buffer_size, 0, (struct sockaddr*)&destAddr, sizeof(destAddr)) < 0)
         printf("[%s]: Sendto non-local host failed!\n", _MAIN_SERVER);
 	else
-		printf("[%s]: The package was forwarded to non-local host successfully!\n", _MAIN_SERVER);
+		printf("[%s]: The package was successfully forwarded to non-local host!\n", _MAIN_SERVER);
 }
 
 void printBuffer(char * buffer, int size, bool localNetHost)

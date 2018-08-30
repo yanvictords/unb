@@ -35,7 +35,7 @@ void checkSocket(int sck_server)
 		exit(1);
 	}
 	else
-		printf("Socket was created successfully!\n");
+		printf("Socket was successfully created!\n");
 }
 
 void bindPort(struct sockaddr_in addr, int port)
@@ -46,7 +46,7 @@ void bindPort(struct sockaddr_in addr, int port)
 		exit(1);
 	}
 	else
-		printf("Port %d was opened successfully! Listening...\n", port);
+		printf("Port %d was successfully opened! Listening...\n", port);
 }
 
 void * toListen(void * args)
@@ -69,7 +69,7 @@ void * toListen(void * args)
 		if (buffer_size = recvfrom(sck,(char*)buffer, _LEN, 0, (struct sockaddr*)&mainServerListen, &sizeAddr) <= 0)
     	    printf("\nRecvfrom main server failed!\n");
 		else
-			printf("\nPackage was received successfully!\nBuffer size: %d\nContent: %s\n", buffer_size, buffer);
+			printf("\nPackage was successfully received!\nBuffer size: %d\nContent: %s\n", buffer_size, buffer);
 	}
 }
 
@@ -106,6 +106,6 @@ void * toSend(void * args)
 		if (sendto(sck, (char*) buffer, buffer_size, 0, (struct sockaddr*)&mainServerSend, sizeAddr) < 0)
 	        printf("\nSendto local host failed!\n");
 		else
-			printf("\nThe package was forwarded to local host successfully!\n");
+			printf("\nThe package was successfully forwarded to local host!\n");
 	}
 }
