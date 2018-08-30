@@ -70,6 +70,7 @@ void * toListen(void * args)
     	    printf("\nRecvfrom main server failed!\n");
 		else
 			printf("\nPackage was successfully received!\nBuffer size: %d\nContent: %s\n", buffer_size, buffer);
+		
 	}
 }
 

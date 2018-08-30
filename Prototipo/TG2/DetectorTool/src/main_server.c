@@ -137,6 +137,9 @@ void nonLocalPackageListener(char * buffer)
 	else
 	{
 		printBuffer(buffer, buffer_size, _IS_NON_LOCAL);
+		
+		buffer_size += _HEADER_ADDR_SZ;
+
 		int status = packageAnalyzer(rcvNonLocalArea, buffer, _IS_NON_LOCAL);
 		if (status == _OK)
 			localPackageSender(putHeaderDestAddr(buffer, &rcvNonLocalArea), buffer_size);
