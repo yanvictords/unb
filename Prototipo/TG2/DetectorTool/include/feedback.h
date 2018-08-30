@@ -1,8 +1,6 @@
 #include "packages.h"
 #include <time.h>
 
-#define _LEN 65536
-
 void printBegin();
 void printEnd();
 void printQueryType(char * module, int operation);

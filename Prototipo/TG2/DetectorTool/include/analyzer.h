@@ -5,7 +5,7 @@
 #include "identifier.h"
 #include "feedback.h"
 
-//#define _DEBUGGER_MODE
+#define _DEBUGGER_MODE
 
 //===== STATUS
 #define _OK 1
@@ -20,7 +20,7 @@
 #define _MODULE_ANALYZER "ANALYZER"
 
 //===== FILE
-#define _BLACK_LIST_FILE "../blacklist.txt"
+#define _BLACK_LIST_FILE "blacklist.txt"
 
 int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost);
 int analyzePackageCounter(int counter, struct sockaddr_in addr, int protocol);

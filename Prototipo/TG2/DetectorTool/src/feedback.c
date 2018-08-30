@@ -43,14 +43,14 @@ void printAnotherStatus(char * module, int status, char * event)
 
 void printGetInBlackListStatus(char * module, int status, struct sockaddr_in addr)
 {
-	char node_addr[_LEN];
+	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n[ACTION] All packets are being BLOCKED!\n", module, status, node_addr);
 }
 
 void printPutInBlackListStatus(char * module, int status, struct sockaddr_in addr)
 {
-	char node_addr[_LEN];
+	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n[ACTION] All packets will be BLOCKED from now on!\n", module, status, node_addr);
 }
@@ -67,7 +67,7 @@ void printProtocolName(char * module, int protocol)
 
 void printAlert(char * module, struct sockaddr_in addr, int protocol, int counter)
 {
-	char node_addr[_LEN];
+	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
 	printf("\n************************ALERT****************************\n");

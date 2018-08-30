@@ -4,7 +4,7 @@
 #include "../test/dnsPackage.h"
 #include <time.h>
 
-#define _LEN 65536
+#define _BUFFER_SIZE 65536
 #define _IS_LOCAL true
 #define _IS_NON_LOCAL false
 
@@ -36,8 +36,8 @@ struct sockaddr_in setCharAddrInfors(char * ipAddress, unsigned int port);
 void bindPort(int sck, struct sockaddr_in addr, int port);
 void localPackageListener(char * buffer);
 void nonLocalPackageListener(char * buffer);
-void localPackageSender(char * buffer);
-void nonLocalPackageSender(char * buffer, struct sockaddr_in destAddr);
+void localPackageSender(char * buffer, int buffer_size);
+void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in destAddr);
 void printBuffer(char * buffer, int size, bool localNetHost);
 void printTrace(struct sockaddr_in src, struct sockaddr_in dest);
 char * getPackageContent(char * buffer);

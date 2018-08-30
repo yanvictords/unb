@@ -71,14 +71,7 @@ void * toListen(void * args)
 		if (buffer_size = recvfrom(sck_listen,(char*)buffer, _LEN, 0, (struct sockaddr*)&mainServerListen, &sizeAddr) <= 0)
     	    printf("Recvfrom main server failed!\n");
 		else
-		{
-			printf("Buffer received successfully! Buffer size: %d\n", buffer_size);
-			strcpy(response, "The message was received successfully!\n");
-			if (sendto(sck_listen, (char*)response, _LEN, 0, (struct sockaddr*)&mainServerListen, sizeAddr) < 0)
-		        printf("Sendto local host failed!\n");
-			else
-				printf("The package was forwarded to local host successfully!\n");
-		}
+			printf("Buffer received successfully!\nBuffer size: %d\nContent: %s\n", buffer_size, buffer);
 	}
 }
 

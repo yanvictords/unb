@@ -11,8 +11,6 @@
 //===== BORDERS
 #define _LOW_LIMIT_STOP -10000
 
-#define _LEN 65536
-
 struct COUNT_ADDR
 {
 	int count;

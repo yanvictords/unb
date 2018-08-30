@@ -73,7 +73,7 @@ bool mustKeepHostOnTheList(struct COUNT_ADDR * listAux)
 	if (listAux->count == 0) // if all requests were responded
 	{
 		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "Matching. All operations with this IP address were resolved.");
-		return true;
+		return false;
 	}
 
 	if (listAux->count < _LOW_LIMIT_STOP) // if the counter demonstrate a characteristic of DDoS attack by reflection
@@ -134,7 +134,7 @@ struct COUNT_ADDR * create_node(struct COUNT_ADDR * next, unsigned long addr)
 
 void printAllCounters(int protocol)
 {
-	char aux[_LEN];
+	char aux[4096];
 	int size=0;
 	struct COUNT_ADDR * listAux;
 	listAux = getProtocolRoot(protocol);
@@ -142,7 +142,7 @@ void printAllCounters(int protocol)
 	printf("\n***Listing All Counters***\n");
 
 	while(listAux!=NULL){
-		inet_ntop(AF_INET, &(listAux->sin_addr), aux, _LEN);
+		inet_ntop(AF_INET, &(listAux->sin_addr), aux, 4096);
 		printf("IP: %s - Counter: %d\n", aux, listAux->count); 
 		listAux=listAux->next;
 		size++;

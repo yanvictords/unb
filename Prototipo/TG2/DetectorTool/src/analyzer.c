@@ -68,9 +68,10 @@ bool getAddrInBlackList(struct sockaddr_in addr)
 		printFileNotFound(_MODULE_ANALYZER, _BLACK_LIST_FILE);
 		return false;
 	}
-	char ipAddr[4096];
 
-	char node_addr[_LEN];
+	char ipAddr[4096];
+	char node_addr[40496];
+	
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
 	while (!feof(file))
@@ -91,7 +92,7 @@ void putAddrInBlackList(struct sockaddr_in addr)
 {
 	FILE *file;
 	file = fopen(_BLACK_LIST_FILE, "a+");
-	char node_addr[_LEN];
+	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 	
 	fprintf(file, "%s\n", node_addr);

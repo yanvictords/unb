@@ -25,7 +25,7 @@ void * localAreaNetwork(void * arg)
 {
 	// int i=*((int*) arg);
 	sckLocal = socket(AF_INET, SOCK_DGRAM, 0);
-	char buffer[_LEN + _LEN];
+	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 	struct sockaddr_in aux;
 	
 	checkSocket(sckLocal);
@@ -35,7 +35,7 @@ void * localAreaNetwork(void * arg)
 
 	while (true)
 	{
-		memset(buffer, 0x0, _LEN);
+		memset(buffer, 0x0, _BUFFER_SIZE);
 		localPackageListener(buffer);	
 	}
 	close(sckLocal);
@@ -45,7 +45,7 @@ void * nonLocalAreaNetwork(void * arg)
 {
 	// int i=*((int*) arg);
 	sckNonLocal = socket(AF_INET, SOCK_DGRAM, 0);
-	char buffer[_LEN + _LEN];
+	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 
 	checkSocket(sckNonLocal);
 	rcvNonLocalArea = setAddrInfors(INADDR_ANY, _NON_LOCAL_PORT);
@@ -53,7 +53,7 @@ void * nonLocalAreaNetwork(void * arg)
 
 	while (true)
 	{
-		memset(buffer, 0x0, _LEN);
+		memset(buffer, 0x0, _BUFFER_SIZE);
 		nonLocalPackageListener(buffer);	
 	}
 	close(sckNonLocal);
@@ -108,18 +108,22 @@ void localPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvLocalArea);	
 
-	if ((buffer_size = recvfrom(sckLocal, buffer, _LEN, 0, (struct sockaddr*)&rcvLocalArea, &sizeAddr)) <= 0)
+	if ((buffer_size = recvfrom(sckLocal, buffer, _BUFFER_SIZE, 0, (struct sockaddr*)&rcvLocalArea, &sizeAddr)) <= 0)
         printf("[%s]: Recvfrom local host failed!\n", _MAIN_SERVER);
 	else
 	{
 		printBuffer(buffer, buffer_size, _IS_LOCAL);
 
 		char * bufferContent = getPackageContent(buffer);
+	
+		if(buffer_size > _HEADER_ADDR_SZ)
+			buffer_size -= _HEADER_ADDR_SZ;
+
 		struct sockaddr_in hostDest = getHeaderDestAddr(buffer);
 		printHost(&hostDest);
 
 		int status = packageAnalyzer(hostDest, bufferContent, _IS_LOCAL);
-		nonLocalPackageSender(bufferContent, hostDest);
+		nonLocalPackageSender(bufferContent, buffer_size, hostDest);
 	}
 }
 
@@ -128,35 +132,32 @@ void nonLocalPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvNonLocalArea);
 
-	if ((buffer_size = recvfrom(sckNonLocal,  buffer, _LEN+_LEN, 0, (struct sockaddr*)&rcvNonLocalArea, &sizeAddr)) <= 0)
+	if ((buffer_size = recvfrom(sckNonLocal,  buffer, _BUFFER_SIZE+_BUFFER_SIZE, 0, (struct sockaddr*)&rcvNonLocalArea, &sizeAddr)) <= 0)
         printf("[%s]: Recvfrom non-local host failed!\n", _MAIN_SERVER);
 	else
 	{
 		printBuffer(buffer, buffer_size, _IS_NON_LOCAL);
 		int status = packageAnalyzer(rcvNonLocalArea, buffer, _IS_NON_LOCAL);
 		if (status == _OK)
-			localPackageSender(putHeaderDestAddr(buffer, &rcvNonLocalArea));
+			localPackageSender(putHeaderDestAddr(buffer, &rcvNonLocalArea), buffer_size);
 	}
 }
 
-void localPackageSender(char * buffer)
+void localPackageSender(char * buffer, int buffer_size)
 {
 	printTrace(rcvNonLocalArea, sendLocalArea);
-//	struct sockaddr_in * test;
-//	test = (struct sockaddr_in *) buffer;
-//	printHost(test);
 
-	if (sendto(sckLocal, (char*)buffer, sizeof(buffer), 0, (struct sockaddr*)&sendLocalArea, sizeof(sendLocalArea)) < 0)
+	if (sendto(sckLocal, (char*)buffer, buffer_size, 0, (struct sockaddr*)&sendLocalArea, sizeof(sendLocalArea)) < 0)
         printf("[%s]: Sendto local host failed!\n", _MAIN_SERVER);
 	else
 		printf("[%s]: The package was forwarded to local host successfully!\n", _MAIN_SERVER);
 }
 
-void nonLocalPackageSender(char * buffer, struct sockaddr_in destAddr)
+void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in destAddr)
 {
 	printTrace(rcvLocalArea, destAddr);
 
-	if (sendto(sckNonLocal, buffer, sizeof(buffer), 0, (struct sockaddr*)&destAddr, sizeof(destAddr)) < 0)
+	if (sendto(sckNonLocal, buffer, buffer_size, 0, (struct sockaddr*)&destAddr, sizeof(destAddr)) < 0)
         printf("[%s]: Sendto non-local host failed!\n", _MAIN_SERVER);
 	else
 		printf("[%s]: The package was forwarded to non-local host successfully!\n", _MAIN_SERVER);
@@ -172,9 +173,9 @@ void printBuffer(char * buffer, int size, bool localNetHost)
 
 void printTrace(struct sockaddr_in src, struct sockaddr_in dest)
 {
-	char src_addr[_LEN];
+	char src_addr[_BUFFER_SIZE];
 	inet_ntop(AF_INET, &(src.sin_addr), src_addr, INET_ADDRSTRLEN);
-	char dest_addr[_LEN];
+	char dest_addr[_BUFFER_SIZE];
 	inet_ntop(AF_INET, &(dest.sin_addr), dest_addr, INET_ADDRSTRLEN);
 
 	printf("[%s]: [TRACE] -> host[%s:%d] is sending a package to host[%s:%d]\n", _MAIN_SERVER, src_addr, htons(src.sin_port), dest_addr, htons(dest.sin_port));
@@ -188,18 +189,16 @@ char * getPackageContent(char * buffer)
 char * putHeaderDestAddr(char * buffer, struct sockaddr_in * destAddr)
 {
 	struct sockaddr_in * aux;
-	char * newBuffer = (char *) malloc(sizeof(_HEADER_ADDR_SZ + sizeof(buffer)));
+	char * newBuffer = (char *) &buffer[_HEADER_ADDR_SZ];
+	strcpy(newBuffer, buffer);	
 
-	aux = (struct sockaddr_in *) newBuffer;
+	aux = (struct sockaddr_in *) buffer;
 	aux->sin_family = destAddr->sin_family;
 	aux->sin_port = destAddr->sin_port;
 	aux->sin_addr = destAddr->sin_addr;
 	strcpy(aux->sin_zero, destAddr->sin_zero);
 
-	char * content;
-	content = &newBuffer[_HEADER_ADDR_SZ];
-	strcpy(content, buffer); // analisar se todo o conteudo esta sendo passado
-	return newBuffer;
+	return buffer;
 }
 
 struct sockaddr_in getHeaderDestAddr(char * buffer)
@@ -210,7 +209,7 @@ struct sockaddr_in getHeaderDestAddr(char * buffer)
 
 void printHost(struct sockaddr_in * host)
 {
-	char node_addr[_LEN];
+	char node_addr[_BUFFER_SIZE];
 	inet_ntop(AF_INET, &(host->sin_addr), node_addr, INET_ADDRSTRLEN);
 
 	printf("\nPrint Host: [%s:%d]\n", node_addr, htons(host->sin_port));
