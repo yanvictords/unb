@@ -1,5 +1,4 @@
-//DNS Query Program on Linux
-//Author : Silver Moon (m00n.silv3r@gmail.com)
+// Code logic inspired by Author : Silver Moon (m00n.silv3r@gmail.com)
 //Dated : 29/4/2009
 //CÓDIGO ALTERADO POR YAN VICTOR DOS SANTOS PARA FINS DE TESTES
 
@@ -27,62 +26,32 @@ typedef uint64_t u8;
 #define T_PTR 12 /* domain name pointer */
 #define T_MX 15 //Mail server
  
-//DNS header structure
 struct DNS_H
 {
-    unsigned short id; // identification number
+    unsigned short id; 
  
-    unsigned char rd :1; // query/response flag
-    unsigned char opcode :4; // purpose of message
-    unsigned char aa :1; // authoritive answer
-    unsigned char tc :1; // truncated message
-    unsigned char qr :1; // recursion desired
+    unsigned char rd :1; 
+    unsigned char opcode :4;
+    unsigned char aa :1; 
+    unsigned char tc :1; 
+    unsigned char qr :1; 
  
-    unsigned char ra :1; // recursion available
-    unsigned char z :1; // its z! reserved
-    unsigned char rcode :4; // response code
-    unsigned char cd :1; // checking disabled
-    unsigned char ad :1; // authenticated data
+    unsigned char ra :1; 
+    unsigned char z :1; 
+    unsigned char rcode :4;
+    unsigned char cd :1; 
+    unsigned char ad :1; 
  
-    unsigned short q_count; // number of question entries
-    unsigned short ans_count; // number of answer entries
-    unsigned short auth_count; // number of authority entries
-    unsigned short add_count; // number of resource entries
+    unsigned short q_count; 
+    unsigned short ans_count;
+    unsigned short auth_count;
+    unsigned short add_count; 
 };
  
-//Constant sized fields of query structure
 struct QUESTION
 {
     unsigned short qtype;
     unsigned short qclass;
 };
  
-//Constant sized fields of the resource record structure
-#pragma pack(push, 1)
-struct R_DATA
-{
-    unsigned short type;
-    unsigned short _class;
-    unsigned int ttl;
-    unsigned short data_len;
-};
-#pragma pack(pop)
- 
-//Pointers to resource record contents
-struct RES_RECORD
-{
-    unsigned char *name;
-    struct R_DATA *resource;
-    unsigned char *rdata;
-};
- 
-//Structure of a Query
-typedef struct
-{
-    unsigned char *name;
-    struct QUESTION *ques;
-} QUERY;
-
-
 void mountDnsPackage(unsigned char queryOrResponse, char * buf, char * host);
-void ChangetoDnsNameFormat(unsigned char* dns,unsigned char* host);

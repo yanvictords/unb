@@ -14,7 +14,9 @@ void startServer()
 {
 	pthread_t a[2];
 	int *listen, *send;
-	
+	sck = socket(AF_INET, SOCK_DGRAM, 0);	
+	checkSocket(sck);
+
 	listen = (int *) malloc(sizeof(int));
 	send = (int *) malloc(sizeof(int));
 	*listen = 1;
@@ -24,7 +26,6 @@ void startServer()
 	pthread_create(&a[1], NULL, toListen, (void *) (listen));
 	pthread_join(a[0],NULL);
 }
-
 
 void checkSocket(int sck_server)
 {
@@ -37,7 +38,7 @@ void checkSocket(int sck_server)
 		printf("Socket criado com sucesso!\n");
 }
 
-void bindPort(int sck, struct sockaddr_in addr, int port)
+void bindPort(struct sockaddr_in addr, int port)
 {
 	if (bind(sck, (struct sockaddr *) &addr, sizeof(addr)) == -1 )
 	{	
@@ -50,12 +51,9 @@ void bindPort(int sck, struct sockaddr_in addr, int port)
 
 void * toListen(void * args)
 {
-	int sck_listen = socket(AF_INET, SOCK_DGRAM, 0);
 	int buffer_size;
 	char buffer[_LEN], response[_LEN];
 	char * completeBuf;
-
-	checkSocket(sck_listen);
 
 	// ---- main server
 	mainServerListen.sin_family = AF_INET; 
@@ -64,23 +62,22 @@ void * toListen(void * args)
 	memset(mainServerListen.sin_zero, 0x0, 8);	
 	int sizeAddr = sizeof(mainServerListen);
 
-	bindPort(sck_listen, mainServerListen, _LOCAL_PORT);
+	bindPort(mainServerListen, _LOCAL_PORT);
 
 	while (true)
 	{
-		if (buffer_size = recvfrom(sck_listen,(char*)buffer, _LEN, 0, (struct sockaddr*)&mainServerListen, &sizeAddr) <= 0)
-    	    printf("Recvfrom main server failed!\n");
+		if (buffer_size = recvfrom(sck,(char*)buffer, _LEN, 0, (struct sockaddr*)&mainServerListen, &sizeAddr) <= 0)
+    	    printf("\nRecvfrom main server failed!\n");
 		else
-			printf("Buffer received successfully!\nBuffer size: %d\nContent: %s\n", buffer_size, buffer);
+			printf("\nPackage was received successfully!\nBuffer size: %d\nContent: %s\n", buffer_size, buffer);
 	}
 }
 
 void * toSend(void * args)
 {
-	int sck_send = socket(AF_INET, SOCK_DGRAM, 0);
 	char buffer[_LEN + _LEN];
 	char *bufferFinal;
-	checkSocket(sck_send);
+
 	// ---- main server
 	mainServerSend.sin_family = AF_INET; 
 	mainServerSend.sin_port = htons(_MAIN_SERV_PORT);
@@ -88,10 +85,6 @@ void * toSend(void * args)
 	memset(mainServerSend.sin_zero, 0x0, 8);	
 	int sizeAddr = sizeof(mainServerSend);
 	int * sizeRealAddr;
-
-		unsigned char host[_LEN];
-		printf("DIGITE O HOST: ");
-		scanf("%s", host);
 
 	while (true)
 	{
@@ -102,14 +95,17 @@ void * toSend(void * args)
 		realServerAddress->sin_addr.s_addr = inet_addr(_REAL_ADDR);
 		memset(realServerAddress->sin_zero, 0x0, 8);	
 
+		unsigned char host[_LEN];
+		printf("\n=> DIGITE O HOST: ");
+		scanf("%s", host);
 		
 		mountDnsPackage((unsigned char) 0, &buffer[_HEADER_ADDR_SZ], host);
 
 		int buffer_size = _HEADER_ADDR_SZ + sizeof(struct DNS_H);
 
-		if (sendto(sck_send, (char*) buffer, buffer_size, 0, (struct sockaddr*)&mainServerSend, sizeAddr) < 0)
-	        printf("Sendto local host failed!\n");
+		if (sendto(sck, (char*) buffer, buffer_size, 0, (struct sockaddr*)&mainServerSend, sizeAddr) < 0)
+	        printf("\nSendto local host failed!\n");
 		else
-			printf("The package was forwarded to local host successfully!\n");
+			printf("\nThe package was forwarded to local host successfully!\n");
 	}
 }

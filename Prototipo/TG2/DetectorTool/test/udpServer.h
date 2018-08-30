@@ -48,8 +48,10 @@ struct DNS_HEADER
     byte_2 ar_count; 
 };
 
+int sck;
+
 void startServer();
 void checkSocket(int sck_server);
-void bindPort(int sck, struct sockaddr_in addr, int port);
+void bindPort(struct sockaddr_in addr, int port);
 void * toListen(void * args);
 void * toSend(void * args);

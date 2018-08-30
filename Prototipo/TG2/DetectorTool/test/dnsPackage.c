@@ -1,7 +1,4 @@
-//DNS Query Program on Linux
-//Author : Silver Moon (m00n.silv3r@gmail.com)
-//Dated : 29/4/2009
-//CÓDIGO ALTERADO POR YAN VICTOR DOS SANTOS PARA FINS DE TESTES
+// Code logic inspired by Author : Silver Moon (m00n.silv3r@gmail.com)
 
 #include "dnsPackage.h"
 
@@ -28,14 +25,7 @@ void mountDnsPackage(unsigned char queryOrResponse, char * buf, char * host)
     dns->auth_count = 0;
     dns->add_count = 0;
     name =(unsigned char*)&buf[sizeof(struct DNS_H)];
-    ChangetoDnsNameFormat(name , host);
-    info =(struct QUESTION*)&buf[sizeof(struct DNS_H) + (strlen((const char*)name) + 1)]; //fill it
-    info->qtype = htons( T_A ); //type of the query , A , MX , CNAME , NS etc
-    info->qclass = htons(1); //its internet (lol)
-}
 
-void ChangetoDnsNameFormat(unsigned char* dns,unsigned char* host) 
-{
     int lock = 0 , i;
     strcat((char*)host,".");
      
@@ -43,13 +33,18 @@ void ChangetoDnsNameFormat(unsigned char* dns,unsigned char* host)
     {
         if(host[i]=='.') 
         {
-            *dns++ = i-lock;
+            *name++ = i-lock;
             for(;lock<i;lock++) 
             {
-                *dns++=host[lock];
+                *name++=host[lock];
             }
-            lock++; //or lock=i+1;
+            lock++;
         }
     }
-    *dns++='\0';
+    *name++='\0';
+
+    info =(struct QUESTION*)&buf[sizeof(struct DNS_H) + (strlen((const char*)name) + 1)]; 
+    info->qtype = htons( T_A ); 
+    info->qclass = htons(1);
 }
+
