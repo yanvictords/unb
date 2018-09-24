@@ -52,6 +52,7 @@ int main()
 			buffer[slen] = '\0';
 			printf("\n=> Comando Recebido: %s\n", buffer);
 		}
+		break;
 	}
 	
 	close(sockfd);
