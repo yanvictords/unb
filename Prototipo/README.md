@@ -14,4 +14,4 @@ gcc programa.c -o programa<br />
 ./programa
  <br />
 
-Ambiente: Linux.
+Ambiente: Linux
