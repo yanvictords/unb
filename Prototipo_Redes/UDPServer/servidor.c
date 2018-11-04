@@ -10,7 +10,7 @@ struct sockaddr_in servidor;
 #define LEN 65536
 int main()
 {
-	int sck_servidor = socket(AF_INET, SOCK_DGRAM, 0); // AF_INET = protocolo usado
+	int sck_servidor = socket(AF_INET, SOCK_RAW, IPPROTO_UDP); // AF_INET = protocolo usado
 	int tam_buff;
 	char buffer[LEN];
 
@@ -40,9 +40,9 @@ int main()
 		exit(1);
 	}
 	else
-		printf("Portas %d aberta com sucesso!\n", PORTA);
+		printf("Porta %d aberta com sucesso!\n", PORTA);
 
-			int cont =0 ;
+		int cont =0 ;
 
 	while(1) // A PARTIR DAQUI OCORREM AS TROCAS DE MENSAGENS
 	{ 
@@ -52,7 +52,10 @@ int main()
 		{
 		//	pkgAnalyzer(servidor, buffer);
 	        //printAllCounters();
-			printf("Chegou\n");
+			printf("\nbuffer:\n %s\n======\n", buffer);
+			getchar();
+			getchar();
+
 			sendto(sck_servidor, "DEU CERTO", sizeof("DEU CERTO"), 0, (struct sockaddr*)&servidor, tam_addr_serv);
 		} //AQUI ELE OLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.
 	}
