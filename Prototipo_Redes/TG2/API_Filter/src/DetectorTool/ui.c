@@ -2,13 +2,13 @@
 
 void printBegin()
 {
-	printf("\n\n==============BEGIN - LOG==============\n");
+	printf("\n============== DETECTOR MODULE ==============\n");
 }
 
 void printEnd()
 {
 	printTime();
-	printf("\n===============END - LOG===============\n\n");
+	printf("\n=============== END - DETECTOR MODULE ===============\n\n\n");
 }
 
 void printQueryType(char * module, int operation)

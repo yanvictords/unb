@@ -11,13 +11,14 @@ int identifyByPort(int port)
 {
 	switch (port)	
 	{
+		case _DNS_PORT:
 		case 53:
 			return _DNS;
-		case 123:
+		case _NTP_PORT:
 			return _NTP;		
-		case 161:
+		case _SNMP_PORT:
 			return _SNMP;
-		case 1900:
+		case _SSDP_PORT:
 			return _SSDP;
 //		default:  // just for testings
 //			return _DNS;

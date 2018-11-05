@@ -1,2 +1,5 @@
 make --directory ../
-./../api
+cd ../
+./api
+cd scripts
+bash clean.sh
