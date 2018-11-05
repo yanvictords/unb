@@ -1,5 +1,6 @@
-#include "../essential.h"
+#include <arpa/inet.h>
 
+#include "../essential.h"
 #include "decoder.h"
 #include "identifier.h"
 #include "record.h"

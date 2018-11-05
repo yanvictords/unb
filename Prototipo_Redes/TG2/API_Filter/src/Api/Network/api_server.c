@@ -1,13 +1,8 @@
-#include "../../include/Api/api_server.h"
+#include "../../../include/Api/Network/api_server.h"
 
-int main()
+void startApiServer()
 {
-	startServer();
-	return 0;
-}
-
-void startServer()
-{
+	printf("[%s]: Starting Api server...\n", _API_SERVER);
 	pthread_t a[2];
 	int *local, *nonLocal;
 	
@@ -21,17 +16,17 @@ void startServer()
 	pthread_join(a[0],NULL);
 }
 
+// ----- Main Functions Below
+
 void * localAreaNetwork(void * arg)
 {
-	// int i=*((int*) arg);
-	sckLocal = socket(AF_INET, SOCK_DGRAM, 0);
+	sckLocal = createSocket(_UDP);
 	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 	struct sockaddr_in aux;
 	
-	checkSocket(sckLocal);
 	rcvLocalArea = setAddrInfors(INADDR_ANY, _LOCAL_PORT);
 	sendLocalArea = setCharAddrInfors(_LOCAL_IP_ADDRESS, _SERVER_LOCAL_PORT);
-	bindPort(sckLocal, rcvLocalArea, _LOCAL_PORT);
+	bindPort(sckLocal, rcvLocalArea);
 
 	while (true)
 	{
@@ -43,13 +38,11 @@ void * localAreaNetwork(void * arg)
 
 void * nonLocalAreaNetwork(void * arg)
 {
-	// int i=*((int*) arg);
-	sckNonLocal = socket(AF_INET, SOCK_DGRAM, 0);
+	sckNonLocal = createSocket(_UDP);
 	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 
-	checkSocket(sckNonLocal);
 	rcvNonLocalArea = setAddrInfors(INADDR_ANY, _NON_LOCAL_PORT);
-	bindPort(sckNonLocal, rcvNonLocalArea, _NON_LOCAL_PORT);
+	bindPort(sckNonLocal, rcvNonLocalArea);
 
 	while (true)
 	{
@@ -59,57 +52,13 @@ void * nonLocalAreaNetwork(void * arg)
 	close(sckNonLocal);
 }
 
-void checkSocket(int socket)
-{
-	if (socket == -1)
-	{
-		printf("[%s]: There was a problem creating the socket.\n", _MAIN_SERVER);
-		exit(1);
-	}
-	else
-		printf("[%s]: Socket was successfully created!\n", _MAIN_SERVER);
-}
-
-struct sockaddr_in setAddrInfors(unsigned int ipAddress, unsigned int port)
-{
-	struct sockaddr_in addr;
-	addr.sin_family = AF_INET; 
-	addr.sin_port = htons(port);
-	addr.sin_addr.s_addr = htonl(ipAddress);
-	memset(addr.sin_zero, 0x0, 8);	
-	
-	return addr;
-}
-
-struct sockaddr_in setCharAddrInfors(char * ipAddress, unsigned int port)
-{
-	struct sockaddr_in addr;
-	addr.sin_family = AF_INET; 
-	addr.sin_port = htons(port);
-	addr.sin_addr.s_addr = inet_addr(ipAddress);
-	memset(addr.sin_zero, 0x0, 8);	
-	
-	return addr;
-}
-
-void bindPort(int sck, struct sockaddr_in addr, int port)
-{
-	if (bind(sck, (struct sockaddr *) &addr, sizeof(addr)) == -1 )
-	{	
-		printf("[%s]: There was a problem opening the port %d...\n", _MAIN_SERVER, port);
-		exit(1);
-	}
-	else
-		printf("[%s]: Port %d was successfully opened! Listening...\n", _MAIN_SERVER, port);
-}
-
 void localPackageListener(char * buffer)
 {
 	int buffer_size;
 	int sizeAddr = sizeof(rcvLocalArea);	
 
-	if ((buffer_size = recvfrom(sckLocal, buffer, _BUFFER_SIZE, 0, (struct sockaddr*)&rcvLocalArea, &sizeAddr)) <= 0)
-        printf("[%s]: Recvfrom local host failed!\n", _MAIN_SERVER);
+	if ((buffer_size = rcvPackage(sckLocal, &rcvLocalArea, buffer, _BUFFER_SIZE)) <= 0)
+		printf("[%s]: Recvfrom local host failed!\n", _API_SERVER);
 	else
 	{
 		printBuffer(buffer, buffer_size, _IS_LOCAL);
@@ -132,8 +81,8 @@ void nonLocalPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvNonLocalArea);
 
-	if ((buffer_size = recvfrom(sckNonLocal,  buffer, _BUFFER_SIZE+_BUFFER_SIZE, 0, (struct sockaddr*)&rcvNonLocalArea, &sizeAddr)) <= 0)
-        printf("[%s]: Recvfrom non-local host failed!\n", _MAIN_SERVER);
+	if ((buffer_size = rcvPackage(sckNonLocal, &rcvNonLocalArea, buffer, _BUFFER_SIZE+_BUFFER_SIZE)) <= 0)
+	    printf("[%s]: Recvfrom non-local host failed!\n", _API_SERVER);
 	else
 	{
 		printBuffer(buffer, buffer_size, _IS_NON_LOCAL);
@@ -150,28 +99,30 @@ void localPackageSender(char * buffer, int buffer_size)
 {
 	printTrace(rcvNonLocalArea, sendLocalArea);
 
-	if (sendto(sckLocal, (char*)buffer, buffer_size, 0, (struct sockaddr*)&sendLocalArea, sizeof(sendLocalArea)) < 0)
-        printf("[%s]: Sendto local host failed!\n", _MAIN_SERVER);
+	if (sendPackage(sckLocal, &sendLocalArea, buffer, buffer_size) < 0)
+        printf("[%s]: Sendto local host failed!\n", _API_SERVER);
 	else
-		printf("[%s]: The package was successfully forwarded to local host!\n", _MAIN_SERVER);
+		printf("[%s]: The package was successfully forwarded to local host!\n", _API_SERVER);
 }
 
 void nonLocalPackageSender(char * buffer, int buffer_size, struct sockaddr_in destAddr)
 {
 	printTrace(rcvLocalArea, destAddr);
 
-	if (sendto(sckNonLocal, buffer, buffer_size, 0, (struct sockaddr*)&destAddr, sizeof(destAddr)) < 0)
-        printf("[%s]: Sendto non-local host failed!\n", _MAIN_SERVER);
+	if (sendPackage(sckNonLocal, &destAddr, buffer, buffer_size) < 0)
+        printf("[%s]: Sendto non-local host failed!\n", _API_SERVER);
 	else
-		printf("[%s]: The package was successfully forwarded to non-local host!\n", _MAIN_SERVER);
+		printf("[%s]: The package was successfully forwarded to non-local host!\n", _API_SERVER);
 }
+
+// ----- Auxiliar Functions Below
 
 void printBuffer(char * buffer, int size, bool localNetHost)
 {
 	if (localNetHost)
-		printf("[%s]: A message was received from local server. Buffer size: %d", _MAIN_SERVER, size);
+		printf("[%s]: A message was received from local server. Buffer size: %d", _API_SERVER, size);
 	else
-		printf("[%s]: A message was received from non-LOCAL server. Buffer size: %d\n", _MAIN_SERVER, size);
+		printf("[%s]: A message was received from non-LOCAL server. Buffer size: %d\n", _API_SERVER, size);
 }
 
 void printTrace(struct sockaddr_in src, struct sockaddr_in dest)
@@ -181,7 +132,7 @@ void printTrace(struct sockaddr_in src, struct sockaddr_in dest)
 	char dest_addr[_BUFFER_SIZE];
 	inet_ntop(AF_INET, &(dest.sin_addr), dest_addr, INET_ADDRSTRLEN);
 
-	printf("[%s]: [TRACE] -> host[%s:%d] is sending a package to host[%s:%d]\n", _MAIN_SERVER, src_addr, htons(src.sin_port), dest_addr, htons(dest.sin_port));
+	printf("[%s]: [TRACE] -> host[%s:%d] is sending a package to host[%s:%d]\n", _API_SERVER, src_addr, htons(src.sin_port), dest_addr, htons(dest.sin_port));
 }
 
 char * getPackageContent(char * buffer)

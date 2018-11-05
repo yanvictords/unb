@@ -1,7 +1,13 @@
 #include <pthread.h>
 #include <time.h>
-#include "../essential.h"
-#include "../DetectorTool/analyzer.h"
+
+#include "../../essential.h"
+#include "socket.h"
+#include "../../DetectorTool/analyzer.h"
+
+#define _TCP 0
+#define _UDP 1
+#define _RAW 2
 
 #define _BUFFER_SIZE 65536
 #define _IS_LOCAL true
@@ -13,7 +19,7 @@
 #define _NON_LOCAL_PORT 8000
 
 //===== MODULE
-#define _MAIN_SERVER "MAIN_SERVER"
+#define _API_SERVER "API_SERVER"
 
 //===== VARIABLES
 #define _HEADER_ADDR_SZ sizeof(struct sockaddr)
@@ -26,13 +32,9 @@ struct sockaddr_in sendNonLocalArea;
 int sckLocal;
 int sckNonLocal;
 
-void startServer();
+void startApiServer();
 void * localAreaNetwork(void * arg);
 void * nonLocalAreaNetwork(void * arg);
-void checkSocket(int socket);
-struct sockaddr_in setAddrInfors(unsigned int ipAddress, unsigned int port);
-struct sockaddr_in setCharAddrInfors(char * ipAddress, unsigned int port);
-void bindPort(int sck, struct sockaddr_in addr, int port);
 void localPackageListener(char * buffer);
 void nonLocalPackageListener(char * buffer);
 void localPackageSender(char * buffer, int buffer_size);
