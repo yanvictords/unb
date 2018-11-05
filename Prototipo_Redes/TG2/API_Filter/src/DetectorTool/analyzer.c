@@ -1,32 +1,34 @@
 #include "../../include/DetectorTool/analyzer.h"
 
+int analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
+{
+	return packageAnalyzer(addr, buffer, localNetHost);
+}
+
 int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 {
-	printBegin();
 	if(!localNetHost)
 	{
 		if(getAddrInBlackList(addr))
 		{
 			printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);	
-			printEnd();
-			return _REJECT_ADDR;	
+			return _REJECT_ADDR; // will be removed shortly	
 		}
 	}
-	int protocol =		protocolIdentifier(addr.sin_port); // gets the protocol
+	int protocol =		identifier(addr.sin_port); // gets the protocol
 	
 	if (!protocol) // the protocol isn't able to be analyzed by this framework. The package will be forwarded without problems
 	{
 		printUnknownProtocol(_MODULE_ANALYZER);		
 		printOkStatus(_MODULE_ANALYZER, _OK);	
-		printEnd();
 		return _OK;
 	}
-	int operation =		packageDecoder(protocol, buffer); // gets the type of operation (RESPONSE OR QUERY)
+	int operation =		decoder(protocol, buffer); // gets the type of operation (REQUEST OR RESPONSE)
 
 	// alter the counter if the local server is querying or the outside server (maybe a reflector) is responding
-	if ((localNetHost && operation == _QUERY) || (!localNetHost && operation == _RESPONSE))
+	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE))
 	{
-		int counter = 		packageRegistration(addr.sin_addr, operation, protocol);
+		int counter = 		record(addr.sin_addr, operation, protocol);
 		#ifdef _DEBUGGER_MODE		
 			printAllCounters(protocol);
 		#endif
@@ -37,8 +39,7 @@ int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 	}
 
 	// int this case, the package can be forwarded without problems
-	printOkStatus(_MODULE_ANALYZER, _OK);	
-	printEnd();
+	printOkStatus(_MODULE_ANALYZER, _OK);
 	return _OK;
 }
 
@@ -46,16 +47,18 @@ int analyzePackageCounter(int counter, struct sockaddr_in addr, int protocol)
 {
 	if (counter < _LOW_LIMIT) // if negative counter, probably the server is a reflector
 	{
-		printErrorStatus(_MODULE_ANALYZER, _REF_ATTACK_ALERT, "More replies than requests was detected (Outside->Inside).");
-		printAlert(_MODULE_ANALYZER, addr, protocol, counter);
+		// bool reflector = 	traceRouteAnalyzer(addr); // This module gives us certainty if the host is even a reflector	
+		printErrorStatus(_MODULE_ANALYZER, _REF_ATTACK_ALERT, "Much more replies than requests was detected (Outside->Inside).");
+		// if (reflector) 
+			printAlert(_MODULE_ANALYZER, addr, protocol, counter);
+		// else
+			//	printAlertForgedReflector(_MODULE_ANALYZER, addr, protocol, counter);
 		printPutInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);
-		printEnd();
 		putAddrInBlackList(addr);
 		return _REF_ATTACK_ALERT;
 	}
 
 	printOkStatus(_MODULE_ANALYZER, _OK);
-	printEnd();
 	return _OK; // the package can ben forward without problems
 }
 

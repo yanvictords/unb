@@ -4,13 +4,12 @@
 //===== STATUS
 #define _ANOMALOUS_OP -1
 #define _NORMAL_OP 1
-#define _DROPPED_NODE 0
 
 //===== MODULE
 #define _MODULE_RECORD "RECORD"
 
 //===== BORDERS
-#define _LOW_LIMIT_STOP -10000
+#define _LOW_LIMIT -5
 
 struct COUNT_ADDR
 {
@@ -19,7 +18,7 @@ struct COUNT_ADDR
 	struct COUNT_ADDR * next;
 } *p_dns, *p_ntp, *p_snmp, *p_ssdp;
 
-int packageRegistration(struct in_addr sin_addr, int operation, int protocol);
+int record(struct in_addr sin_addr, int operation, int protocol);
 int updateCountersList(struct in_addr sin_addr, int operation, int protocol);
 bool mustKeepHostOnTheList(struct COUNT_ADDR * listAux);
 void setProtocolRoot(int protocol, struct COUNT_ADDR * root);

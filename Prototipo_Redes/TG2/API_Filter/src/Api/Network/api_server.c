@@ -1,5 +1,10 @@
 #include "../../../include/Api/Network/api_server.h"
 
+void apiServer()
+{
+	startApiServer();
+}
+
 void startApiServer()
 {
 	printf("[%s]: Starting Api server...\n", _API_SERVER);
@@ -20,12 +25,12 @@ void startApiServer()
 
 void * localAreaNetwork(void * arg)
 {
-	sckLocal = createSocket(_UDP);
+	sckLocal =		createSocket(_UDP);
 	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 	struct sockaddr_in aux;
 	
-	rcvLocalArea = setAddrInfors(INADDR_ANY, _LOCAL_PORT);
-	sendLocalArea = setCharAddrInfors(_LOCAL_IP_ADDRESS, _SERVER_LOCAL_PORT);
+	rcvLocalArea =		setAddrInfors(INADDR_ANY, _LOCAL_PORT);
+	sendLocalArea =		setCharAddrInfors(_LOCAL_IP_ADDRESS, _SERVER_LOCAL_PORT);
 	bindPort(sckLocal, rcvLocalArea);
 
 	while (true)
@@ -38,10 +43,10 @@ void * localAreaNetwork(void * arg)
 
 void * nonLocalAreaNetwork(void * arg)
 {
-	sckNonLocal = createSocket(_UDP);
+	sckNonLocal =		createSocket(_UDP);
 	char buffer[_BUFFER_SIZE + _BUFFER_SIZE];
 
-	rcvNonLocalArea = setAddrInfors(INADDR_ANY, _NON_LOCAL_PORT);
+	rcvNonLocalArea =		setAddrInfors(INADDR_ANY, _NON_LOCAL_PORT);
 	bindPort(sckNonLocal, rcvNonLocalArea);
 
 	while (true)
@@ -57,7 +62,7 @@ void localPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvLocalArea);	
 
-	if ((buffer_size = rcvPackage(sckLocal, &rcvLocalArea, buffer, _BUFFER_SIZE)) <= 0)
+	if ((buffer_size =		rcvPackage(sckLocal, &rcvLocalArea, buffer, _BUFFER_SIZE)) <= 0)
 		printf("[%s]: Recvfrom local host failed!\n", _API_SERVER);
 	else
 	{
@@ -71,7 +76,7 @@ void localPackageListener(char * buffer)
 		struct sockaddr_in hostDest = getHeaderDestAddr(buffer);
 		printHost(&hostDest);
 
-		int status = packageAnalyzer(hostDest, bufferContent, _IS_LOCAL);
+		int status =		detectorTool(hostDest, bufferContent, _IS_LOCAL);
 		nonLocalPackageSender(bufferContent, buffer_size, hostDest);
 	}
 }
@@ -81,7 +86,7 @@ void nonLocalPackageListener(char * buffer)
 	int buffer_size;
 	int sizeAddr = sizeof(rcvNonLocalArea);
 
-	if ((buffer_size = rcvPackage(sckNonLocal, &rcvNonLocalArea, buffer, _BUFFER_SIZE+_BUFFER_SIZE)) <= 0)
+	if ((buffer_size =		rcvPackage(sckNonLocal, &rcvNonLocalArea, buffer, _BUFFER_SIZE+_BUFFER_SIZE)) <= 0)
 	    printf("[%s]: Recvfrom non-local host failed!\n", _API_SERVER);
 	else
 	{
@@ -89,9 +94,11 @@ void nonLocalPackageListener(char * buffer)
 		
 		buffer_size += _HEADER_ADDR_SZ;
 
-		int status = packageAnalyzer(rcvNonLocalArea, buffer, _IS_NON_LOCAL);
+		int status =		detectorTool(rcvNonLocalArea, buffer, _IS_NON_LOCAL);
 		if (status == _OK)
 			localPackageSender(putHeaderDestAddr(buffer, &rcvNonLocalArea), buffer_size);
+		else
+			printf("[%s]: The package was dropped.\n", _API_SERVER);
 	}
 }
 

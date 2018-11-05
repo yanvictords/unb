@@ -1,5 +1,10 @@
 #include "../../include/DetectorTool/decoder.h"
 
+int decoder(int protocol, char * buffer)
+{
+	return packageDecoder(protocol, buffer);
+}
+
 int packageDecoder(int protocol,  char * buffer)
 {
 	int operation;
@@ -30,10 +35,10 @@ int getDnsQueryType(char * buffer)
 	struct DNS_HEADER *dns;
     dns = (struct DNS_HEADER*) buffer;
 
-	if((int) dns->qr == 1)
+	if((int) dns->qr == _DNS_RESPONSE)
 		return _RESPONSE;
-	else if((int) dns->qr == 0)
-		return _QUERY;
+	else if((int) dns->qr == _DNS_REQUEST)
+		return _REQUEST;
 
 	return _UNKNOWN_QUERY_TYPE;
 }

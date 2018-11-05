@@ -13,5 +13,6 @@ void printPutInBlackListStatus(char * module, int status, struct sockaddr_in add
 void printFileNotFound(char * module, char * file);
 void printProtocolName(char * module, int protocol);
 void printAlert(char * module, struct sockaddr_in addr, int protocol, int counter);
+void printAlertForgedReflector(char * module, struct sockaddr_in addr, int protocol, int counter);
 char * getProtocolName(int protocol);
 void printTime();

@@ -1,5 +1,10 @@
 #include "../../include/DetectorTool/identifier.h"
 
+int identifier(unsigned short port)
+{
+	return protocolIdentifier(port);
+}
+
 int protocolIdentifier(unsigned short port)
 {
 	int protocol = identifyByPort(htons(port));
@@ -12,7 +17,7 @@ int identifyByPort(int port)
 	switch (port)	
 	{
 		case _DNS_PORT:
-		case 53:
+		case 53: // just for testing. Should be removed shortly
 			return _DNS;
 		case _NTP_PORT:
 			return _NTP;		
@@ -20,8 +25,8 @@ int identifyByPort(int port)
 			return _SNMP;
 		case _SSDP_PORT:
 			return _SSDP;
-//		default:  // just for testings
-//			return _DNS;
+		// default:  just for testing. Should be removed shortly
+			// return _DNS;
 	}
 	return _UNKNOWN_PROTOCOL;
 }

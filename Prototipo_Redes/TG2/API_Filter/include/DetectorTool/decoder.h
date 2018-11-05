@@ -3,9 +3,13 @@
 #include "ui.h"
 
 //===== PACKAGES
-#define _QUERY 1
+#define _REQUEST 1
 #define _RESPONSE -1
 #define _UNKNOWN_QUERY_TYPE 0
+
+//===== LIST OF QUERY TYPES BY PROTOCOLS
+#define _DNS_REQUEST 0
+#define _DNS_RESPONSE 1
 
 #define _1BIT 1
 #define _4BITS 4
@@ -33,6 +37,7 @@ struct DNS_HEADER
     byte_2 ar_count; 
 };
 
+int decoder(int protocol,  char * buffer);
 int packageDecoder(int protocol,  char * buffer);
 int getDnsQueryType(char * buffer);
 int getNtpQueryType(char * buffer);

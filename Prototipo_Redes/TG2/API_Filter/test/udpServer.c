@@ -6,6 +6,7 @@
 
 int main()
 {
+	system("@cls||clear");
 	startServer();
 	return 0;
 }

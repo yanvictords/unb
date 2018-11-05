@@ -4,9 +4,10 @@ int main()
 {
 	system("@cls||clear");
 	printf("\n*************************************************\n");
-	printf("* Welcome to API Filter! Created by: Yan Victor *\n", _API_MAIN);
+	printf("* Welcome to API Filter! Created by: Yan Victor *\n");
 	printf("*************************************************\n\n");
 	
-	startApiServer();
+	apiServer();
+
 	return 0;
 }

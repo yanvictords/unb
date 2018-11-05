@@ -3,7 +3,7 @@
 
 #include "../../essential.h"
 #include "socket.h"
-#include "../../DetectorTool/analyzer.h"
+#include "../../DetectorTool/detectorTool.h"
 
 #define _TCP 0
 #define _UDP 1
@@ -32,6 +32,7 @@ struct sockaddr_in sendNonLocalArea;
 int sckLocal;
 int sckNonLocal;
 
+void apiServer();
 void startApiServer();
 void * localAreaNetwork(void * arg);
 void * nonLocalAreaNetwork(void * arg);

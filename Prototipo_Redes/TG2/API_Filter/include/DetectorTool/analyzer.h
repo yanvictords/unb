@@ -14,7 +14,6 @@
 #define _REJECT_ADDR 0
 
 //===== BORDERS
-#define _LOW_LIMIT -5
 #define _HIGH_LIMIT 500
 
 //===== MODULE
@@ -23,6 +22,7 @@
 //===== FILE
 #define _BLACK_LIST_FILE "blacklist.txt"
 
+int analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost);
 int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost);
 int analyzePackageCounter(int counter, struct sockaddr_in addr, int protocol);
 bool getAddrInBlackList(struct sockaddr_in addr);

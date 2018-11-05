@@ -45,14 +45,14 @@ void printGetInBlackListStatus(char * module, int status, struct sockaddr_in add
 {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
-	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n[ACTION] All packets are being BLOCKED!\n", module, status, node_addr);
+	printf("[%s]: Status %d. [BLACKLIST] The host %s was found in the blacklist.\n@Action: All packets are being BLOCKED!\n", module, status, node_addr);
 }
 
 void printPutInBlackListStatus(char * module, int status, struct sockaddr_in addr)
 {
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
-	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n[ACTION] All packets will be BLOCKED from now on!\n", module, status, node_addr);
+	printf("[%s]: Status %d. [BLACKLIST] The host %s was listed in the blacklist.\n@Action: All packets will be BLOCKED from now on!\n", module, status, node_addr);
 }
 
 void printFileNotFound(char * module, char * file)
@@ -72,6 +72,18 @@ void printAlert(char * module, struct sockaddr_in addr, int protocol, int counte
 
 	printf("\n************************ALERT****************************\n");
 	printf("[%s]: The non-local server is being a reflector candidate!\n", module);
+	printf("Host Ip Address: %s:%d ~ %s protocol package\n", node_addr, htons(addr.sin_port), getProtocolName(protocol));
+	printf("Counter: %d\n", counter);
+	printf("************************ALERT****************************\n\n");
+}
+
+void printAlertForgedReflector(char * module, struct sockaddr_in addr, int protocol, int counter)
+{
+	char node_addr[4096];
+	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
+
+	printf("\n************************ALERT****************************\n");
+	printf("[%s]: The non-local server was detected like a forged reflector!\n", module);
 	printf("Host Ip Address: %s:%d ~ %s protocol package\n", node_addr, htons(addr.sin_port), getProtocolName(protocol));
 	printf("Counter: %d\n", counter);
 	printf("************************ALERT****************************\n\n");

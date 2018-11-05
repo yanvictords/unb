@@ -1,6 +1,6 @@
 #include "../../include/DetectorTool/record.h"
 
-int packageRegistration(struct in_addr sin_addr, int operation, int protocol)
+int record(struct in_addr sin_addr, int operation, int protocol)
 {
 	return updateCountersList(sin_addr, operation, protocol);
 }
@@ -41,10 +41,12 @@ int updateCountersList(struct in_addr sin_addr, int operation, int protocol)
 				if (predecessor != NULL)
 					predecessor->next = listAux->next;
 				else // if the node which will be dropped is the root
-					setProtocolRoot(protocol, NULL);
+					setProtocolRoot(protocol, listAux->next);
 
+				int newCounter = listAux->count;
 				free(listAux);
-				return _DROPPED_NODE;
+
+				return newCounter;
 			}
 
 			setProtocolRoot(protocol, root);
@@ -79,7 +81,7 @@ bool mustKeepHostOnTheList(struct COUNT_ADDR * listAux)
 		return false;
 	}
 
-	if (listAux->count < _LOW_LIMIT_STOP) // if the counter demonstrate a characteristic of DDoS attack by reflection
+	if (listAux->count < _LOW_LIMIT) // if the counter demonstrate a characteristic of DDoS attack by reflection
 	{
 		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. The counter negative value is less than allowed.");
 		return false;
