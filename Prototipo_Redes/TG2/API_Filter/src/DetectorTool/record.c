@@ -1,5 +1,8 @@
 #include "../../include/DetectorTool/record.h"
 
+#include "../../include/DetectorTool/ui.h"
+#include "../../include/DetectorTool/identifier.h"
+
 int record(struct in_addr sin_addr, int operation, int protocol)
 {
 	return updateCountersList(sin_addr, operation, protocol);

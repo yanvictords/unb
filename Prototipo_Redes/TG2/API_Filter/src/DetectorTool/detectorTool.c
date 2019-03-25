@@ -1,11 +1,14 @@
 #include "../../include/DetectorTool/detectorTool.h"
 
-int detectorTool(struct sockaddr_in addr, char * buffer, bool localNetHost)
+#include "../../include/DetectorTool/ui.h"
+#include "../../include/DetectorTool/analyzer.h"
+
+int detectorTool(struct sockaddr_in addr, char * buffer)
 {
 	int status;
 
 	printBegin();
-	status =		analyzer(addr, buffer, localNetHost);
+	status =		analyzer(addr, buffer, false);
 	printEnd();
 	
 	return status;

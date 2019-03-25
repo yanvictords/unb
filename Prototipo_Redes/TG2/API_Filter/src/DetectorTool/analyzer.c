@@ -1,5 +1,10 @@
 #include "../../include/DetectorTool/analyzer.h"
 
+#include "../../include/DetectorTool/ui.h"
+#include "../../include/DetectorTool/record.h"
+#include "../../include/DetectorTool/decoder.h"
+#include "../../include/DetectorTool/identifier.h"
+
 int analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 {
 	return packageAnalyzer(addr, buffer, localNetHost);

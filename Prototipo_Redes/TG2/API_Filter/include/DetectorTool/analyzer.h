@@ -1,10 +1,6 @@
-#include <arpa/inet.h>
+#include "../../include/essential.h"
 
-#include "../essential.h"
-#include "decoder.h"
-#include "identifier.h"
-#include "record.h"
-#include "ui.h"
+#include <stdbool.h>
 
 #define _DEBUGGER_MODE
 

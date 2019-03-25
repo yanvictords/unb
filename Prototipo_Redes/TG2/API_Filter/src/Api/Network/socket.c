@@ -1,18 +1,27 @@
 #include "../../../include/Api/Network/socket.h"
 
+#include <netdb.h>
+#include <inttypes.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+
 int createSocket(int type)
 {
 	int sck;
+	char sckTypeName[4];
 	
 	switch (type) {
 		case _TCP:
 			sck = socket(AF_INET, SOCK_STREAM, 0);
+			strcpy(sckTypeName, "TCP");
 			break;
 		case _UDP:
 			sck = socket(AF_INET, SOCK_DGRAM, 0);
+			strcpy(sckTypeName, "UDP");
 			break;
-		case _RAW:
-			sck = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
+		case _RAW_UDP:
+			sck = socket(AF_INET, SOCK_RAW, IPPROTO_UDP);
+			strcpy(sckTypeName, "RAW");
 			break;
 	}
 
@@ -20,11 +29,23 @@ int createSocket(int type)
 	{
 		printf("[%s]: There was a problem creating the socket.\n", _SOCKET);
 		exit(1);
-	}
-	// else
-		// printf("[%s]: Socket was successfully created!\n", _SOCKET);
+	} else
+		printf("[%s]: Socket %s was successfully created!\n", _SOCKET, sckTypeName);
 	
 	return sck;
+}
+
+void closeSocket(int * socket)
+{
+	close(*socket);
+}
+
+void setIpHeaderInSocket(int socket)
+{
+    int one = 1;
+    const int *val = &one;
+    if (setsockopt (socket, IPPROTO_IP, IP_HDRINCL, val, sizeof (one)) < 0)
+      printf ("Warning: Cannot set HDRINCL!\n");
 }
 
 void bindPort(int sck, struct sockaddr_in addr)
@@ -38,35 +59,13 @@ void bindPort(int sck, struct sockaddr_in addr)
 		printf("[%s]: Port %d was successfully opened! Listening...\n", _SOCKET, htons(addr.sin_port));
 }
 
-ssize_t sendPackage(int sockfd, struct sockaddr_in * host, void * buf, int szBuf)
+ssize_t listenToPackages(int socket, char *buffer, int bufferSize, struct sockaddr_in source)
 {
-	return sendto(sockfd, buf, szBuf, 0, (struct sockaddr*) host, sizeof(*host));
+	int sizeAddr = sizeof(source);
+	return recvfrom(socket, buffer, bufferSize, 0, (struct sockaddr*)&source, &sizeAddr);
 }
 
-ssize_t rcvPackage(int sockfd, struct sockaddr_in * host, void *buf, int szBuf)
+ssize_t sendPackage(int socket, char * buffer, int bufferSize, struct sockaddr_in destiny)
 {
-	int sizeHost = sizeof(host);
-	return recvfrom(sockfd, buf, szBuf, 0, (struct sockaddr*) host, &sizeHost);
-}
-
-struct sockaddr_in setAddrInfors(unsigned int ipAddress, unsigned int port)
-{
-	struct sockaddr_in addr;
-	addr.sin_family = AF_INET; 
-	addr.sin_port = htons(port);
-	addr.sin_addr.s_addr = htonl(ipAddress);
-	memset(addr.sin_zero, 0x0, 8);	
-	
-	return addr;
-}
-
-struct sockaddr_in setCharAddrInfors(char * ipAddress, unsigned int port)
-{
-	struct sockaddr_in addr;
-	addr.sin_family = AF_INET; 
-	addr.sin_port = htons(port);
-	addr.sin_addr.s_addr = inet_addr(ipAddress);
-	memset(addr.sin_zero, 0x0, 8);	
-	
-	return addr;
+	return sendto(socket, buffer, bufferSize, 0, (struct sockaddr*)&destiny, sizeof(destiny));
 }

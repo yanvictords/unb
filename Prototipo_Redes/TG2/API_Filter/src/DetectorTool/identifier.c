@@ -1,5 +1,7 @@
 #include "../../include/DetectorTool/identifier.h"
 
+#include "../../include/DetectorTool/ui.h"
+
 int identifier(unsigned short port)
 {
 	return protocolIdentifier(port);
@@ -17,7 +19,7 @@ int identifyByPort(int port)
 	switch (port)	
 	{
 		case _DNS_PORT:
-		case 53: // just for testing. Should be removed shortly
+		case 503: // just for testing. Should be removed shortly
 			return _DNS;
 		case _NTP_PORT:
 			return _NTP;		

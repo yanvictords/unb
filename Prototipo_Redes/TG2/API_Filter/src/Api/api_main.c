@@ -1,5 +1,7 @@
 #include "../../include/Api/api_main.h"
 
+#include "../../include/Api/Network/api_server.h"
+
 int main()
 {
 	system("@cls||clear");

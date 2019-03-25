@@ -1,8 +1,4 @@
-#include <pthread.h>
-#include <time.h>
-
-#include "../essential.h"
-#include "./Network/api_server.h"
+#include "../../include/essential.h"
 
 //===== MODULE
 #define _API_MAIN "API_MAIN"

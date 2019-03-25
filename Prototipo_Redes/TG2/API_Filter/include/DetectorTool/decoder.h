@@ -1,6 +1,4 @@
-#include "../essential.h"
-#include "identifier.h"
-#include "ui.h"
+#include "../../include/essential.h"
 
 //===== PACKAGES
 #define _REQUEST 1

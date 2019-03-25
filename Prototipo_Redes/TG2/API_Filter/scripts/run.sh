@@ -1,5 +1,5 @@
 make --directory ../
 cd ../
-./api
+sudo ./api
 cd scripts
 bash clean.sh

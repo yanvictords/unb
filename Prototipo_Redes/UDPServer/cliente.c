@@ -6,11 +6,12 @@
 
 struct sockaddr_in remoto;
 
-#define PORTA 8000
+#define PORTA 9000
 #define _IP "127.0.0.1"
 #define LEN 1000000
 #define IPARRAYLEN 20
 #define QUERYMAXLEN 4096
+
 typedef unsigned char char_type;
 char_type* parse_result(char_type* result, int query_len, char_type* ip) {
     /*int offset = -1;

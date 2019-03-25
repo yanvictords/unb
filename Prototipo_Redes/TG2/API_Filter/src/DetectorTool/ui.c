@@ -1,8 +1,22 @@
 #include "../../include/DetectorTool/ui.h"
 
+#include <time.h>
+
 void printBegin()
 {
 	printf("\n============== DETECTOR MODULE ==============\n");
+	/*PRINT_COLOR(RED, "\ntestando");
+	PRINT_COLOR(BOLD_RED, "testando");
+	PRINT_COLOR(GREEN, "testando");
+	PRINT_COLOR(BOLD_GREEN, "testando");
+	PRINT_COLOR(YELLOW, "testando");
+	PRINT_COLOR(BOLD_YELLOW, "testando");
+	PRINT_COLOR(BLUE, "testando");
+	PRINT_COLOR(BOLD_BLUE, "testando");
+	PRINT_COLOR(CYAN, "testando");
+	PRINT_COLOR(BOLD_CYAN, "testando");
+	PRINT_COLOR(MAGENTA, "testando");
+	PRINT_COLOR(BOLD_MAGENTA, "testando\n");*/
 }
 
 void printEnd()
@@ -70,11 +84,11 @@ void printAlert(char * module, struct sockaddr_in addr, int protocol, int counte
 	char node_addr[4096];
 	inet_ntop(AF_INET, &(addr.sin_addr), node_addr, INET_ADDRSTRLEN);
 
-	printf("\n************************ALERT****************************\n");
+	PRINT_COLOR(RED, "\n************************ ALERT ****************************\n");
 	printf("[%s]: The non-local server is being a reflector candidate!\n", module);
 	printf("Host Ip Address: %s:%d ~ %s protocol package\n", node_addr, htons(addr.sin_port), getProtocolName(protocol));
 	printf("Counter: %d\n", counter);
-	printf("************************ALERT****************************\n\n");
+	PRINT_COLOR(RED, "************************ ALERT ****************************\n\n");
 }
 
 void printAlertForgedReflector(char * module, struct sockaddr_in addr, int protocol, int counter)

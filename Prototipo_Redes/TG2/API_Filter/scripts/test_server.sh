@@ -1,5 +1,5 @@
 cd ../test
 gcc dnsPackage.c udpServer.c -o s -pthread
-./s
+sudo ./s
 cd ../scripts
 bash clean.sh

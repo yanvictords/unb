@@ -1,5 +1,8 @@
 #include "../../include/DetectorTool/decoder.h"
 
+#include "../../include/DetectorTool/ui.h"
+#include "../../include/DetectorTool/identifier.h"
+
 int decoder(int protocol, char * buffer)
 {
 	return packageDecoder(protocol, buffer);
@@ -34,7 +37,6 @@ int getDnsQueryType(char * buffer)
 {
 	struct DNS_HEADER *dns;
     dns = (struct DNS_HEADER*) buffer;
-
 	if((int) dns->qr == _DNS_RESPONSE)
 		return _RESPONSE;
 	else if((int) dns->qr == _DNS_REQUEST)
