@@ -6,11 +6,11 @@
 #include "dns_decoder.h"
 
 struct sockaddr_in servidor;
-#define PORTA 2000
+#define PORTA 9000
 #define LEN 65536
 int main()
 {
-	int sck_servidor = socket(AF_INET, SOCK_RAW, IPPROTO_UDP); // AF_INET = protocolo usado
+	int sck_servidor = socket(AF_INET, SOCK_DGRAM, 0); // AF_INET = protocolo usado // AF_INET = protocolo usado
 	int tam_buff;
 	char buffer[LEN];
 

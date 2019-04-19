@@ -19,7 +19,6 @@ int identifyByPort(int port)
 	switch (port)	
 	{
 		case _DNS_PORT:
-		case 503: // just for testing. Should be removed shortly
 			return _DNS;
 		case _NTP_PORT:
 			return _NTP;		

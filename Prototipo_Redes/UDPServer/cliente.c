@@ -3,51 +3,26 @@
 // CLIENTE DE TESTE 
 
 #include "refdec.h"
-
+#include "../TG2/API_Filter/include/Api/Network/utils.h"
 struct sockaddr_in remoto;
+struct sockaddr_in source;
 
-#define PORTA 9000
-#define _IP "127.0.0.1"
-#define LEN 1000000
+#define PORTA 10000
+#define PORTA_ORIGEM 4000
+#define _IP "192.168.25.6"
+// #define _IP "192.168.25.18"
+#define LEN 4096
 #define IPARRAYLEN 20
 #define QUERYMAXLEN 4096
 
-typedef unsigned char char_type;
-char_type* parse_result(char_type* result, int query_len, char_type* ip) {
-    /*int offset = -1;
 
-    //offset = query_len + 32;
-    int count = 0;
-    while(count < 3) {
-        offset++;
-        if(result[offset] == 0x00C0) {
-            count++;
-        }
-    }
+void printHost(struct sockaddr_in * host)
+{
+	char node_addr[4096];
+	inet_ntop(AF_INET, &(host->sin_addr), node_addr, INET_ADDRSTRLEN);
 
-    offset += 32;*/
-
-    int offset = -1;
-    int found = 0;
-    while(found == 0) {
-        offset++;
-        if(result[offset] == 0x00C0) {
-	printf("ok\n");
-            if(result[offset + 3] == 0x0001 && result[offset + 2] == 0x0000) {
-                offset = offset + 12;
-                found = 1;
-            }
-        }
-    }
-
-    sprintf(ip, "%d.%d.%d.%d\n", 
-    result[offset], result[offset + 1], 
-    result[offset + 2], result[offset + 3]);
-
-    return ip;
+	printf("\nPrint Host: [%s:%d]\n", node_addr, htons(host->sin_port));
 }
-
-
 int main()
 {
 
@@ -56,10 +31,11 @@ int main()
 	printf("================ CLIENTE - UDP =================\n\n");
 
 	int sockfd = socket(AF_INET, SOCK_DGRAM, 0); //UDP
+
 	int len = sizeof(remoto);
 	int slen;
-	char_type* buffer;
-	buffer = (char_type*)malloc((QUERYMAXLEN) * sizeof(char_type));
+	unsigned char* buffer;
+	buffer = (unsigned char*)malloc((QUERYMAXLEN) * sizeof(unsigned char));
 	if(sockfd == -1)
 	{
 		perror("O socket nao foi criado com sucesso!\n");
@@ -70,6 +46,15 @@ int main()
 		printf("O socket foi criado com sucesso!\n");
 	}
 
+	source.sin_family = AF_INET;
+	source.sin_port = htons(PORTA_ORIGEM);
+	memset(source.sin_zero, 0x0, 8);
+
+   if (bind(sockfd, (struct sockaddr *) &source, sizeof(source)) < 0) {
+        perror("bind");
+        exit(1);
+    }
+
 	remoto.sin_family = AF_INET;
 	remoto.sin_port = htons(PORTA);
 	remoto.sin_addr.s_addr = inet_addr(_IP);
@@ -77,10 +62,10 @@ int main()
 
 	struct sockaddr *cast_remoto = (struct sockaddr *) &remoto;
 	int tam_addr_remoto = sizeof(remoto);
-    char_type* ip;
+    unsigned char* ip;
 	while(1)
 	{
-		printf("Lendo arquivo\n");
+//		printf("Lendo arquivo\n");
 //		fread(buffer, (QUERYMAXLEN) * sizeof(char_type), 1, arq);
 
 		printf("Enviando a palavra teste\n");
@@ -95,10 +80,11 @@ int main()
 		{
 			buffer[slen] = '\0';
 		    //ip = (char_type*)malloc(IPARRAYLEN * sizeof(char_type));
-			printf("Resposta do servidor: \n%s\n", buffer);
-			
+			printf("buffer: %s\n", buffer);
+			printHost((struct sockaddr_in *) cast_remoto);
 		}
-		break;
+		// break;
+		getchar();
 	}
 
 

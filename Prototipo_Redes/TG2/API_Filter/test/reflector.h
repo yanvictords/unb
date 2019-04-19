@@ -13,7 +13,7 @@
 
 #define _DNS_PORT 503
 
-#define _VICTIM_PORT 9000
+#define _VICTIM_PORT 8000
 #define _VICTIM_ADDRESS "127.0.0.1"
 
 #define _LEN 65500

@@ -3,13 +3,13 @@
 //Dated : 29/4/2009
  
 //Header Files
-#include<stdio.h> //printf
-#include<string.h>    //strlen
-#include<stdlib.h>    //malloc
-#include<sys/socket.h>    //you know what this is for
-#include<arpa/inet.h> //inet_addr , inet_ntoa , ntohs etc
-#include<netinet/in.h>
-#include<unistd.h>    //getpid
+#include <stdio.h> //printf
+#include <string.h>    //strlen
+#include <stdlib.h>    //malloc
+#include <sys/socket.h>    //you know what this is for
+#include <arpa/inet.h> //inet_addr , inet_ntoa , ntohs etc
+#include <netinet/in.h>
+#include <unistd.h>    //getpid
  #include "inttypes.h"
 #include "stdbool.h"
 #include "dns_decoder.h"
@@ -100,14 +100,14 @@ int main( int argc , char *argv[])
     get_dns_servers();
      
     //Get the hostname from the terminal
-while(1){
-    //printf("Enter Hostname to Lookup : ");
-	//scanf("%s" , hostname);
-  	strcpy(hostname, "www.twitter.com\0");   
-    //Now get the ip of this hostname , A record
-	ngethostbyname(hostname , T_A);
+	while(1){
+    	//printf("Enter Hostname to Lookup : ");
+		//scanf("%s" , hostname);
+  		strcpy(hostname, "www.twitter.com\0");   
+    	//Now get the ip of this hostname , A record
+		ngethostbyname(hostname , T_A);
 	 
-}
+	}
     return 0;
 }
  
@@ -123,7 +123,7 @@ void ngethostbyname(unsigned char *host , int query_type)
     struct RES_RECORD answers[20],auth[20],addit[20]; //the replies from the DNS server
     struct sockaddr_in dest;
  
-    struct DNS_HEADER *dns = NULL;
+    struct DNS_H *dns = NULL;
     struct QUESTION *qinfo = NULL;
  
     printf("\n===> Resolving %s\n" , host);
@@ -132,17 +132,13 @@ void ngethostbyname(unsigned char *host , int query_type)
 	int cli = socket(AF_INET , SOCK_DGRAM , IPPROTO_UDP);
 
     dest.sin_family = AF_INET;
-    dest.sin_port = htons(2000);
-	char dnss[100];
-	
-	strcpy(dnss, "127.0.0.1");
-	
-	//printf("dns: %s\n\n", dnss);
-    dest.sin_addr.s_addr = inet_addr(dnss); //dns servers
-
+    dest.sin_port = htons(_DNS_PORT);
+    dest.sin_addr.s_addr = inet_addr(_FINAL_SERVER); //dns servers
+	memset(dest.sin_zero, 0x0, 8);
+	printf("\n[%s:%d]\n", _FINAL_SERVER, _DNS_PORT);
 
     //Set the DNS structure to standard queries
-    dns = (struct DNS_HEADER *)&buf;
+    dns = (struct DNS_H *)&buf;
  
     dns->id = (unsigned short) htons(getpid());
     dns->qr = 0; //This is a query
@@ -174,24 +170,20 @@ void ngethostbyname(unsigned char *host , int query_type)
 	int sint = sizeof(unsigned short);
 	int schar = sizeof(unsigned char);
 
- 	printf("\nSending Packet...: %s\n", (char *) buf);
-	/*int k;
-	for(k=0; k< 65535; k++)
-		printf("%c", buf[k]);
-	printf("\n==================\n");*/
+ 	printf("\nSending Packet...\n");
+
     if( sendto(s,(char*)buf,sizeof(struct DNS_H) + (strlen((const char*)qname)+1) + sizeof(struct QUESTION),0,(struct sockaddr*)&dest,sizeof(dest)) < 0)
     {
         perror("sendto failed");
     }
     //Receive the answer
-     printf("nao chegou\n");
-    i = sizeof dest;
-    if(recvfrom (s,(char*)buf , 65536 , 0 , (struct sockaddr*)&dest , (socklen_t*)&i ) < 0)
+    i = sizeof(dest);
+    if(recvfrom (s, buf, _LEN , 0 , (struct sockaddr*)&dest , (socklen_t*)&i) < 0)
     {
-        perror("recvfrom failed");
+       perror("recvfrom failed");
     }
  	printf("\nRecibo: %s\n", (char*) buf);
-	
+
     dns = (struct DNS_H*) buf;
 
     //move ahead of the dns header and the query field

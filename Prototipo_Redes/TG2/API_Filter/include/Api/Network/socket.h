@@ -5,13 +5,14 @@
 #define _TCP 0
 #define _UDP 1
 #define _RAW_UDP 2
-
+#define _RAW_ETH 3
 //===== MODULE
 #define _SOCKET "SOCKET"
 
 int createSocket(int type);
 void closeSocket(int * socket);
 void setIpHeaderInSocket(int socket);
+void setEthHeaderInSocket(int socket, char * interface);
 void bindPort(int sck, struct sockaddr_in addr);
-ssize_t listenToPackages(int socket, char *buffer, int bufferSize, struct sockaddr_in source);
-ssize_t sendPackage(int socket, char * buffer, int bufferSize, struct sockaddr_in destiny);
+ssize_t listenToPackages(int socket, char *buffer, int bufferSize, struct sockaddr_in * source);
+ssize_t sendPackage(int socket, char * buffer, struct sockaddr_in destiny);

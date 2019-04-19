@@ -4,7 +4,8 @@
 
 void printBegin()
 {
-	printf("\n============== DETECTOR MODULE ==============\n");
+	printf("\n================== DETECTOR MODULE ==================\n");
+	printf("|Analyzing packet...\n");
 	/*PRINT_COLOR(RED, "\ntestando");
 	PRINT_COLOR(BOLD_RED, "testando");
 	PRINT_COLOR(GREEN, "testando");
@@ -22,7 +23,7 @@ void printBegin()
 void printEnd()
 {
 	printTime();
-	printf("\n=============== END - DETECTOR MODULE ===============\n\n\n");
+	printf("\n=============== END - DETECTOR MODULE ===============\n\n");
 }
 
 void printQueryType(char * module, int operation)

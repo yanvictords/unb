@@ -15,7 +15,7 @@ void startAttack()
 {
 	sck = socket(AF_INET, SOCK_DGRAM, 0);
 	checkSocket();
-	bindPort();
+	bindPort(); 
 
 	toAttack();
 }

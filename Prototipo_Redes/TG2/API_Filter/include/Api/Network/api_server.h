@@ -12,6 +12,8 @@
 //===== MODULE
 #define _API_SERVER "API_SERVER"
 
+#define _API_INTERFACE "wlp2s0"
+
 struct sockaddr_in _sourceAddr;
 struct sockaddr_in _destinyAddr;
 int _sckRaw;

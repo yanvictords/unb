@@ -4,9 +4,6 @@
 #include "../../../include/Api/Network/socket.h"
 #include "../../../include/DetectorTool/detectorTool.h"
 
-#include <pthread.h>
-#include <time.h>
-
 void apiServer()
 {
 	// getNetworkConfInformations();
@@ -20,26 +17,25 @@ void startApiServer()
 	long bufferSize;
 
 	printf("[%s]: Starting Api server...\n", _API_SERVER);
-	_sckRaw = createSocket(_RAW_UDP);
+	_sckRaw = createSocket(_RAW_ETH);
 	_sckUdp = createSocket(_UDP);
 
-	setIpHeaderInSocket(_sckRaw);
+	// setEthHeaderInSocket(_sckRaw, "eth0");
 
-	_sourceAddr = mountCharAddrInfors("127.0.0.1", htons(8080));
+	_sourceAddr = mountAddr(INADDR_ANY, htons(9000));
+	bindPort(_sckUdp, _sourceAddr);
 
 	while(_running)
 	{
 		memset(buffer, 0x0, _BUFFER_SIZE);
-
-		if(bufferSize = listenToPackages(_sckRaw, buffer, _BUFFER_SIZE, _sourceAddr) > 0)
-		{	
-			getSrcDestAddrFromHeaders(buffer, &_sourceAddr, &_destinyAddr);
-			if(ntohs(_destinyAddr.sin_port) == 9000)
+		if(bufferSize = listenToPackages(_sckRaw, buffer, _BUFFER_SIZE, &_destinyAddr) > 0)
+		{	 
+			if(!ifLocalIpAddress(_sckRaw, buffer) && ifIsUdpProtocol(buffer))
 			{
-				printAllPacketContent(buffer);
-				detectorTool(_sourceAddr, getPayload(buffer));
-				_destinyAddr = mountAddr(_destinyAddr.sin_addr.s_addr, _sourceAddr.sin_port);
-				sendPackage(_sckUdp, "Deu certo yan victor dos santos!\n", _LOW_BUFFER_SIZE, _destinyAddr);
+				printAllPacketContent(buffer);	
+				_destinyAddr = mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer));
+				detectorTool(_destinyAddr, getPayload(buffer), ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer))));
+				// sendPackage(_sckUdp, getPayload(buffer), _destinyAddr);
 			}
 		}
 	}

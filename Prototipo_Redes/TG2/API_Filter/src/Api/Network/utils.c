@@ -1,5 +1,14 @@
 #include "../../../include/Api/Network/utils.h"
 
+char * convertAddrToChar(struct in_addr ipAddr)
+{
+	char *ip = (char *) malloc(24);
+	strcpy(ip, (char *)inet_ntoa(ipAddr));
+	return ip;
+}
+
+// ------------ MOUNT's
+
 struct sockaddr_in mountAddr(unsigned long ipAddr, unsigned int port){
 	struct sockaddr_in addr;
 	addr.sin_addr.s_addr = ipAddr;
@@ -21,108 +30,98 @@ struct sockaddr_in mountCharAddrInfors(char * ipAddress, unsigned int port)
 	return addr;
 }
 
-void getSrcDestAddrFromHeaders(char * buffer, struct sockaddr_in * source, struct sockaddr_in * destiny)
-{
-	struct iphdr *ip_packet = (struct iphdr *)buffer;
-	struct udphdr *udp_header = (struct udphdr *)&buffer[sizeof(struct iphdr)];
-
-	memset(source, 0, sizeof(*source));
-	source->sin_addr.s_addr = ip_packet->saddr;
-	memset(destiny, 0, sizeof(*destiny));
-	destiny->sin_addr.s_addr = ip_packet->daddr;
-
-	source->sin_port = udp_header->uh_sport;
-	destiny->sin_port = udp_header->uh_dport;
-}
+// ------------ GET's
 
 char * getPayload(char * buffer)
 {
-	return (char *) &buffer[sizeof(struct iphdr) + sizeof(struct udphdr)];
+	return (char *) &buffer[_SIZE_OF_ETH + _SIZE_OF_IP + _SIZE_OF_UDP];
 }
 
-/* void getNetworkConfInformations()
+unsigned int getSPortFromBuffer(char * buffer)
 {
-	FILE *networkConf;
-	
-	printf("[%s]: ### Reading the networking settings... ###\n", _UTILS_SERVER);
-
-	if(!(networkConf = fopen(_NETWORK_CONF_FILE, "r+")))
-	{
-		printf("[%s]: File %s was not found!\n", _UTILS_SERVER, _NETWORK_CONF_FILE);
-		generateNetworkConfFile(networkConf);
-	}
-	else
-	{
-		char lanPort[6];
-		char nonLanPort[6];
-
-		fscanf(networkConf, "######## Network Settings ########\n@LOCAL_interface:\nport: %s\n\n@NONLOCAL_interface:\nport: %s\n", lanPort, nonLanPort);
-
-		_local_interface_port = atoi(lanPort);
-		_non_local_interface_port = atoi(nonLanPort);
-
-		fclose(networkConf);
-
-		if (invalidPort(_local_interface_port) || invalidPort(_non_local_interface_port))
-			exit(1);
-	}
+	struct udphdr *udp_header = (struct udphdr *)&buffer[_SIZE_OF_ETH + _SIZE_OF_IP];
+	return udp_header->uh_sport;
 }
 
- void generateNetworkConfFile(FILE * networkConf)
+unsigned int getDPortFromBuffer(char * buffer)
 {
-	networkConf = fopen(_NETWORK_CONF_FILE, "w+");
-
-	printf("\n[%s]: ### Generating the Networking Settings... ###\n", _UTILS_SERVER);
-
-	do {
-		printf("[%s]: Local Port: ", _UTILS_SERVER);
-		scanf("%d", &_local_interface_port);
-	} while ( invalidPort(_local_interface_port) );
-
-	do {
-		printf("[%s]: Non-Local Port: ", _UTILS_SERVER);
-		scanf("%d", &_non_local_interface_port);
-	} while ( invalidPort(_non_local_interface_port) );
-
-	fprintf(networkConf, "######## Network Settings ########\n@LOCAL_interface:\nport: %d\n\n@NONLOCAL_interface:\nport: %d\n", _local_interface_port, _non_local_interface_port);
-	
-	fclose(networkConf);
+	struct udphdr *udp_header = (struct udphdr *)&buffer[_SIZE_OF_ETH + _SIZE_OF_IP];
+	return udp_header->uh_dport;
 }
 
-
-bool invalidPort(int port) 
+struct in_addr getSAddrFromBuffer(char * buffer)
 {
-	bool isInvalid = (port <= 0 || port > 65535);
-	
-	if (isInvalid)
-		printf("[%s]: [ERROR] The port %d is out of range! Try another port...\n", _UTILS_SERVER, port);
-
-	return isInvalid;
-}
-*/
-
-void printAllPacketContent(char * buffer) {
-
-	struct sockaddr_in source, destiny;
-	struct iphdr *ip_packet = (struct iphdr *)buffer;
-	struct udphdr *udp_header = (struct udphdr *)&buffer[sizeof(struct iphdr)];
+	struct sockaddr_in source;
+	struct iphdr *ip_packet = (struct iphdr *)&buffer[_SIZE_OF_ETH];
 
 	memset(&source, 0, sizeof(source));
 	source.sin_addr.s_addr = ip_packet->saddr;
-	memset(&destiny, 0, sizeof(destiny));
-	destiny.sin_addr.s_addr = ip_packet->daddr;
-	char * buf;
-	buf = (char *) &buffer[sizeof(struct iphdr) + sizeof(struct udphdr)];
 
+	return source.sin_addr;
+}
+
+struct in_addr getDAddrFromBuffer(char * buffer)
+{
+	struct sockaddr_in destiny;
+	struct iphdr *ip_packet = (struct iphdr *)&buffer[_SIZE_OF_ETH];
+
+	memset(&destiny, 0, sizeof(destiny));
+	destiny.sin_addr.s_addr = ip_packet->daddr;	
+	return destiny.sin_addr;
+}
+
+char * getIpByInterfaceName(int sck, char * interface)
+{
+	char *ip = (char *) malloc(24);
+	
+	struct ifreq ifr;
+
+	ifr.ifr_addr.sa_family = AF_INET;
+	strncpy(ifr.ifr_name, interface, IFNAMSIZ-1);
+	ioctl(sck, SIOCGIFADDR, &ifr);
+
+	strcpy(ip, (char *) inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr));
+	return ip;
+}
+
+// ------------ PRINT's
+
+void printAllPacketContent(char * buffer) 
+{
+	struct ethhdr *eth = (struct ethhdr *)buffer;
+	struct iphdr *ip_packet = (struct iphdr *)&buffer[_SIZE_OF_ETH];
+	struct udphdr *udp_header = (struct udphdr *)&buffer[_SIZE_OF_ETH + _SIZE_OF_UDP];
+
+	char * buf;
+	buf = (char *) &buffer[_SIZE_OF_ETH + _SIZE_OF_IP + _SIZE_OF_UDP];
+
+	printf("\n--------------------------\n");
+
+	printf("[%s]:", _API_SERVER);
 	printf("\n-------------\n");
-	printf("Source ip Address: %s\n", (char *)inet_ntoa(source.sin_addr));
-	printf("Port source: %d\n", ntohs(udp_header->uh_sport));
-	printf("Destination ip Address: %s\n", (char *)inet_ntoa(destiny.sin_addr));
-	printf("Port destiny: %d\n", ntohs(udp_header->uh_dport));
-	printf("Packet Size (bytes): %d\n",ntohs(ip_packet->tot_len));
-	printf("Protocol: %u\n", (unsigned) ip_packet->protocol);
-	printf("Identification: %d\n\n", ntohs(ip_packet->id));
-	printf("Payload: %s\n-------------\n", buf);
+	printf( "Ethernet Header\n");
+	printf( "|-Destination Address    : %.2X-%.2X-%.2X-%.2X-%.2X-%.2X \n", eth->h_dest[0] , eth->h_dest[1] , eth->h_dest[2] , eth->h_dest[3] , eth->h_dest[4] , eth->h_dest[5] );
+	printf( "|-Source Address         : %.2X-%.2X-%.2X-%.2X-%.2X-%.2X \n", eth->h_source[0] , eth->h_source[1] , eth->h_source[2] , eth->h_source[3] , eth->h_source[4] , eth->h_source[5] );
+	printf( "|-Protocol               : %u \n",(unsigned short)eth->h_proto);
+	
+	printf("\nIp Header\n");
+	printf("|-Header checksum        : %d\n", ntohs(ip_packet->check));
+	printf("|-Source IP Address      : %s\n", (char *)inet_ntoa(getSAddrFromBuffer(buffer)));
+	printf("|-Destination ip Address : %s\n", (char *)inet_ntoa(getDAddrFromBuffer(buffer)));
+	printf("|-Packet Size (bytes)    : %d\n",ntohs(ip_packet->tot_len));
+	printf("|-Protocol               : %u\n", (unsigned) ip_packet->protocol);
+	printf("|-Identification         : %d\n", ntohs(ip_packet->id));
+
+	printf("\nUDP Header\n");
+	printf("|-Port - Source          : %d\n", ntohs(getSPortFromBuffer(buffer)));
+	printf("|-Port - Destiny         : %d\n", ntohs(getDPortFromBuffer(buffer)));
+	printf("|-Checksum               : %d\n", ntohs(udp_header->uh_sum)); 
+	
+	if(ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer))))
+		printf("\n|The packet came from LAN.\n");
+	else
+		printf("|The packet came from WAN.\n");
+	printf("--------------------------\n");
 }
 
 void printHost(struct sockaddr_in * host)
@@ -151,4 +150,38 @@ void printTrace(struct sockaddr_in src, struct sockaddr_in dest)
 
 	printf("[%s]: [TRACE] -> host[%s:%d] is sending a package to host[%s:%d]\n", 
 		_UTILS_SERVER, src_addr, htons(src.sin_port), dest_addr, htons(dest.sin_port));
+}
+
+// ------------ CONDITIONS
+
+_Bool ifLocalIpAddress(int sck, char * buffer)
+{
+	char * ipLocalByDhcp = getIpByInterfaceName(sck, _API_INTERFACE);
+	char * ipSource = convertAddrToChar(getSAddrFromBuffer(buffer));
+	char * ipDest = convertAddrToChar(getDAddrFromBuffer(buffer));
+
+	return (strcmp(ipSource, "127.0.0.1") == 0 ||
+			strcmp(ipDest, "127.0.0.1") == 0 ||
+			strcmp(ipSource, ipLocalByDhcp) == 0 ||
+			strcmp(ipDest, ipLocalByDhcp) == 0);
+}
+
+_Bool ifLanIpAddress(char * ipAddr)
+{
+	_Bool isLan;
+	char addrInit1[2] = "10";
+	char addrInit2[6] = "172.16";
+	char addrInit3[7] = "192.168";
+	
+	isLan = strncmp(addrInit1, ipAddr, sizeof(addrInit1)) == 0 ||
+			strncmp(addrInit2, ipAddr, sizeof(addrInit2)) == 0 ||
+			strncmp(addrInit3, ipAddr, sizeof(addrInit3)) == 0;
+
+	return isLan;
+}
+
+_Bool ifIsUdpProtocol(char * buffer)
+{
+	struct iphdr *ip_packet = (struct iphdr *)&buffer[_SIZE_OF_ETH];
+	return ip_packet->protocol == _UDP_PROTOCOL;
 }

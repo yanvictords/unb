@@ -11,9 +11,9 @@
 
 #define _1BIT 1
 #define _4BITS 4
-#define _FINAL_SERVER "127.0.0.1"
+#define _FINAL_SERVER "8.8.8.8"
 #define _LEN 65536
-#define _DNS_PORT 53
+#define _DNS_PORT 9001
 
 typedef uint16_t byte_2;
 struct DNS_HEADER

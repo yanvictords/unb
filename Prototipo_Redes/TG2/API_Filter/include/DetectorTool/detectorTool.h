@@ -4,5 +4,5 @@
 
 #include <stdbool.h>
 
-int detectorTool(struct sockaddr_in addr, char * buffer);
+int detectorTool(struct sockaddr_in addr, char * buffer, bool _isLan);
 

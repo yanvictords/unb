@@ -37,6 +37,7 @@ int getDnsQueryType(char * buffer)
 {
 	struct DNS_HEADER *dns;
     dns = (struct DNS_HEADER*) buffer;
+	printf("\nTipo: %d\n", dns->rd);
 	if((int) dns->qr == _DNS_RESPONSE)
 		return _RESPONSE;
 	else if((int) dns->qr == _DNS_REQUEST)
