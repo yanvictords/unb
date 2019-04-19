@@ -12,6 +12,7 @@ int analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 
 int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 {
+	printf("%s\n", buffer);
 	if(!localNetHost)
 	{
 		if(getAddrInBlackList(addr))
@@ -29,6 +30,7 @@ int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 		printOkStatus(_MODULE_ANALYZER, _OK);	
 		return _OK;
 	}
+
 	int operation =		decoder(protocol, buffer); // gets the type of operation (REQUEST OR RESPONSE)
 
 	// alter the counter if the local server is querying or the outside server (maybe a reflector) is responding

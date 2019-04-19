@@ -106,7 +106,8 @@ int main( int argc , char *argv[])
   		strcpy(hostname, "www.twitter.com\0");   
     	//Now get the ip of this hostname , A record
 		ngethostbyname(hostname , T_A);
-	 
+		getchar();
+		getchar();
 	}
     return 0;
 }
@@ -131,6 +132,12 @@ void ngethostbyname(unsigned char *host , int query_type)
     s = socket(AF_INET , SOCK_DGRAM , IPPROTO_UDP); //UDP packet for DNS queries
 	int cli = socket(AF_INET , SOCK_DGRAM , IPPROTO_UDP);
 
+	struct sockaddr_in server;
+    server.sin_family = AF_INET;
+    server.sin_port = htons(4000);
+	memset(server.sin_zero, 0x0, 8);
+	bind(s, (struct sockaddr *) &server, sizeof(server));
+	
     dest.sin_family = AF_INET;
     dest.sin_port = htons(_DNS_PORT);
     dest.sin_addr.s_addr = inet_addr(_FINAL_SERVER); //dns servers
@@ -141,8 +148,8 @@ void ngethostbyname(unsigned char *host , int query_type)
     dns = (struct DNS_H *)&buf;
  
     dns->id = (unsigned short) htons(getpid());
-    dns->qr = 0; //This is a query
-    dns->rd = 1; //Recursion Desired
+    dns->qr = 1; //Recursion Desired
+    dns->rd = 0; //This is a query
     dns->tc = 0; //This message is not truncated
     dns->aa = 0; //Not Authoritative
     dns->opcode = 0; //This is a standard query

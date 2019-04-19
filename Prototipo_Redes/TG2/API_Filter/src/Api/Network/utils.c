@@ -120,7 +120,7 @@ void printAllPacketContent(char * buffer)
 	if(ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer))))
 		printf("\n|The packet came from LAN.\n");
 	else
-		printf("|The packet came from WAN.\n");
+		printf("\n|The packet came from WAN.\n");
 	printf("--------------------------\n");
 }
 
