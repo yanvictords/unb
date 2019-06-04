@@ -1,3 +1,4 @@
+bash clean.sh
 make --directory ../
 cd ../
 sudo ./api

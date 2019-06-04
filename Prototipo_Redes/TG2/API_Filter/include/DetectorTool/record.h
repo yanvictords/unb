@@ -8,7 +8,7 @@
 #define _MODULE_RECORD "RECORD"
 
 //===== BORDERS
-#define _LOW_LIMIT -5
+#define _LOW_LIMIT -100
 
 struct COUNT_ADDR
 {

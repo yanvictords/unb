@@ -13,6 +13,8 @@ void apiServer()
 
 void startApiServer()
 {
+	struct sockaddr_in * hostToAnalyzer;
+	char * ipInterface;
 	char buffer[_BUFFER_SIZE];
 	long bufferSize;
 
@@ -20,10 +22,13 @@ void startApiServer()
 	_sckRaw = createSocket(_RAW_ETH);
 	_sckUdp = createSocket(_UDP);
 
-	// setEthHeaderInSocket(_sckRaw, "eth0");
+	setEthHeaderInSocket(_sckRaw);
+	
+	ipInterface = getIpByInterfaceName(_sckRaw, _API_INTERFACE);
+	printf("[%s] interface %s IP: %s\n", _API_SERVER, _API_INTERFACE, ipInterface);
+	// _sourceAddr = mountCharAddrInfors(ipInterface, 9001);
 
-	_sourceAddr = mountAddr(INADDR_ANY, htons(9000));
-	bindPort(_sckUdp, _sourceAddr);
+//	bindPort(_sckRaw, _sourceAddr);
 
 	while(_running)
 	{
@@ -32,10 +37,17 @@ void startApiServer()
 		{	 
 			if(shouldAnalyzePackage(_sckRaw, buffer))
 			{
-				printAllPacketContent(buffer);
 				
-				_destinyAddr = mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer));
-				detectorTool(_destinyAddr, getPayload(buffer), ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer))));
+				setSrcDestAddrs(buffer);
+				_isLocal = ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer)));
+				hostToAnalyzer = getAddrByAreaNetwork(_isLocal);
+
+				// if (strcmp("192.168.15.2", (char *)inet_ntoa(getSAddrFromBuffer(buffer)))) { // For testing in lab
+					printAllPacketContent(buffer);
+					detectorTool(*hostToAnalyzer, getPayload(buffer), _isLocal);
+					fflush(stdout);
+				// }
+				
 				// sendPackage(_sckUdp, getPayload(buffer), _destinyAddr);
 			}
 		}
@@ -46,4 +58,15 @@ _Bool shouldAnalyzePackage(int sck, char * buffer)
 {
 	return  (!ifLocalIpAddress(sck, buffer) && 
 			ifIsUdpProtocol(buffer));
+}
+
+void setSrcDestAddrs(char * buffer)
+{
+	_sourceAddr = mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
+	_destinyAddr = mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer));
+}
+
+struct sockaddr_in * getAddrByAreaNetwork(_Bool _isLocal)
+{
+	return _isLocal ? &_destinyAddr : &_sourceAddr;
 }

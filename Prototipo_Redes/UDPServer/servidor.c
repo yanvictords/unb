@@ -6,7 +6,7 @@
 #include "dns_decoder.h"
 
 struct sockaddr_in servidor;
-#define PORTA 9000
+#define PORTA 13568
 #define LEN 65536
 int main()
 {
@@ -53,8 +53,6 @@ int main()
 		//	pkgAnalyzer(servidor, buffer);
 	        //printAllCounters();
 			printf("\nbuffer:\n %s\n======\n", buffer);
-			getchar();
-			getchar();
 
 			sendto(sck_servidor, "DEU CERTO", sizeof("DEU CERTO"), 0, (struct sockaddr*)&servidor, tam_addr_serv);
 		} //AQUI ELE OLTA PARA LOOP INFINITO, E VAI PARA O RECV FICAR TRAVADO ESPERANDO OUTRA MENSAGEM DO CLIENTE.

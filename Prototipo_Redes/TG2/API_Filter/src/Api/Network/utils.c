@@ -2,7 +2,10 @@
 
 char * convertAddrToChar(struct in_addr ipAddr)
 {
-	char *ip = (char *) malloc(24);
+	char *ip;
+	int sizeIp = sizeof(inet_ntoa(ipAddr));
+
+	ip = (char *) malloc(sizeIp);
 	strcpy(ip, (char *)inet_ntoa(ipAddr));
 	return ip;
 }
@@ -72,14 +75,16 @@ struct in_addr getDAddrFromBuffer(char * buffer)
 
 char * getIpByInterfaceName(int sck, char * interface)
 {
-	char *ip = (char *) malloc(24);
-	
+	char *ip;
 	struct ifreq ifr;
+	int ipSize;
 
 	ifr.ifr_addr.sa_family = AF_INET;
 	strncpy(ifr.ifr_name, interface, IFNAMSIZ-1);
 	ioctl(sck, SIOCGIFADDR, &ifr);
-
+	
+	ipSize = sizeof(inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr)); 	
+	ip = (char *) malloc(ipSize);
 	strcpy(ip, (char *) inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr));
 	return ip;
 }
@@ -120,7 +125,7 @@ void printAllPacketContent(char * buffer)
 	if(ifLanIpAddress(inet_ntoa(getSAddrFromBuffer(buffer))))
 		printf("\n|The packet came from LAN.\n");
 	else
-		printf("\n|The packet came from WAN.\n");
+		printf("|The packet came from WAN.\n");
 	printf("--------------------------\n");
 }
 
@@ -172,7 +177,8 @@ _Bool ifLanIpAddress(char * ipAddr)
 	char addrInit1[2] = "10";
 	char addrInit2[6] = "172.16";
 	char addrInit3[7] = "192.168";
-	
+	// char addrInit3[7] = "191.168"; // For testing in lab
+
 	isLan = strncmp(addrInit1, ipAddr, sizeof(addrInit1)) == 0 ||
 			strncmp(addrInit2, ipAddr, sizeof(addrInit2)) == 0 ||
 			strncmp(addrInit3, ipAddr, sizeof(addrInit3)) == 0;

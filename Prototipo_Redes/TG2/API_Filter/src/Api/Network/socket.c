@@ -4,7 +4,7 @@
 #include <inttypes.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#define ETH_P_ALL	0x0003	
+	
 int createSocket(int type)
 {
 	int sck;
@@ -24,7 +24,7 @@ int createSocket(int type)
 			strcpy(sckTypeName, "RAW UDP");
 			break;
 		case _RAW_ETH:
-			sck = socket(AF_PACKET , SOCK_RAW , htons(ETH_P_ALL));
+			sck = socket(AF_PACKET , SOCK_RAW, htons(ETH_P_ALL));
 			strcpy(sckTypeName, "RAW ETH");
 			break;
 	}
@@ -52,9 +52,24 @@ void setIpHeaderInSocket(int socket)
 		printf ("Warning: Cannot set HDRINCL!\n");
 }
 
-void setEthHeaderInSocket(int socket, char * interface)
+void setEthHeaderInSocket(int socket)
 {
-	setsockopt(socket , SOL_SOCKET , SO_BINDTODEVICE , interface , strlen(interface)+ 1 );
+	struct ifreq ifr;
+	memset(&ifr, 0, sizeof(ifr));
+	snprintf(ifr.ifr_name, sizeof(ifr.ifr_name), _API_INTERFACE);
+	
+	if (ioctl(socket, SIOCGIFINDEX, &ifr) < 0)
+	{
+    	perror("ioctl(): error ");
+    	exit(1);
+	}
+	if(setsockopt(socket, SOL_SOCKET, SO_BINDTODEVICE , (void *)&ifr, sizeof(ifr)) < 0)
+	{
+		printf("[%s]: There was a problem binding interface %s to socket\n", _SOCKET, _API_INTERFACE);
+		exit(1);
+	}
+	else
+		printf("[%s]: Binding socket to interface %s occurred successfully!\n", _SOCKET, _API_INTERFACE);
 }
 
 void bindPort(int sck, struct sockaddr_in addr)
@@ -62,6 +77,7 @@ void bindPort(int sck, struct sockaddr_in addr)
 	if (bind(sck, (struct sockaddr *) &addr, sizeof(addr)) == -1 )
 	{	
 		printf("[%s]: There was a problem opening the port %d...\n", _SOCKET, htons(addr.sin_port));
+		perror("erro");
 		exit(1);
 	}
 	else

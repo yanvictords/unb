@@ -1,5 +1,5 @@
 #include "../../essential.h"
-
+#include "api_server.h"
 #include <netinet/in.h>
 
 #define _TCP 0
@@ -12,7 +12,7 @@
 int createSocket(int type);
 void closeSocket(int * socket);
 void setIpHeaderInSocket(int socket);
-void setEthHeaderInSocket(int socket, char * interface);
+void setEthHeaderInSocket(int socket);
 void bindPort(int sck, struct sockaddr_in addr);
 ssize_t listenToPackages(int socket, char *buffer, int bufferSize, struct sockaddr_in * source);
 ssize_t sendPackage(int socket, char * buffer, struct sockaddr_in destiny);

@@ -7,9 +7,9 @@
 struct sockaddr_in remoto;
 struct sockaddr_in source;
 
-#define PORTA 10000
+#define PORTA 8080
 #define PORTA_ORIGEM 4000
-#define _IP "192.168.25.6"
+#define _IP "127.0.0.1"
 // #define _IP "192.168.25.18"
 #define LEN 4096
 #define IPARRAYLEN 20

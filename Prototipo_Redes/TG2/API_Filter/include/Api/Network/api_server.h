@@ -11,15 +11,17 @@
 
 //===== MODULE
 #define _API_SERVER "API_SERVER"
-
 #define _API_INTERFACE "wlp2s0"
 
 struct sockaddr_in _sourceAddr;
 struct sockaddr_in _destinyAddr;
 int _sckRaw;
 int _sckUdp;
-bool _running;
+_Bool _running;
+_Bool _isLocal;
 
 void apiServer();
 void startApiServer();
 _Bool shouldAnalyzePackage(int _sckRaw, char * buffer);
+void setSrcDestAddrs(char * buffer);
+struct sockaddr_in * getAddrByAreaNetwork(_Bool _isLocal);

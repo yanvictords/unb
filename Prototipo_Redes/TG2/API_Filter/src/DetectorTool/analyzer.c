@@ -12,7 +12,6 @@ int analyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 
 int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 {
-	printf("%s\n", buffer);
 	if(!localNetHost)
 	{
 		if(getAddrInBlackList(addr))
@@ -22,8 +21,9 @@ int packageAnalyzer(struct sockaddr_in addr, char * buffer, bool localNetHost)
 			return _OK; // Now, the blacklisted IP will block in another local
 		}
 	}
-	int protocol =		identifier(addr.sin_port); // gets the protocol
 	
+	int protocol =		identifier(addr.sin_port); // gets the protocol
+
 	if (!protocol) // the protocol isn't able to be analyzed by this framework. The package will be forwarded without problems
 	{
 		printUnknownProtocol(_MODULE_ANALYZER);		
