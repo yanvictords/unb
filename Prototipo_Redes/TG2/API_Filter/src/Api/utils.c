@@ -17,7 +17,7 @@ struct sockaddr_in * mountAddr (unsigned long ipAddr, unsigned int port) {
 
 struct sockaddr_in mountCharAddrInfors (char * ipAddress, unsigned int port) {
 	struct sockaddr_in addr;
-	
+
 	addr.sin_family = AF_INET; 
 	addr.sin_port = htons(port);
 	addr.sin_addr.s_addr = inet_addr(ipAddress);
@@ -134,4 +134,8 @@ void printAllPacketContent (char * buffer) {
 	printf("|-Checksum               : %d\n", ntohs(udp_header->uh_sum)); 
 	
 	printf("--------------------------------------------\n");
+}
+
+void clearConsole () {
+	system("@cls||clear");
 }

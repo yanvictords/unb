@@ -64,12 +64,6 @@ void setEthHeaderInSocket (int socket) {
     	perror("ioctl(): error ");
     	exit(1);
 	}
-	if (setsockopt(socket, SOL_SOCKET, SO_BINDTODEVICE , (void *)&ifr, sizeof(ifr)) < 0) {
-		printf("[%s]: There was a problem binding interface %s to socket\n", _SOCKET, _API_INTERFACE);
-		exit(1);
-	}	else {
-		printf("[%s]: Binding socket to interface %s occurred successfully!\n", _SOCKET, _API_INTERFACE);
-	}
 }
 
 ssize_t listenToPackages (int type, int socket, char *buffer, int bufferSize, struct sockaddr_in * source) {

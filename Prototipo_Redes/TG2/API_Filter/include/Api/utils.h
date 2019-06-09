@@ -21,3 +21,4 @@ void printBuffer (char * buffer, int size, bool localNetHost);
 void printHost (struct sockaddr_in * host);
 void printTrace (struct sockaddr_in src, struct sockaddr_in dest);
 void printAllPacketContent (char * buffer);
+void clearConsole ();

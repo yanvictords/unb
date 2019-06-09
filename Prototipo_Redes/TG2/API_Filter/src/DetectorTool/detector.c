@@ -1,5 +1,6 @@
 #include "../../include/DetectorTool/detector.h"
 
+#include "../../include/Api/utils.h"
 #include "../../include/DetectorTool/ui.h"
 #include "../../include/DetectorTool/record.h"
 #include "../../include/DetectorTool/decoder.h"
@@ -36,7 +37,7 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 
 	// The operation is valid only if the package is a LAN request or WAN response
 	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {
-		system("@cls||clear");
+		clearConsole();
 		printBegin();
 		
 		long long counter = record(addr.sin_addr, operation, protocol);
@@ -57,7 +58,7 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 
 int analyzePackageCounter (long long counter, struct sockaddr_in addr, int protocol) {
 	// If negative counter, probably the server is a reflector
-	if (counter < (_LOW_LIMIT * (-1))) {
+	if (counter < (_LOW_LIMIT * (-1))	) {
 		// This module gives us certainty if the host is even a reflector
 		// bool reflector = 	traceRouteAnalyzer(addr);	
 		printErrorStatus(_MODULE_ANALYZER, _REF_ATTACK_ALERT, "Much more replies than requests was detected (Outside->Inside).");

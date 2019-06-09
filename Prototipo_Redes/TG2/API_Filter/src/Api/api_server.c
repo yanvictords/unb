@@ -22,7 +22,7 @@ void * blackListSender(void * ipAddress);
 
 // ----- Main
 int main () {
-	system("@cls||clear");
+	clearConsole();
 	printf("\n***********************************************************\n");
 	printf("* Welcome to API Reflectors Detection! Author: Yan Victor *\n");
 	printf("***********************************************************\n\n");
@@ -133,6 +133,8 @@ _Bool ifIsUdpProtocol (char * buffer) {
 }
 
 void * blackListSender (void * ipAddress) {
+	clearConsole();
+
 	char * ipToBlock = (char *) ipAddress;
 	int sckTcp = createSocket(_TCP);
 
