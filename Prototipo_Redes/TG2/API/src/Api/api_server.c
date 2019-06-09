@@ -94,7 +94,7 @@ void startApiServer () {
 		struct sockaddr_in * hostToAnalyzer;
 		memset(buffer, 0x0, _BUFFER_SIZE);
 
-		// Listening for incoming packages
+		// Listening to for incoming packages
 		if (bufferSize = listenToPackages(_RAW_ETH, _sckRaw, buffer, _BUFFER_SIZE, hostToAnalyzer) > 0
 				&& ifIsUdpProtocol(buffer)) {	 
 			if (_DEBUG_MODE) {
