@@ -1,8 +1,4 @@
-#include "../../include/essential.h"
-
-#include <stdbool.h>
-
-#define _DEBUGGER_MODE
+#include "../essential.h"
 
 //===== STATUS
 #define _OK 1
@@ -15,8 +11,8 @@
 //===== MODULE
 #define _MODULE_ANALYZER "DETECTOR"
 
-int detector (struct sockaddr_in, char *, bool);
-int packageAnalyzer (struct sockaddr_in, char *, bool);
-int analyzePackageCounter (long long, struct sockaddr_in, int);
-bool getAddrInBlackList (struct sockaddr_in);
-void putAddrInBlackList (struct sockaddr_in);
+int detector (struct sockaddr_in addr, char * buffer, bool localNetHost);
+int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost);
+int analyzePackageCounter (long long counter, struct sockaddr_in addr, int protocol);
+bool getAddrInBlackList (struct sockaddr_in addr);
+void putAddrInBlackList (struct sockaddr_in addr);

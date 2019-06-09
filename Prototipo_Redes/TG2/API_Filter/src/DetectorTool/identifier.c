@@ -1,5 +1,4 @@
 #include "../../include/DetectorTool/identifier.h"
-
 #include "../../include/DetectorTool/ui.h"
 
 int identifier (unsigned short port) {

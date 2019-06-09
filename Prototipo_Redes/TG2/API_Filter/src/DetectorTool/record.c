@@ -1,7 +1,6 @@
 #include "../../include/DetectorTool/record.h"
-
-#include "../../include/DetectorTool/ui.h"
 #include "../../include/DetectorTool/identifier.h"
+#include "../../include/DetectorTool/ui.h"
 
 long long record (struct in_addr sin_addr, long long operation, int protocol) {
 	struct COUNT_ADDR * root, * listAux, *predecessor;

@@ -1,5 +1,4 @@
 #include "../../include/DetectorTool/detector.h"
-
 #include "../../include/Api/utils.h"
 #include "../../include/DetectorTool/ui.h"
 #include "../../include/DetectorTool/record.h"
@@ -75,7 +74,7 @@ int analyzePackageCounter (long long counter, struct sockaddr_in addr, int proto
 	return _OK; // the package can ben forwarded without problems
 }
 
-bool getAddrInBlackList (struct sockaddr_in addr) {
+_Bool getAddrInBlackList (struct sockaddr_in addr) {
 	char ipAddr[4096];
 	char node_addr[4096];
 	FILE *file;

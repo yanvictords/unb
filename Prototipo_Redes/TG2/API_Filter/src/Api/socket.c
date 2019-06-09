@@ -1,6 +1,4 @@
-#include "../../include/essential.h"
 #include "../../include/Api/socket.h"
-
 #include <netdb.h>
 #include <inttypes.h>
 #include <sys/types.h>

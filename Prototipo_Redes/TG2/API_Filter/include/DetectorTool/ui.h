@@ -1,4 +1,4 @@
-#include "../../include/essential.h"
+#include "../essential.h"
 
 #define RED "\033[0;31m"
 #define BOLD_RED "\033[1;31m"

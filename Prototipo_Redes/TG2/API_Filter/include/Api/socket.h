@@ -1,3 +1,5 @@
+#include "../essential.h"
+
 //===== MODULE
 #define _SOCKET "SOCKET"
 

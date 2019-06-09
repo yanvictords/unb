@@ -1,5 +1,4 @@
 #include "../../include/DetectorTool/decoder.h"
-
 #include "../../include/DetectorTool/ui.h"
 #include "../../include/DetectorTool/identifier.h"
 

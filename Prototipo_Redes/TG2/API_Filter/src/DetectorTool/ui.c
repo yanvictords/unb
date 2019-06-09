@@ -1,7 +1,5 @@
 #include "../../include/DetectorTool/ui.h"
 
-#include <time.h>
-
 void printBegin () {
 	printf("\n================== DETECTOR MODULE ==================\n");
 	printf("|Analyzing packet...\n");
