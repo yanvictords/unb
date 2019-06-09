@@ -4,6 +4,27 @@
 
 #include "proxy.h"
 
+_Bool getAddrInBlackList (char * ipAddr) {
+	char ipList[4096];
+	FILE *file;
+
+	if (!(file = fopen(_BLACKLIST_FILE, "r+"))) {
+		printf("Blacklist file not found\n");
+		return false;
+	}
+	
+	while (!feof(file)) {
+		fscanf(file, "%s\n", ipList);
+		if (!strcmp(ipList, ipAddr)) {
+			fclose(file);
+			return true;
+		}	
+	}
+	
+	fclose(file);
+	return false;
+}
+
 void putAddrInBlackList (char * ipAddr) {
 	FILE *file;
 	file = fopen(_BLACKLIST_FILE, "a+");
@@ -22,8 +43,10 @@ void setBlackRule (char * ipAddr) {
 }
 
 void blockIpAddr(char * ipAddr) {
-	putAddrInBlackList(ipAddr);
-	setBlackRule(ipAddr);
+	if (!getAddrInBlackList(ipAddr)) {
+		putAddrInBlackList(ipAddr);
+		setBlackRule(ipAddr);
+	}
 }
 
 int main() {
