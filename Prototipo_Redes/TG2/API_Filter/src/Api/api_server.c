@@ -7,7 +7,7 @@
 #define _LOW_BUFFER_SIZE 4096
 
 // ----- Global variables
-struct sockaddr_in _midServer;
+struct sockaddr_in _proxy;
 int _sckRaw;
 _Bool _running;
 
@@ -30,7 +30,7 @@ int main () {
 	initConfiguration();
 	printConfiguration();
 
-	_midServer = mountCharAddrInfors(_PROXY_IP, _PROXY_PORT);
+	_proxy = mountCharAddrInfors(_PROXY_IP, _PROXY_PORT);
 	
 	_running = true;
 	startApiServer();
@@ -137,8 +137,8 @@ void * blackListSender (void * ipAddress) {
 	char * ipToBlock = (char *) ipAddress;
 	int sckTcp = createSocket(_TCP);
 
-	if (connectSocket(sckTcp, _midServer) != -1) {
-		sendPackage(_TCP, sckTcp, ipToBlock, _midServer);
+	if (connectSocket(sckTcp, _proxy) != -1) {
+		sendPackage(_TCP, sckTcp, ipToBlock, _proxy);
 		printf("[%s] The IP address %s was sended to intermediate server successfully!\n", _API_SERVER, ipToBlock);
 	}
 
