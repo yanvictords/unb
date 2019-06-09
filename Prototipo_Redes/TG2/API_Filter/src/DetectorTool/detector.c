@@ -16,13 +16,13 @@ int detector (struct sockaddr_in addr, char * buffer, bool localNetHost) {
 }
 
 int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) {
-	// checks if the ip address is already in the blacklist
+	// Checks if the ip address is already in the blacklist
 	if (getAddrInBlackList(addr)) {
 		printGetInBlackListStatus(_MODULE_ANALYZER, _REJECT_ADDR, addr);	
 		return _REJECT_ADDR; // will be removed shortly	
 	}
 	
-	// checks if the protocol can be analyzed by this framework.
+	// Checks if the protocol can be analyzed by this framework.
 	int protocol =		identifier(addr.sin_port); // gets the protocol
 
 	if (!protocol) {
@@ -31,11 +31,12 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 		return _OK;
 	}
 
-	// checks the operation type (QUERY or REQUEST)
+	// Checks the operation type (REQUEST or RESPONSE)
 	long long operation =		decoder(protocol, buffer);
 
+	// The operation is valid only if the package is a LAN request or WAN response
 	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {
-		// system("@cls||clear");
+		system("@cls||clear");
 		printBegin();
 		
 		long long counter = 		record(addr.sin_addr, operation, protocol);
@@ -43,7 +44,8 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 		#ifdef _DEBUGGER_MODE		
 			printAllCounters(protocol);
 		#endif
-		// checks if the package comes from WAN
+
+		// Is useful to analyze the counter only when is a WAN response
 		if (!localNetHost) {
 			return analyzePackageCounter(counter, addr, protocol);
 		}
@@ -54,8 +56,10 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 }
 
 int analyzePackageCounter (long long counter, struct sockaddr_in addr, int protocol) {
-	if (counter < _LOW_LIMIT) {// if negative counter, probably the server is a reflector
-		// bool reflector = 	traceRouteAnalyzer(addr); // This module gives us certainty if the host is even a reflector	
+	// If negative counter, probably the server is a reflector
+	if (counter < _LOW_LIMIT) {
+		// This module gives us certainty if the host is even a reflector
+		// bool reflector = 	traceRouteAnalyzer(addr);	
 		printErrorStatus(_MODULE_ANALYZER, _REF_ATTACK_ALERT, "Much more replies than requests was detected (Outside->Inside).");
 		// if (reflector) 
 		printAlert(_MODULE_ANALYZER, addr, protocol, counter);
@@ -67,7 +71,7 @@ int analyzePackageCounter (long long counter, struct sockaddr_in addr, int proto
 	}
 
 	printOkStatus(_MODULE_ANALYZER, _OK);
-	return _OK; // the package can ben forward without problems
+	return _OK; // the package can ben forwarded without problems
 }
 
 bool getAddrInBlackList (struct sockaddr_in addr) {

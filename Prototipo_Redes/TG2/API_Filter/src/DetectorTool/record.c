@@ -7,49 +7,53 @@ long long record (struct in_addr sin_addr, long long operation, int protocol) {
 	struct COUNT_ADDR * root, * listAux, *predecessor;
 	unsigned long sAddr = sin_addr.s_addr;
 
-	 // gets the list os counters by protocol
+	 // Gets the list of counters by protocol
 	root = getProtocolRoot(protocol);
 
 	listAux = root;	
 	predecessor = NULL;
 
-	// if the IP address is already registered in the list. Updates the root to the last updated counter node
+	// If the IP address is already registered in the list, updates the counter
+	// and sets the root list to the last updated counter node
 	while (listAux != NULL) {
 		// If the IP address was found
 		if (listAux->sin_addr.s_addr == sAddr) {
 			listAux->count += operation;
 			
-			// Checks whether the host should be dropped from the list (black list or no more pending requests)
+			// Checks whether the host should be dropped from the list (cases: black list or no more pending requests)
 			if (mustKeepHostOnTheList(listAux)) {
-				// if the node isn't the root node, moves it off the list
-				if (predecessor != NULL) {			
-					// making the swap (putting the node at root of the list)
+				// If the node isn't the root node yet, then do it
+				if (predecessor != NULL) {
 					predecessor->next = listAux->next;
 					listAux->next = root;
 					root = listAux;
 				}
+				
+				setProtocolRoot(protocol, root);
+				return root->count;
+
+			// Else: must to remove the node from the list
 			} else {
+				// if the node which will be dropped isn't the root
 				if (predecessor != NULL) {
 					predecessor->next = listAux->next;
-				}	else { // if the node which will be dropped is the root
+				} else {
 					setProtocolRoot(protocol, listAux->next);
 				}
 
+				// Returns the counter of removed node
 				int newCounter = listAux->count;
 				free(listAux);
 
 				return newCounter;
 			}
-
-			setProtocolRoot(protocol, root);
-			return root->count;
 		}
 
 		predecessor = listAux;
 		listAux=listAux->next;
 	}
 
-	// If IP isn't registered yet. Updates the root to be the newer counter node
+	// If IP isn't registered yet, then updates the root to be the newer counter node
 	root = create_node(root, sAddr);
 	root->count += operation;
 
@@ -60,22 +64,26 @@ long long record (struct in_addr sin_addr, long long operation, int protocol) {
 }
 
 bool mustKeepHostOnTheList (struct COUNT_ADDR * listAux) {
-	if (listAux->count > 0) { // if there is a pendant request	
+	// If there is a pendant request
+	if (listAux->count > 0) {
 		printAnotherStatus(_MODULE_RECORD, _NORMAL_OP, "Positive counter. Waiting for matching with the destiny IP address.");
 		return true;
 	}
 
-	if (listAux->count == 0) {// if all requests were responded
+	// If all requests were responded
+	if (listAux->count == 0) {
 		printAnotherStatus(_MODULE_RECORD, _NORMAL_OP, "Matching. All operations with this IP address were resolved.");
 		return false;
 	}
 
-	if (listAux->count < _LOW_LIMIT) { // if the counter demonstrate a characteristic of DDoS attack by reflection
+	// If the counter demonstrate a characteristic of DDoS attack by reflection
+	if (listAux->count < _LOW_LIMIT) {
 		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. The counter negative value is less than allowed.");
 		return false;
 	}
 
-	if (listAux->count < 0) { // stay alert
+	// Stay alert
+	if (listAux->count < 0) {
 		printAnotherStatus(_MODULE_RECORD, _ANOMALOUS_OP, "[WARNING] Anomalous operation. A negative counter was detected.");
 		return true;
 	}
@@ -95,7 +103,7 @@ void setProtocolRoot (int protocol, struct COUNT_ADDR * root) {
 		case _SSDP: // TODO
 			_pSsdp = root;
 			break;
-	}
+	}	
 }
 
 struct COUNT_ADDR * getProtocolRoot (int protocol) {	

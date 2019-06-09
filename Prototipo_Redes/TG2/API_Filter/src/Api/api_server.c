@@ -29,10 +29,11 @@ int main () {
 	printf("*************************************************\n\n");
 
 	_midServer = mountCharAddrInfors("192.168.25.6", 7000);
+	
 	_running = true;
 	startApiServer();
+	
 	closeSocket(&_sckRaw);
-
 	return 0;
 }
 
@@ -48,21 +49,26 @@ void startApiServer () {
 	while (_running) {	
 		memset(buffer, 0x0, _BUFFER_SIZE);
 
+		// Listening for incoming packages
 		if (bufferSize = listenToPackages(_RAW_ETH, _sckRaw, buffer, _BUFFER_SIZE, &_destinyAddr) > 0
 				&& ifIsUdpProtocol(buffer)) {	 
 			
 			printAllPacketContent(buffer);
+
 			_isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
 			_sourceAddr = mountAddr(getSAddrFromBuffer(buffer).s_addr, getSPortFromBuffer(buffer));
 			_destinyAddr = mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer));
 			
+			// Always gets the WAN address
 			hostToAnalyzer = _isLocal ? &_destinyAddr : &_sourceAddr;
 			_status = detector(*hostToAnalyzer, getPayload(buffer), _isLocal);
 
+			// If status is -1, then the address analyzed is a reflector
 			if (_status < 0) {
+				pthread_t worker;
 				char * ipToBlock = inet_ntoa(hostToAnalyzer->sin_addr);
 
-				pthread_t worker;
+				// Sending to the intermediate server that is responsible for dropping packages coming from this Ip address
 				pthread_create(&worker, NULL, blackListSender, (void *) ipToBlock);
 			}
 		}
@@ -81,11 +87,10 @@ _Bool ifIsUdpProtocol (char * buffer) {
 }
 
 void * blackListSender (void * ipAddress) {
-	int sckTcp = createSocket(_TCP);
 	char * ipToBlock = (char *) ipAddress;
+	int sckTcp = createSocket(_TCP);
 
-	int status = connectSocket(sckTcp, _midServer);
-	if (status != -1) {
+	if (connectSocket(sckTcp, _midServer) != -1) {
 		sendPackage(_TCP, sckTcp, ipToBlock, _midServer);
 		printf("[%s] The IP address %s was sended to intermediate server successfully!\n", _API_SERVER, ipToBlock);
 	}
