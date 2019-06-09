@@ -86,7 +86,6 @@ void startApiServer () {
 	if (_sckRaw == -1) {
 		_running = false;
 	}
-
 	setEthHeaderInSocket(_sckRaw);
 
 	printf("[%s]: Starting Api server...\n", _API_SERVER);
@@ -115,7 +114,7 @@ void startApiServer () {
 				pthread_t worker;
 				char * ipToBlock = inet_ntoa(hostToAnalyzer->sin_addr);
 
-				// Sending to the intermediate server that is responsible for dropping packages coming from blacklisted addresses
+				// Sending to the proxy server that is responsible for dropping packages coming from blacklisted addresses
 				pthread_create(&worker, NULL, blackListSender, (void *) ipToBlock);
 			}
 		}
@@ -139,7 +138,7 @@ void * blackListSender (void * ipAddress) {
 
 	if (connectSocket(sckTcp, _proxy) != -1) {
 		sendPackage(_TCP, sckTcp, ipToBlock, _proxy);
-		printf("[%s] The IP address %s was sended to intermediate server successfully!\n", _API_SERVER, ipToBlock);
+		printf("[%s] The IP address %s was sended to proxy server successfully!\n", _API_SERVER, ipToBlock);
 	}
 
 	closeSocket(&sckTcp);
