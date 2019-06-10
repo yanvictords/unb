@@ -46,14 +46,14 @@ int main()
 
 		int bufferSize;
 		if((bufferSize = recvfrom(sck, buffer, _LEN, 0, (struct sockaddr*)&client, &ipAddrSz)) > 0) {
-			printf("\n=> New request:\n%s\n\n", buffer);
+			printf("\n=> New request: %s\n\n", buffer);
 		
 			if (!ifIsDnsResponse(buffer)) {
 				char response[_LEN];
 				strcpy(response, "Thanks for request!");
 
 				if(sendto(sck, response, strlen(response), 0, (struct sockaddr*)&client, ipAddrSz)) {
-					printf("Sending message: %s\n\n", response);
+					printf("=> Sending message: %s\n\n", response);
 				} else {
 					printf("Failed to send message!\n");
 				}
