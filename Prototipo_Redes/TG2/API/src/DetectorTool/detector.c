@@ -35,10 +35,7 @@ int packageAnalyzer (struct sockaddr_in addr, char * buffer, bool localNetHost) 
 	long long operation = decoder(protocol, buffer);
 
 	// The operation is valid only if the package is a LAN request or WAN response
-	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {
-		clearConsole();
-		printBegin();
-		
+	if ((localNetHost && operation == _REQUEST) || (!localNetHost && operation == _RESPONSE)) {		
 		long long counter = record(addr.sin_addr, operation, protocol);
 
 			if (_DEBUG_MODE) {

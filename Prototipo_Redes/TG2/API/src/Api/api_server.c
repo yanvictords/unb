@@ -101,7 +101,7 @@ void startApiServer () {
 				printAllPacketContent(buffer);
 			}
 
-			bool isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
+			_Bool isLocal = ifLanIpAddress(getSAddrFromBuffer(buffer));
 
 			// Always gets the WAN address
 			hostToAnalyzer = isLocal ? mountAddr(getDAddrFromBuffer(buffer).s_addr, getDPortFromBuffer(buffer))
@@ -122,9 +122,20 @@ void startApiServer () {
 }
 
 _Bool ifLanIpAddress (struct in_addr ipAddr) {
-	return strncmp("10", inet_ntoa(ipAddr), sizeof("10")) == 0
-		|| strncmp("172.16", inet_ntoa(ipAddr), sizeof("172.16")) == 0
-		|| strncmp("192.168", inet_ntoa(ipAddr), sizeof("192.168")) == 0;
+	char * ip = inet_ntoa(ipAddr);
+
+	// Just for testings. The below ip address must be the client/reflector ip address used to testing
+	if (_DEBUG_MODE) {
+		int testIp = strcmp(ip, "192.168.25.19");
+
+		return ((testIp != 0) && (strncmp("10", ip, strlen("10")) == 0
+			|| strncmp("172.16", ip, strlen("172.16")) == 0
+			|| strncmp("192.168", ip, strlen("192.168")) == 0));
+	}
+
+	return strncmp("10", ip, strlen("10")) == 0
+		|| strncmp("172.16", ip, strlen("172.16")) == 0
+ 		|| strncmp("192.168", ip, strlen("192.168")) == 0;
 }
 
 _Bool ifIsUdpProtocol (char * buffer) {

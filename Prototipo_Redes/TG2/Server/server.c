@@ -3,6 +3,12 @@
 // Resume: This server represents any LAN service (UDP)
 
 #include "server.h"
+#include "dnsPackage.h"
+
+_Bool ifIsDnsResponse(char * msg) {
+	struct DNS_H * dns = (struct DNS_H *) msg;
+	return dns->qr == _RESPONSE;
+}
 
 int main()
 {
@@ -36,19 +42,23 @@ int main()
 	_running = true;
 	while (_running) { 
 		memset(buffer, 0x0, _LEN);
-		printf("Waiting for new requests...\n");
+		printf("**************************\nWaiting for new requests...\n");
 
 		int bufferSize;
 		if((bufferSize = recvfrom(sck, buffer, _LEN, 0, (struct sockaddr*)&client, &ipAddrSz)) > 0) {
 			printf("\n=> New request:\n%s\n\n", buffer);
+		
+			if (!ifIsDnsResponse(buffer)) {
+				char response[_LEN];
+				strcpy(response, "Thanks for request!");
 
-			char response[_LEN];
-			strcpy(response, "Thanks for request!");
-
-			if(sendto(sck, response, strlen(response), 0, (struct sockaddr*)&client, ipAddrSz)) {
-				printf("Sending message: %s\n\n", response);
+				if(sendto(sck, response, strlen(response), 0, (struct sockaddr*)&client, ipAddrSz)) {
+					printf("Sending message: %s\n\n", response);
+				} else {
+					printf("Failed to send message!\n");
+				}
 			} else {
-				printf("Failed to send message!\n");
+				printf("The package is a DNS response!\n\n");
 			}
 		}
 	}
