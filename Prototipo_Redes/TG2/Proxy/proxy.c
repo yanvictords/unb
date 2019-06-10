@@ -101,7 +101,7 @@ int main() {
 
 			blockIpAddr(buffer);
 
-			char response[_LEN];
+			/* char response[_LEN];
 			strcat(response, "The IP ");
 			strcat(response, buffer);
 			strcat(response, " was blocked successfully!");
@@ -110,7 +110,7 @@ int main() {
 				printf("Sending message: %s\n", response);
 			} else {
 				printf("Failed to send message!\n");
-			}
+			} */
 		}
 	}
 
