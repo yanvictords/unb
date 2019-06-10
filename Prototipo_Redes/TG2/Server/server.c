@@ -6,7 +6,7 @@
 
 int main()
 {
-	int sck = socket(AF_INET, SOCK_DGRAM, 0); // AF_INET = protocolo usado // AF_INET = protocolo usado
+	int sck = socket(AF_INET, SOCK_DGRAM, 0);
 	char buffer[_LEN];
 
 	printf("================ SERVER - UDP =================\n\n");
