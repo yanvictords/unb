@@ -102,7 +102,7 @@ int main() {
 			blockIpAddr(buffer);
 
 			char response[_LEN];
-			strcpy(repsonse, "");
+			strcpy(response, "");
 			strcat(response, "The IP ");
 			strcat(response, buffer);
 			strcat(response, " was blocked successfully!");

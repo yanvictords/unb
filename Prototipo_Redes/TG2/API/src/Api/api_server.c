@@ -126,8 +126,7 @@ _Bool ifLanIpAddress (struct in_addr ipAddr) {
 
 	// Just for testings. The below ip address must be the client/reflector ip address used to testing
 	if (_DEBUG_MODE) {
-		_Bool localReflectors = strcmp(ip, "192.168.25.19") == 0
-								|| strcmp(ip, "192.168.25.13") == 0;
+		_Bool localReflectors = strcmp(ip, "192.168.15.3") == 0;
 
 		return (!localReflectors && (strncmp("10", ip, strlen("10")) == 0
 			|| strncmp("172.16", ip, strlen("172.16")) == 0
