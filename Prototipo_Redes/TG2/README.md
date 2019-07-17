@@ -1,8 +1,23 @@
 # TG2
-Todos os códigos, com exceção do arquivo "dns_refletor.c", foram feitos por mim: Yan Victor dos Santos. <br />
-A ferramenta é capaz por detectar a presença de possíveis refletores em ataques DDoS volumétricos. <br />
+Tema:<br />
+Ataque de Negação de Serviço por Reflexão Amplificada: Explorando o protocolo Domain Name System para a Detecção e Identificação de Refletores. <br />
 
-O programa "dns_refletor.c" atua como refletor, executando uma QUERY para um servidor DNS via terminal. O pacote é repassado ao analisador da ferramenta implementada, que logo detecta a presença do refletor. Diversas outras funcionalidades podem ser vistas nos arquivos .h's. <br />
+Este trabalho propõe uma ferramenta que realize a detecção e a identificação de refletores, principais agentes em ataques de Negação de serviço por reflexão amplificada. Para a realização da detecção, os métodos utilizados até o momento consideram apenas a análise de pacotes referentes ao protocolo Domain Name System (DNS). <br />
+
+Esta ferramenta é capaz de detectar e identificar refletores em ataques de negação de serviço por reflexão amplificada. Após a detecção, o IP do refletor é enviado para um PROXY responsável por bloquear o tráfego. Para testar, é necessário executar o detector e o Proxy.
+
+Arquivo de configuração:
+API.conf
+
+Para alterar o limite de tolerância dos valores dos contadores, é preciso alterar no arquivo de configuração.
+Alterações sobre o IP do Proxy e porta, também é definido pelo arquivo de configuração
+A opção de log detalhado sobre o tráfego pode ser obtida através do modo Debug, no arquivo de configuração.
+
+Execução Detector: 
+bash ./API/scripts/run.sh
+
+Execução Proxy (porta 7000):
+bash ./Proxy/scripts/run.sh
 
 Orientação: João José Costa Gondim  <br />
 Universidade de Brasília - 2018/1 ~ 2019/1 <br />
